@@ -3,10 +3,10 @@ package sample;
 import java.io.*;
 
 public class UserStorage {
-    public void saveUser(User u){
-        ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(u.getUserID));
-        output.writeObject(u);
+    public void saveUser(User u) {
         try {
+            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(u.getUserId));
+            output.writeObject(u);
             output.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -16,7 +16,8 @@ public class UserStorage {
         try{
             ObjectInputStream input = new ObjectInputStream(new FileInputStream(String.format("%s",UserID)));
             return (User) input.readObject();
-    } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
 
