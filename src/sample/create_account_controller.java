@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -11,6 +13,7 @@ import java.time.LocalDate;
 
 public class create_account_controller {
 
+    private User user;
     @FXML
     private TextField txt_lastName;
     @FXML
@@ -19,6 +22,7 @@ public class create_account_controller {
     private DatePicker dte_dateOfBirth;
     @FXML
     private ComboBox cmb_sex;
+
     @FXML
     private TextField txt_email;
     @FXML
@@ -27,20 +31,8 @@ public class create_account_controller {
     private TextField txt_adres;
 
     public void createAccount(ActionEvent e) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(txt_lastName.getText() + "\n");
-        sb.append(txt_firstName.getText() + "\n");
-        sb.append(dte_dateOfBirth.getValue() + "\n");
-        sb.append(txt_email.getText() + "\n");
-        sb.append(txt_phoneNumber.getText() + "\n");
-        sb.append(txt_adres.getText());
-        System.out.println(sb.toString());
-//        final DatePicker datePicker = new DatePicker();
-//        datePicker.setOnAction(new EventHandler() {
-//            public void handle(Event t) {
-//                LocalDate date = datePicker.getValue();
-//                System.err.println("Selected date: " + date);
-//            }
-//        });
+
+        user = new User(txt_lastName.getText(), txt_firstName.getText(), dte_dateOfBirth.getValue(),
+                (String) cmb_sex.getValue(), txt_email.getText(), txt_phoneNumber.getText(), txt_adres.getText());
     }
 }
