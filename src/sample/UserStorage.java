@@ -5,7 +5,7 @@ import java.io.*;
 public class UserStorage {
     public void saveUser(User u) {
         try {
-            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(u.getUserId));
+            ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(Integer.toString(u.getUserId())));
             output.writeObject(u);
             output.close();
         } catch (IOException e) {
