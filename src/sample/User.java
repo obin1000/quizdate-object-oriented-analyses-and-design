@@ -1,32 +1,46 @@
 package sample;
 
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class User {
-    private static int userId = 10000;
+    private static int userId = 1000;
     private String lastName;
     private String firstName;
-    private Date dateOfBirth;
-    private boolean sex;
+    private LocalDate dateOfBirth;
+    private String sex;
     private String email;
     private String phoneNumber;
     private String adres;
     private Image profilePicture;
     private Date creationDate;
 
+    public User(String lastName, String firstName, LocalDate dateOfBirth, String sex, String email,
+                String phoneNumber, String adres) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.dateOfBirth = dateOfBirth;
+        this.sex = sex;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.adres = adres;
+        this.creationDate = new Date();
+    }
+
     //Methods
 
 
     //Getters & Setters
-    public static int getUserId() {
+
+    public int getUserId() {
         return userId;
+        
     }
-
-    public static void setUserId(int userId) {
-        User.userId = userId;
+    
+    public void setUserId(int userId) {
+        User.userId = userId
     }
-
     public String getLastName() {
         return lastName;
     }
@@ -43,19 +57,19 @@ public class User {
         this.firstName = firstName;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public boolean isSex() {
+    public String isSex() {
         return sex;
     }
 
-    public void setSex(boolean sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
