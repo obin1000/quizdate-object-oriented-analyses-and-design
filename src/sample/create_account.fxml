@@ -13,7 +13,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.collections.FXCollections?>
 
+<?import java.lang.String?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.create_account_controller">
    <children>
       <ImageView fitHeight="490.0" fitWidth="714.0" layoutX="-112.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
@@ -41,7 +43,14 @@
             <TextField fx:id="txt_lastName" promptText="Last Name" />
             <TextField fx:id="txt_firstName" promptText="First Name" GridPane.rowIndex="1" />
             <DatePicker fx:id="dte_dateOfBirth" centerShape="false" prefHeight="8.0" prefWidth="166.0" promptText="Date of Birth" GridPane.rowIndex="2" />
-            <ComboBox fx:id="cmb_sex" prefHeight="15.0" prefWidth="166.0" promptText="Sex" GridPane.rowIndex="3" />
+            <ComboBox fx:id="cmb_sex" prefHeight="15.0" prefWidth="166.0" promptText="Sex" GridPane.rowIndex="3">
+               <items>
+               <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Man" />
+                  <String fx:value="Vrouw" />
+               </FXCollections>
+               </items>
+            </ComboBox>
          </children>
       </GridPane>
       <GridPane layoutX="314.0" layoutY="95.0" prefHeight="173.0" prefWidth="175.0">

@@ -1,30 +1,47 @@
 package sample;
 
-import java.awt.*;
-import java.util.Date;
+import java.awt.Image;
+import java.time.LocalDate;
+import java.util.*;
 
 public class User {
-    private static int userId = 10000;
+    private static int latestUserId = 1000;
+    private int userId;
     private String lastName;
     private String firstName;
-    private Date dateOfBirth;
-    private boolean sex;
+    private LocalDate dateOfBirth;
+    private String sex;
     private String email;
     private String phoneNumber;
     private String adres;
     private Image profilePicture;
     private Date creationDate;
+    private List<Integer> Likes;
+    private List<Integer> Matches;
+
+    public User(String lastName, String firstName, LocalDate dateOfBirth, String sex, String email,
+                String phoneNumber, String adres) {
+        this.userId = latestUserId;
+        latestUserId++;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.dateOfBirth = dateOfBirth;
+        this.sex = sex;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.adres = adres;
+        this.creationDate = new Date();
+        this.Likes = new ArrayList<>();
+    }
 
     //Methods
 
 
     //Getters & Setters
-    public static int getUserId() {
-        return userId;
-    }
 
-    public static void setUserId(int userId) {
-        User.userId = userId;
+    public int getUserId() {
+        return userId;
+        
     }
 
     public String getLastName() {
@@ -43,19 +60,19 @@ public class User {
         this.firstName = firstName;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public boolean isSex() {
+    public String isSex() {
         return sex;
     }
 
-    public void setSex(boolean sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -66,4 +83,12 @@ public class User {
     public void setProfilePicture(Image profilePicture) {
         this.profilePicture = profilePicture;
     }
+
+    public List<Integer> getLikes(){return Likes;}
+
+    public void addToLiked(int likedPerson){this.Likes.add(likedPerson);}
+
+    public void addToMatches(int matchId){this.Matches.add(matchId);}
+
+    public String toString(){return firstName + " " + lastName;}
 }
