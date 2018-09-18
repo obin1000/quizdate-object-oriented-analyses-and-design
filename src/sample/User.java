@@ -5,7 +5,8 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class User {
-    private static int userId = 1000;
+    private static int latestUserId = 1000;
+    private int userId;
     private String lastName;
     private String firstName;
     private LocalDate dateOfBirth;
@@ -18,6 +19,8 @@ public class User {
 
     public User(String lastName, String firstName, LocalDate dateOfBirth, String sex, String email,
                 String phoneNumber, String adres) {
+        this.userId = latestUserId;
+        latestUserId++;
         this.lastName = lastName;
         this.firstName = firstName;
         this.dateOfBirth = dateOfBirth;
@@ -37,10 +40,7 @@ public class User {
         return userId;
         
     }
-    
-    public void setUserId(int userId) {
-        User.userId = userId
-    }
+
     public String getLastName() {
         return lastName;
     }
