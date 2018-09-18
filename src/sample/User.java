@@ -17,6 +17,7 @@ public class User {
     private Image profilePicture;
     private Date creationDate;
     private List<Integer> Likes;
+    private List<Integer> Matches;
 
     public User(String lastName, String firstName, LocalDate dateOfBirth, String sex, String email,
                 String phoneNumber, String adres) {
@@ -30,7 +31,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.adres = adres;
         this.creationDate = new Date();
-        this.Likes = new ArrayList<Integer>();
+        this.Likes = new ArrayList<>();
     }
 
     //Methods
@@ -86,4 +87,8 @@ public class User {
     public List<Integer> getLikes(){return Likes;}
 
     public void addToLiked(int likedPerson){this.Likes.add(likedPerson);}
+
+    public void addToMatches(int matchId){this.Matches.add(matchId);}
+
+    public String toString(){return firstName + " " + lastName;}
 }
