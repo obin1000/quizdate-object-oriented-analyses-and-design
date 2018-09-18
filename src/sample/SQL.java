@@ -17,7 +17,7 @@ public class SQL {
 
         } catch (Exception e) {
 
-            System.out.println(e);
+            System.err.println(e);
         }
 
     }
@@ -26,25 +26,30 @@ public class SQL {
 
         try {
             statement.executeQuery(text);
+
         } catch (Exception e) {
-            System.out.println(e);
+            System.err.println(e);
         }
 
     }
 
-    public void update(String text) {
+    public boolean update(String text) {
+        boolean status = false;
         try {
             statement.executeUpdate(text);
+            status = true;
+
         } catch (Exception e) {
-            System.out.println(e);
+            System.err.println(e);
         }
+        return status;
     }
 
     public void close() {
         try {
             connection.close();
         } catch (Exception e) {
-            System.out.println(e);
+            System.err.println(e);
         }
     }
 

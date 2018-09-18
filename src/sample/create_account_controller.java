@@ -39,10 +39,13 @@ public class create_account_controller extends MainController{
         SQL sql = new SQL("jdbc:mysql://oege.ie.hva.nl:3306/zhadiyem?useUnicode=true&useJDBCCompliantTimezoneShift" +
                            "=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "hadiyem","F+OYAvrrsj26nQ");
 
-        sql.update("INSERT INTO Account (email, lastName, firstName, dateOfBirth," +
+        if (sql.update("INSERT INTO Account (email, lastName, firstName, dateOfBirth," +
                 " sex, phoneNumber, adres) VALUES ('" + user.getEmail() + "', '" + user.getLastName() + "', '" +
                 user.getFirstName() + "', '" + user.getDateOfBirth() + "', '" + user.getSex() + "', '" +
-                user.getPhoneNumber() + "', '" + user.getAdres() + "')");
+                user.getPhoneNumber() + "', '" + user.getAdres() + "')")){
+
+            super.switchSceneLogin(event,btn_createAccount);
+        }
 
         sql.close();
     }
