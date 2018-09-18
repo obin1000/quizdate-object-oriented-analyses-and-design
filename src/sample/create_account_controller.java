@@ -7,9 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.time.LocalDate;
 
-public class create_account_controller {
+public class create_account_controller extends MainController{
 
     @FXML
     private TextField txt_lastName;
@@ -25,8 +26,12 @@ public class create_account_controller {
     private TextField txt_phoneNumber;
     @FXML
     private TextField txt_adres;
+    @FXML
+    private Button btn_createAccount;
+    @FXML
+    private Button btn_back;
 
-    public void createAccount(ActionEvent e) {
+    public void createAccountButtonPressed (ActionEvent event) throws IOException {
         StringBuilder sb = new StringBuilder();
         sb.append(txt_lastName.getText() + "\n");
         sb.append(txt_firstName.getText() + "\n");
@@ -35,12 +40,11 @@ public class create_account_controller {
         sb.append(txt_phoneNumber.getText() + "\n");
         sb.append(txt_adres.getText());
         System.out.println(sb.toString());
-//        final DatePicker datePicker = new DatePicker();
-//        datePicker.setOnAction(new EventHandler() {
-//            public void handle(Event t) {
-//                LocalDate date = datePicker.getValue();
-//                System.err.println("Selected date: " + date);
-//            }
-//        });
+        super.switchSceneLogin(event,btn_createAccount);
     }
+
+    public void backButtonPressed (ActionEvent event) throws IOException {
+        super.switchSceneLogin(event, btn_back);
+    }
+
 }
