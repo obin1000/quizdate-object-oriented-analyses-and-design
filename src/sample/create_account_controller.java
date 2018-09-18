@@ -32,15 +32,16 @@ public class create_account_controller extends MainController{
     private Button btn_back;
 
     public void createAccountButtonPressed (ActionEvent event) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        sb.append(txt_lastName.getText() + "\n");
-        sb.append(txt_firstName.getText() + "\n");
-        sb.append(dte_dateOfBirth.getValue() + "\n");
-        sb.append(txt_email.getText() + "\n");
-        sb.append(txt_phoneNumber.getText() + "\n");
-        sb.append(txt_adres.getText());
-        System.out.println(sb.toString());
-        super.switchSceneLogin(event,btn_createAccount);
+        
+        SQL sql = new SQL("jdbc:mysql://oege.ie.hva.nl:3306/zhadiyem?useUnicode=true&useJDBCCompliantTimezoneShift" +
+                           "=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "hadiyem","F+OYAvrrsj26nQ");
+
+        sql.update("INSERT INTO Account (email, lastName, firstName, dateOfBirth," +
+                " sex, phoneNumber, adres) VALUES ('" + user.getEmail() + "', '" + user.getLastName() + "', '" +
+                user.getFirstName() + "', '" + user.getDateOfBirth() + "', '" + user.getSex() + "', '" +
+                user.getPhoneNumber() + "', '" + user.getAdres() + "')");
+
+        sql.close();
     }
 
     public void backButtonPressed (ActionEvent event) throws IOException {
