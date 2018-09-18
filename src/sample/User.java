@@ -1,8 +1,8 @@
 package sample;
 
-import java.awt.*;
+import java.awt.Image;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.*;
 
 public class User {
     private static int latestUserId = 1000;
@@ -16,6 +16,7 @@ public class User {
     private String adres;
     private Image profilePicture;
     private Date creationDate;
+    private List<Integer> Likes;
 
     public User(String lastName, String firstName, LocalDate dateOfBirth, String sex, String email,
                 String phoneNumber, String adres) {
@@ -29,6 +30,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.adres = adres;
         this.creationDate = new Date();
+        this.Likes = new ArrayList<Integer>();
     }
 
     //Methods
@@ -80,4 +82,8 @@ public class User {
     public void setProfilePicture(Image profilePicture) {
         this.profilePicture = profilePicture;
     }
+
+    public List<Integer> getLikes(){return Likes;}
+
+    public void addToLiked(int likedPerson){this.Likes.add(likedPerson);}
 }
