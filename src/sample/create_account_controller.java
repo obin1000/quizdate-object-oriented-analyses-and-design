@@ -33,7 +33,7 @@ public class create_account_controller extends MainController{
 
     public void createAccountButtonPressed (ActionEvent event) throws IOException {
         
-        user = new User(txt_lastName.getText(), txt_firstName.getText(), dte_dateOfBirth.getValue(),
+        User user = new User(txt_lastName.getText(), txt_firstName.getText(), dte_dateOfBirth.getValue(),
             (String) cmb_sex.getValue(), txt_email.getText(), txt_phoneNumber.getText(), txt_adres.getText());
             
         SQL sql = new SQL("jdbc:mysql://oege.ie.hva.nl:3306/zhadiyem?useUnicode=true&useJDBCCompliantTimezoneShift" +
