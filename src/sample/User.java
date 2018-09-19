@@ -108,11 +108,30 @@ public class User {
         this.profilePicture = profilePicture;
     }
 
-    public List<Integer> getLikes(){return Likes;}
+    public List<Integer> getLikes(){
+        return Likes;
+    }
 
-    public void addToLiked(int likedPerson){this.Likes.add(likedPerson);}
+    public void addToLiked(int likedPerson){
+        this.Likes.add(likedPerson);
+    }
 
-    public void addToMatches(int matchId){this.Matches.add(matchId);}
+    public void addToMatches(int matchId){
+        this.Matches.add(matchId);
+    }
 
-    public String toString(){return firstName + " " + lastName;}
+    public void addToMatches(User user){
+        this.Matches.add(user.getUserId());
+    }
+
+    public void removeMatch(int user){
+        Matches.remove(user);
+    }
+    public void removeMatch(User user){
+        Matches.remove(user.getUserId());
+    }
+
+    public String toString(){
+        return firstName + " " + lastName;
+    }
 }
