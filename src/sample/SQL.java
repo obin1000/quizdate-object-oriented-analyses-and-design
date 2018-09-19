@@ -7,12 +7,12 @@ public class SQL {
     private Connection connection;
     private Statement statement;
 
-    public SQL(String conLink, String username, String password) {
+    public SQL() {
 
         try {
-
             Class.forName("com.mysql.cj.jdbc.Driver");
-            this.connection = DriverManager.getConnection(conLink, username, password);
+            this.connection = DriverManager.getConnection("jdbc:mysql://oege.ie.hva.nl:3306/zhadiyem?useUnicode=true&useJDBCCompliantTimezoneShift" +
+                    "=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "hadiyem","F+OYAvrrsj26nQ");
             this.statement = connection.createStatement();
 
         } catch (Exception e) {
