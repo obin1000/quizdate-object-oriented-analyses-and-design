@@ -112,6 +112,14 @@ public class User {
         return Likes;
     }
 
+    public void removeLike(int user){
+        Likes.remove(user);
+    }
+
+    public void removeLike(User user){
+        Likes.remove(user.getUserId());
+    }
+
     public void addToLiked(int likedPerson){
         this.Likes.add(likedPerson);
     }

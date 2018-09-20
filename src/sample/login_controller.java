@@ -39,7 +39,7 @@ public class login_controller extends MainController {
     public void login(ActionEvent event) {
 
         if (loginInformationCorrect() && textEntered()) {
-            //CHECK IF LOGIN DATA IS CORRECT, THEN DENIE OR LOGIN.
+            //CHECK IF LOGIN DATA IS CORRECT, THEN DENY OR LOGIN.
             System.out.println("Checking login details...");
             System.out.println("logindetails correct!");
             System.out.println(txt_username.getText());
