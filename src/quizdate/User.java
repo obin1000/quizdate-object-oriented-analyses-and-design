@@ -117,7 +117,6 @@ public class User {
 
     public boolean hasMatch(User user) {
         return Matches.contains(user.getUserId());
-
     }
 
     public boolean hasLike(User user) {
