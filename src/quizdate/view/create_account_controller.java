@@ -1,12 +1,14 @@
-package quizdate;
+package quizdate.view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import quizdate.SQL;
+import quizdate.User;
 
 import java.io.IOException;
 
-public class create_account_controller extends MainController{
+public class create_account_controller extends MainController {
 
     @FXML
     private TextField txt_lastName;

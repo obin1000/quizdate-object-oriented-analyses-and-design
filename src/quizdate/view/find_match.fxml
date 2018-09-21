@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quizdate.view.find_match_controller">
+   <children>
+      <ImageView fitHeight="425.0" fitWidth="639.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/loves.jpg" />
+         </image>
+      </ImageView>
+      <Pane layoutX="155.0" prefHeight="401.0" prefWidth="290.0" style="-fx-background-color: FFFF;" />
+      <ImageView fitHeight="212.0" fitWidth="290.0" layoutX="155.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/roses.jpg" />
+         </image>
+      </ImageView>
+      <Button layoutX="175.0" layoutY="324.0" mnemonicParsing="false" text="Button" />
+      <Button layoutX="374.0" layoutY="324.0" mnemonicParsing="false" text="Button" />
+      <ImageView fitHeight="171.0" fitWidth="290.0" layoutX="215.0" layoutY="-40.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/dateapp_logo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
