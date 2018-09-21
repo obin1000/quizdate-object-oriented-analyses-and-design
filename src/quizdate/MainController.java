@@ -1,4 +1,4 @@
-package sample;
+package quizdate;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;

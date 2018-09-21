@@ -1,4 +1,4 @@
-package sample;
+package quizdate;
 
 import java.io.*;
 

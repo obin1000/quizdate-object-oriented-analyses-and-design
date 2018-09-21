@@ -1,4 +1,4 @@
-package sample;
+package quizdate;
 
 public class match {
 
@@ -39,8 +39,7 @@ public class match {
     public void acceptMatch(User u1, User u2){
         u1.addToLiked(u2.getUserId()); // add user2 to user1s likes list
         if(checkIfLiked(u2, u1.getUserId())){ //check if user1 is in user2s likes list
-            createMatch(u1,u2);
-        }
+            createMatch(u1,u2); }
 
     }
     // Is called when user presses the deny button
