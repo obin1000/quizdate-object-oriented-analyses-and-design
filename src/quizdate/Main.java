@@ -28,17 +28,24 @@ public class Main extends Application {
         User u2 = new User("Rummens", "Michel", inputDate, "Male", "robin", "42","Hoorn2");
         User u3 = new User("Bootje", "Mootje", inputDate, "Male", "robin", "1337","Hoorn3");
         System.out.println(u1);
-        System.out.println(u2);System.out.println(u3);
-        u1.addToLiked(1001);
+        System.out.println(u2);
+        System.out.println(u3);
+        u1.addToLiked(u2.getUserId());
         match m = new match();
         System.out.println(m.checkIfLiked(u1, 1001));
         System.out.println(m.checkIfLiked(u1, 1002));
         System.out.println(m.checkIfLiked(u2, 1000));
-        u2.addToLiked(1000);
+        u2.addToLiked(u1.getUserId());
+        u1.addToLiked(u3.getUserId());
+        u3.addToLiked(u1.getUserId());
         System.out.println(m.checkIfLiked(u2, 1000));
         m.acceptMatch(u1,u2);
-        System.out.println(u1.getm);
-        System.out.println();
+        m.acceptMatch(u1,u3);
+        System.out.println(u1.getMatches());
+        System.out.println(u2.getMatches());
+        m.removeMatch(u1,u2);
+        System.out.println(u1.getMatches());
+        System.out.println(u2.getMatches());
         launch(args);
     }
 }
