@@ -1,4 +1,4 @@
-package sample;
+package quizdate;
 
 import java.awt.Image;
 import java.time.LocalDate;
@@ -110,6 +110,14 @@ public class User {
 
     public List<Integer> getLikes(){
         return Likes;
+    }
+
+    public List<Integer> getMatches(){
+        return Matches;
+    }
+
+    public boolean getMatch(User U){
+        return Matches.contains(U.getUserId());
     }
 
     public void removeLike(int user){

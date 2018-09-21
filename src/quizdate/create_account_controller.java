@@ -1,14 +1,10 @@
-package sample;
+package quizdate;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import javax.swing.*;
 import java.io.IOException;
-import java.time.LocalDate;
 
 public class create_account_controller extends MainController{
 
