@@ -31,7 +31,7 @@ public class Main extends Application {
         System.out.println(u2);
         System.out.println(u3);
         u1.addToLiked(u2.getUserId());
-        match m = new match();
+        Match m = new Match();
         System.out.println(m.checkIfLiked(u1, 1001));
         System.out.println(m.checkIfLiked(u1, 1002));
         System.out.println(m.checkIfLiked(u2, 1000));

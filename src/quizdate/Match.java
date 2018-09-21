@@ -1,6 +1,6 @@
 package quizdate;
 
-public class match {
+public class Match {
 
     public boolean checkIfLiked(User u, int ID){
         for (Integer number : u.getLikes()){
@@ -16,18 +16,18 @@ public class match {
 
     }
 
-    // A user can request a match to accept or deny it
+    // A user can request a Match to accept or deny it
     public int requestMatch() {
         return 1000;
     }
 
-    // Create a match between two users
+    // Create a Match between two users
     public boolean createMatch(User u1, User u2){
         u1.addToMatches(u2.getUserId()); //add user2 to user1s matches
         u2.addToMatches(u1.getUserId()); // add user1 to user2s matches
         return true;
     }
-    // Remove a match between two users
+    // Remove a Match between two users
     public boolean removeMatch(User u1, User u2){
         u1.removeLike(u2);
         u1.removeMatch(u2);
