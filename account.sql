@@ -5,19 +5,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema zhadiyem
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema zhadiyem
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `zhadiyem` DEFAULT CHARACTER SET utf8 ;
+USE `zhadiyem` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Account`
+-- Table `zhadiyem`.`Account`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Account` (
+CREATE TABLE IF NOT EXISTS `zhadiyem`.`Account` (
   `userId` INT NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `lastName` VARCHAR(45) NOT NULL,
@@ -34,17 +34,17 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`LikeList`
+-- Table `zhadiyem`.`LikeList`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`LikeList` (
+CREATE TABLE IF NOT EXISTS `zhadiyem`.`LikeList` (
   `idLikeList` INT NOT NULL,
   `likedPerson` VARCHAR(45) NULL,
   `userId` INT NOT NULL,
-  PRIMARY KEY (`idLikeList`),
+  PRIMARY KEY (`idLikeList`, `userId`),
   INDEX `fk_verzinzelf_idx` (`userId` ASC),
   CONSTRAINT `fk_verzinzelf`
     FOREIGN KEY (`userId`)
-    REFERENCES `mydb`.`Account` (`userId`)
+    REFERENCES `zhadiyem`.`Account` (`userId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
