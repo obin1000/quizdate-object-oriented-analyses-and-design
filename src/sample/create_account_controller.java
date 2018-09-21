@@ -38,8 +38,8 @@ public class create_account_controller extends MainController{
             
         SQL sqlConnection = new SQL();
 
-        if (sqlConnection.update("INSERT INTO Account (email, lastName, firstName, dateOfBirth," +
-                " sex, phoneNumber, adres) VALUES ('" + user.getEmail() + "', '" + user.getLastName() + "', '" +
+        if (sqlConnection.update("INSERT INTO Account (userId, email, lastName, firstName, dateOfBirth," +
+                " sex, phoneNumber, adres) VALUES ('" + user.getUserId() + "','" + user.getEmail() + "', '" + user.getLastName() + "', '" +
                 user.getFirstName() + "', '" + user.getDateOfBirth() + "', '" + user.getSex() + "', '" +
                 user.getPhoneNumber() + "', '" + user.getAdres() + "')")){
 

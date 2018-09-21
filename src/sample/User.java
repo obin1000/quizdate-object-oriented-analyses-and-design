@@ -21,8 +21,7 @@ public class User {
 
     public User(String lastName, String firstName, LocalDate dateOfBirth, String sex, String email,
                 String phoneNumber, String adres) {
-        this.userId = latestUserId;
-        latestUserId++;
+        this.userId = latestUserId++;
         this.lastName = lastName;
         this.firstName = firstName;
         this.dateOfBirth = dateOfBirth;
