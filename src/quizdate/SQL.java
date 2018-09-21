@@ -4,8 +4,8 @@ import java.sql.*;
 
 public class SQL {
 
-    private Connection connection;
-    private Statement statement;
+    private static Connection connection;
+    private static Statement statement;
 
     public SQL() {
 
@@ -20,6 +20,29 @@ public class SQL {
         }
 
     }
+
+    public static int getAvailableUserId(int startId) {
+        int id = startId;
+        boolean status = false;
+        try {
+            do {
+                ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM Account WHERE userId = " + id);
+                rs.next();
+                int value = rs.getInt(1);
+                if (value == 1) {
+                    ++id;
+                } else {
+                    status = true;
+                }
+
+            } while (status == false);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
+
     // grabs a random userId from the database
     public int getRandomId(){
         int data =1;
@@ -37,11 +60,11 @@ public class SQL {
         boolean status = false;
         try {
             statement.executeUpdate("INSERT INTO Account (userId, email, lastName, firstName, dateOfBirth," +
-                    " sex, phoneNumber, adres) VALUES ('" + user.getUserId() + "','" + user.getEmail() + "', '" + user.getLastName() + "', '" +
+                    " sex, phoneNumber, adres) VALUES ('" + SQL.getAvailableUserId(1000) + "','" + user.getEmail() + "', '" + user.getLastName() + "', '" +
                     user.getFirstName() + "', '" + user.getDateOfBirth() + "', '" + user.getSex() + "', '" +
                     user.getPhoneNumber() + "', '" + user.getAdres() + "')");
             status = true;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return status;
@@ -50,7 +73,7 @@ public class SQL {
     public void deleteUser(int userId) {
         try {
             statement.executeUpdate("DELETE FROM Account WHERE userId = '" + userId + "'");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -81,7 +104,7 @@ public class SQL {
     public void close() {
         try {
             connection.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
