@@ -16,8 +16,7 @@ public class SQL {
             this.statement = connection.createStatement();
 
         } catch (Exception e) {
-
-            System.err.println(e);
+            e.printStackTrace();
         }
 
     }
