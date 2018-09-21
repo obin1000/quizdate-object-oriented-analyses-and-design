@@ -8,7 +8,7 @@ import quizdate.User;
 
 import java.io.IOException;
 
-public class create_account_controller extends MainController {
+public class CreateAccountController extends MainController {
 
     @FXML
     private TextField txt_lastName;

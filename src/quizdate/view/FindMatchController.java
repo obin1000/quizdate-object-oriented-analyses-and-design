@@ -12,16 +12,18 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class find_match_controller implements Initializable {
+public class FindMatchController extends MainController implements Initializable {
     @FXML private ImageView profilePicture;
+    @FXML Button btn_settings;
 
 
-    Image img = new Image("file:./src/quizdate/images/like.png");
+    Image img = new Image("file:./src/quizdate/images/trump.jpg");
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         profilePicture.setImage(img);
         System.out.println("test123");
     }
+
     public void dislikeButtonClicked(ActionEvent event) throws IOException {
         System.out.println("Dislike button clicked...");
     }
@@ -32,6 +34,7 @@ public class find_match_controller implements Initializable {
 
     public void settingsButtonClicked(ActionEvent event) throws IOException {
         System.out.println("settings button clicked...");
+        super.switchSceneEditUser(event,btn_settings);
     }
 
     public void chatButtonClicked(ActionEvent event) throws IOException {

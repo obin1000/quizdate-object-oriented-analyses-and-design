@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class login_controller extends MainController {
+public class LoginController extends MainController {
 
     @FXML
     private TextField txt_username;
@@ -31,7 +31,7 @@ public class login_controller extends MainController {
         return true;
     }
 
-    public void login(ActionEvent event) {
+    public void login(ActionEvent event) throws IOException {
 
         if (loginInformationCorrect() && textEntered()) {
             //CHECK IF LOGIN DATA IS CORRECT, THEN DENY OR LOGIN.
@@ -39,6 +39,8 @@ public class login_controller extends MainController {
             System.out.println("logindetails correct!");
             System.out.println(txt_username.getText());
             System.out.println(txt_password.getText());
+            super.switchSceneFindMatch(event,btn_login);
+
         } else {
             System.err.print("please enter correct information");
         }
@@ -52,7 +54,6 @@ public class login_controller extends MainController {
     public void registerButtonClicked(ActionEvent event) throws IOException {
         super.switchSceneCreateAccount(event, btn_register);
     }
-
 
 
     }

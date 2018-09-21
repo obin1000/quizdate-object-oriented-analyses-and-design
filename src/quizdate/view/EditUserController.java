@@ -3,6 +3,7 @@ package quizdate.view;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import quizdate.User;
@@ -12,12 +13,13 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class EditUserController implements Initializable {
+public class EditUserController extends MainController implements Initializable {
 
 
     @FXML Label name;
     @FXML TextField lastName;
     @FXML TextField firstName;
+    @FXML Button btn_back;
 
 
     LocalDate inputDa = LocalDate.of(2001,5,23);
@@ -26,6 +28,10 @@ public class EditUserController implements Initializable {
     public void editUserData(ActionEvent event) throws IOException {
         u3.setLastName(lastName.getText());
         System.out.println(u3.getLastName());
+    }
+
+    public void backButtonClicked(ActionEvent event) throws IOException{
+        super.switchSceneFindMatch(event,btn_back);
     }
 
     @Override

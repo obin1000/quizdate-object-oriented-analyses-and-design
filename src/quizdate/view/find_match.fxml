@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quizdate.view.find_match_controller">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quizdate.view.FindMatchController">
    <children>
-      <ImageView fitHeight="564.0" fitWidth="600.0" layoutX="14.0" layoutY="-163.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="419.0" fitWidth="615.0" layoutX="-9.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/hearts.gif" />
+            <Image url="@../images/bikeLove.jpg" />
          </image>
       </ImageView>
       <Pane layoutX="156.0" layoutY="63.0" prefHeight="338.0" prefWidth="290.0" style="-fx-background-color: FFFF;">
@@ -35,10 +35,10 @@
             </ImageView>
             <ImageView fitHeight="63.0" fitWidth="76.0" layoutX="520.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../chat.png" />
+                  <Image url="@../images/chat.png" />
                </image>
             </ImageView>
-            <Button layoutX="9.0" layoutY="5.0" mnemonicParsing="false" onAction="#settingsButtonClicked" prefHeight="50.0" prefWidth="52.0" style="-fx-background-color: transparent;" />
+            <Button fx:id="btn_settings" layoutX="9.0" layoutY="5.0" mnemonicParsing="false" onAction="#settingsButtonClicked" prefHeight="50.0" prefWidth="52.0" style="-fx-background-color: transparent;" />
             <Button layoutX="516.0" layoutY="-6.0" mnemonicParsing="false" onAction="#chatButtonClicked" prefHeight="63.0" prefWidth="70.0" style="-fx-background-color: transparent;" />
          </children></Pane>
       <ImageView fx:id="profilePicture" fitHeight="221.0" fitWidth="290.0" layoutX="156.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
