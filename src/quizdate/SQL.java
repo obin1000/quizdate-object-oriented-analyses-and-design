@@ -22,7 +22,29 @@ public class SQL {
 
     }
 
-    public void execute(String text) {
+    public boolean saveUser(User user) {
+        boolean status = false;
+        try {
+            statement.executeUpdate("INSERT INTO Account (userId, email, lastName, firstName, dateOfBirth," +
+                    " sex, phoneNumber, adres) VALUES ('" + user.getUserId() + "','" + user.getEmail() + "', '" + user.getLastName() + "', '" +
+                    user.getFirstName() + "', '" + user.getDateOfBirth() + "', '" + user.getSex() + "', '" +
+                    user.getPhoneNumber() + "', '" + user.getAdres() + "')");
+            status = true;
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return status;
+    }
+
+    public void deleteUser(int userId) {
+        try {
+            statement.executeUpdate("DELETE FROM Account WHERE userId = '" + userId + "'");
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
+
+ /*   public void execute(String text) {
 
         try {
             statement.executeQuery(text);
@@ -43,7 +65,7 @@ public class SQL {
             System.err.println(e);
         }
         return status;
-    }
+    }*/
 
     public void close() {
         try {
