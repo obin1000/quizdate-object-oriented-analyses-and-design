@@ -41,7 +41,6 @@ public class User {
 
     public int getUserId() {
         return userId;
-        
     }
 
     public String getLastName() {
@@ -116,8 +115,13 @@ public class User {
         return Matches;
     }
 
-    public boolean getMatch(User User) {
-        return Matches.contains(User.getUserId());
+    public boolean hasMatch(User user) {
+        return Matches.contains(user.getUserId());
+
+    }
+
+    public boolean hasLike(User user) {
+        return Likes.contains(user.getUserId());
     }
 
     public void addToLiked(int likedPerson){
@@ -128,24 +132,24 @@ public class User {
         this.Matches.add(matchId);
     }
 
-    public void addToMatches(User uid){
-        this.Matches.add(uid.getUserId());
+    public void addToMatches(User user){
+        this.Matches.add(user.getUserId());
     }
 
     public void removeMatch(int uid){
         Matches.remove((Integer) uid);
     }
 
-    public void removeMatch(User uid){
-        Matches.remove((Integer) uid.getUserId());
+    public void removeMatch(User user){
+        Matches.remove((Integer) user.getUserId());
     }
 
     public void removeLike(int uid){
         Likes.remove((Integer) uid);
     }
 
-    public void removeLike(User uid){
-        Likes.remove((Integer) uid.getUserId());
+    public void removeLike(User user){
+        Likes.remove((Integer) user.getUserId());
     }
 
     public String toString(){

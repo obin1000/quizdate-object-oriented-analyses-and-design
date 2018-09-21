@@ -20,6 +20,18 @@ public class SQL {
         }
 
     }
+    // grabs a random userId from the database
+    public int getRandomId(){
+        int data =1;
+        try {
+            ResultSet back = statement.executeQuery("SELECT userId FROM Account ORDER BY RAND() LIMIT 1");
+            back.next();
+            data = back.getInt(1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
 
     public boolean saveUser(User user) {
         boolean status = false;
@@ -30,7 +42,7 @@ public class SQL {
                     user.getPhoneNumber() + "', '" + user.getAdres() + "')");
             status = true;
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
         return status;
     }
@@ -39,7 +51,7 @@ public class SQL {
         try {
             statement.executeUpdate("DELETE FROM Account WHERE userId = '" + userId + "'");
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -49,7 +61,7 @@ public class SQL {
             statement.executeQuery(text);
 
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
 
     }
@@ -61,7 +73,7 @@ public class SQL {
             status = true;
 
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
         return status;
     }*/
@@ -70,7 +82,7 @@ public class SQL {
         try {
             connection.close();
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
         }
     }
 
