@@ -31,6 +31,7 @@ public class User {
         this.adres = adres;
         this.creationDate = new Date();
         this.Likes = new ArrayList<>();
+        this.Matches = new ArrayList<>();
     }
 
     //Methods
@@ -115,16 +116,8 @@ public class User {
         return Matches;
     }
 
-    public boolean getMatch(User U){
-        return Matches.contains(U.getUserId());
-    }
-
-    public void removeLike(int user){
-        Likes.remove(user);
-    }
-
-    public void removeLike(User user){
-        Likes.remove(user.getUserId());
+    public boolean getMatch(User User) {
+        return Matches.contains(User.getUserId());
     }
 
     public void addToLiked(int likedPerson){
@@ -135,18 +128,27 @@ public class User {
         this.Matches.add(matchId);
     }
 
-    public void addToMatches(User user){
-        this.Matches.add(user.getUserId());
+    public void addToMatches(User uid){
+        this.Matches.add(uid.getUserId());
     }
 
-    public void removeMatch(int user){
-        Matches.remove(user);
+    public void removeMatch(int uid){
+        Matches.remove((Integer) uid);
     }
-    public void removeMatch(User user){
-        Matches.remove(user.getUserId());
+
+    public void removeMatch(User uid){
+        Matches.remove((Integer) uid.getUserId());
+    }
+
+    public void removeLike(int uid){
+        Likes.remove((Integer) uid);
+    }
+
+    public void removeLike(User uid){
+        Likes.remove((Integer) uid.getUserId());
     }
 
     public String toString(){
-        return firstName + " " + lastName;
+        return userId + " " + firstName + " " + lastName;
     }
 }
