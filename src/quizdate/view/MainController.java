@@ -28,7 +28,7 @@ public class MainController {
     }
 
     public void switchSceneLogin(ActionEvent event, Button pressedButton) throws IOException {
-        switchScene(event,pressedButton, "loginButtonPressed.fxml");
+        switchScene(event,pressedButton, "login.fxml");
     }
 
     public void switchSceneFindMatch(ActionEvent event, Button pressedButton) throws IOException{
