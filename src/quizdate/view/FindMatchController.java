@@ -14,10 +14,10 @@ import java.util.ResourceBundle;
 
 public class FindMatchController extends MainController implements Initializable {
     @FXML private ImageView profilePicture;
-    @FXML Button btn_settings;
+    @FXML private Button btn_settings;
 
+    private Image img = new Image("file:./src/quizdate/images/trump.jpg");
 
-    Image img = new Image("file:./src/quizdate/images/trump.jpg");
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         profilePicture.setImage(img);

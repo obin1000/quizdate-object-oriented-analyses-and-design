@@ -16,14 +16,14 @@ import java.util.ResourceBundle;
 public class EditUserController extends MainController implements Initializable {
 
 
-    @FXML Label name;
-    @FXML TextField lastName;
-    @FXML TextField firstName;
-    @FXML Button btn_back;
+    @FXML private Label name;
+    @FXML private TextField lastName;
+    @FXML private TextField firstName;
+    @FXML private Button btn_back;
 
 
-    LocalDate inputDa = LocalDate.of(2001,5,23);
-    User u3 = new User("Bootje", "Mootje", inputDa, "Male", "robin", "1337","Hoorn3");
+    private LocalDate inputDa = LocalDate.of(2001,5,23);
+    private User u3 = new User("Bootje", "Mootje", inputDa, "Male", "robin", "1337","Hoorn3");
 
     public void saveChangesButtonPressed(ActionEvent event) throws IOException {
         u3.setLastName(lastName.getText());
