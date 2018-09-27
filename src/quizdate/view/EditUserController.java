@@ -25,12 +25,12 @@ public class EditUserController extends MainController implements Initializable 
     LocalDate inputDa = LocalDate.of(2001,5,23);
     User u3 = new User("Bootje", "Mootje", inputDa, "Male", "robin", "1337","Hoorn3");
 
-    public void editUserData(ActionEvent event) throws IOException {
+    public void saveChangesButtonPressed(ActionEvent event) throws IOException {
         u3.setLastName(lastName.getText());
         System.out.println(u3.getLastName());
     }
 
-    public void backButtonClicked(ActionEvent event) throws IOException{
+    public void backButtonPressed(ActionEvent event) throws IOException{
         super.switchSceneFindMatch(event,btn_back);
     }
 

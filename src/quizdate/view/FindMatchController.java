@@ -24,20 +24,20 @@ public class FindMatchController extends MainController implements Initializable
         System.out.println("test123");
     }
 
-    public void dislikeButtonClicked(ActionEvent event) throws IOException {
+    public void dislikeButtonPressed(ActionEvent event) throws IOException {
         System.out.println("Dislike button clicked...");
     }
 
-    public void likeButtonClicked(ActionEvent event) throws IOException {
+    public void likeButtonPressed(ActionEvent event) throws IOException {
         System.out.println("Like button clicked...");
     }
 
-    public void settingsButtonClicked(ActionEvent event) throws IOException {
+    public void settingsButtonPressed(ActionEvent event) throws IOException {
         System.out.println("settings button clicked...");
         super.switchSceneEditUser(event,btn_settings);
     }
 
-    public void chatButtonClicked(ActionEvent event) throws IOException {
+    public void chatButtonPressed(ActionEvent event) throws IOException {
         System.out.println("Chat button clicked...");
     }
 }

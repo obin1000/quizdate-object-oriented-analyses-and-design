@@ -31,11 +31,11 @@ public class LoginController extends MainController {
         return true;
     }
 
-    public void login(ActionEvent event) throws IOException {
+    public void loginButtonPressed(ActionEvent event) throws IOException {
 
         if (loginInformationCorrect() && textEntered()) {
             //CHECK IF LOGIN DATA IS CORRECT, THEN DENY OR LOGIN.
-            System.out.println("Checking login details...");
+            System.out.println("Checking loginButtonPressed details...");
             System.out.println("logindetails correct!");
             System.out.println(txt_username.getText());
             System.out.println(txt_password.getText());

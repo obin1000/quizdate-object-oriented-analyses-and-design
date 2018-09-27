@@ -49,7 +49,7 @@ public class Main extends Application {
         System.out.println(db.getRandomId());
         System.out.println(db.getRandomId());
         System.out.println(db.getRandomId());
-
         launch(args);
     }
+
 }
