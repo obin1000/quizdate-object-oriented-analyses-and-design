@@ -1,4 +1,6 @@
-package quizdate;
+package quizdate.model;
+
+import quizdate.model.Question;
 
 import java.util.List;
 

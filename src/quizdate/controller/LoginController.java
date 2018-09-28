@@ -1,4 +1,4 @@
-package quizdate.view;
+package quizdate.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

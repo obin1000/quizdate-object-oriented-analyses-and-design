@@ -5,6 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import quizdate.model.Match;
+import quizdate.model.SQL;
+import quizdate.model.User;
 
 import java.time.LocalDate;
 

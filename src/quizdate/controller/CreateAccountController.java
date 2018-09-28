@@ -1,10 +1,10 @@
-package quizdate.view;
+package quizdate.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import quizdate.SQL;
-import quizdate.User;
+import quizdate.model.SQL;
+import quizdate.model.User;
 
 import java.io.IOException;
 

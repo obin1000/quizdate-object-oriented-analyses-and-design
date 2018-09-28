@@ -1,4 +1,4 @@
-package quizdate;
+package quizdate.model;
 
 import java.awt.Image;
 import java.time.LocalDate;

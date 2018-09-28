@@ -1,4 +1,4 @@
-package quizdate.view;
+package quizdate.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -11,11 +11,11 @@ import java.io.IOException;
 
 public class MainController {
 
-    private void switchScene (ActionEvent event, Button btn_register, String sceneName) throws IOException {
+    private void switchScene (ActionEvent event, Button pressedButton, String sceneName) throws IOException {
         Stage appStage;
         Parent newRoot;
-        if (event.getSource() == btn_register) {
-            appStage = (Stage) btn_register.getScene().getWindow();
+        if (event.getSource() == pressedButton) {
+            appStage = (Stage) pressedButton.getScene().getWindow();
             newRoot = FXMLLoader.load(getClass().getResource(sceneName));
             Scene scene = new Scene(newRoot);
             appStage.setScene(scene);
@@ -24,18 +24,18 @@ public class MainController {
     }
 
     public void switchSceneCreateAccount(ActionEvent event, Button pressedButton) throws IOException {
-        switchScene(event,pressedButton, "create_account.fxml");
+        switchScene(event,pressedButton, "../view/create_account.fxml");
     }
 
     public void switchSceneLogin(ActionEvent event, Button pressedButton) throws IOException {
-        switchScene(event,pressedButton, "login.fxml");
+        switchScene(event,pressedButton, "../view/login.fxml");
     }
 
     public void switchSceneFindMatch(ActionEvent event, Button pressedButton) throws IOException{
-        switchScene(event,pressedButton,"find_match.fxml");
+        switchScene(event,pressedButton,"../view/find_match.fxml");
     }
 
     public void switchSceneEditUser(ActionEvent event, Button pressedButton) throws IOException{
-        switchScene(event,pressedButton,"edit_user.fxml");
+        switchScene(event,pressedButton,"../view/edit_user.fxml");
     }
 }
