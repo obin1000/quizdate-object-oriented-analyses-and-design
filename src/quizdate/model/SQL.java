@@ -22,41 +22,16 @@ public class SQL {
 
     }
 
-
-    private static int getAvailableUserId() {
-
-        int id = START_ID;
-        boolean status = false;
-
-        try {
-            do {
-                Statement statement = connection.createStatement();
-                ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM Account WHERE userId = " + id);
-                rs.next();
-                int value = rs.getInt(1);
-                if (value == 1) {
-                    ++id;
-                } else {
-                    status = true;
-                }
-
-            } while (!status);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return id;
-
-    }
-
-//    private static int checkLoginInformation(String email, String password) {
+//
+//    private static int getAvailableUserId() {
+//
+//        int id = START_ID;
 //        boolean status = false;
 //
 //        try {
 //            do {
 //                Statement statement = connection.createStatement();
-//                ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM Account WHERE email=);
+//                ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM Account WHERE userId = " + id);
 //                rs.next();
 //                int value = rs.getInt(1);
 //                if (value == 1) {
@@ -75,10 +50,33 @@ public class SQL {
 //
 //    }
 
-    // grabs a random userId from the database
-    public int getRandomId(){
+    public boolean checkLoginInformation(String email, String password) {
+        boolean status = false;
 
-        int data =1;
+        try {
+
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM Account WHERE email ='" + email + "' AND password ='" + password + "'");
+            rs.next();
+            int value = rs.getInt(1);
+            if (value == 1) {
+                status = true;
+            } else {
+                status = false;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return status;
+
+    }
+
+    // grabs a random userId from the database
+    public int getRandomId() {
+
+        int data = 1;
         try {
             Statement statement = connection.createStatement();
             ResultSet back = statement.executeQuery("SELECT userId FROM Account ORDER BY RAND() LIMIT 1");
@@ -98,8 +96,8 @@ public class SQL {
 
         try {
             Statement statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO Account (userId, email, password, lastName, firstName, dateOfBirth," +
-                    " sex, phoneNumber, adres) VALUES ('" + SQL.getAvailableUserId() + "','" + user.getEmail() + "', '" + user.getPassword() + "', '" + user.getLastName() + "', '" +
+            statement.executeUpdate("INSERT INTO Account (email, password, lastName, firstName, dateOfBirth," +
+                    " sex, phoneNumber, adres) VALUES ('" + user.getEmail() + "', '" + user.getPassword() + "', '" + user.getLastName() + "', '" +
                     user.getFirstName() + "', '" + user.getDateOfBirth() + "', '" + user.getSex() + "', '" +
                     user.getPhoneNumber() + "', '" + user.getAdres() + " ' )");
             status = true;
@@ -110,6 +108,18 @@ public class SQL {
         return status;
 
     }
+
+    public void getUser(int userId) {
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Account WHERE userId = " + userId);
+            System.out.println(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //RETURN USER
+    }
+
 
     public void deleteUser(int userId) {
 
@@ -132,7 +142,7 @@ public class SQL {
 
     }
 
-    public boolean getUser(){
+    public boolean getUser() {
         boolean status = false;
 
         return status;

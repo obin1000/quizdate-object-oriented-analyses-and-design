@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class User extends Observable {
-    private static int latestUserId = 1000;
+//    private static int latestUserId = 1000;
     private int userId;
     private String lastName;
     private String firstName;
@@ -22,7 +22,7 @@ public class User extends Observable {
 
     public User(String lastName, String firstName, LocalDate dateOfBirth, String sex, String email,
                 String phoneNumber, String adres, String password) {
-        this.userId = latestUserId++;
+//        this.userId = latestUserId++;
         this.lastName = lastName;
         this.firstName = firstName;
         this.dateOfBirth = dateOfBirth;

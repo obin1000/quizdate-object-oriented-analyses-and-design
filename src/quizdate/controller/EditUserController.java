@@ -1,12 +1,10 @@
 package quizdate.controller;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -17,7 +15,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class EditUserController extends MainController implements Initializable{
+public class EditUserController implements Initializable{
 
 
     @FXML private Label name;
@@ -34,7 +32,13 @@ public class EditUserController extends MainController implements Initializable{
     }
 
     public void backButtonPressed(ActionEvent event) throws IOException{
-        super.switchSceneFindMatch(event,btn_back);
+        getMainController().switchSceneFindMatch(event, btn_back,getMainController().getUserId());
+    }
+
+    private MainController getMainController() throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
+        Parent root = (Parent)fxmlLoader.load();
+        return fxmlLoader.<MainController>getController();
     }
 
     @Override
