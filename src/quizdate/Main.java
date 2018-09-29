@@ -22,7 +22,6 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-//Added MVC structure
     public static void main(String[] args) {
         LocalDate inputDate = LocalDate.of(2000,1,31);
         LocalDate inputDat = LocalDate.of(2010,3,4);

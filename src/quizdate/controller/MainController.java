@@ -1,5 +1,6 @@
 package quizdate.controller;
 
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,6 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MainController {
+
 
     private void switchScene (ActionEvent event, Button pressedButton, String sceneName) throws IOException {
         Stage appStage;
@@ -38,4 +40,6 @@ public class MainController {
     public void switchSceneEditUser(ActionEvent event, Button pressedButton) throws IOException{
         switchScene(event,pressedButton,"../view/edit_user.fxml");
     }
+
+
 }

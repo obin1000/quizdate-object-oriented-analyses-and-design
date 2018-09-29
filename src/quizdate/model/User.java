@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.time.LocalDate;
 import java.util.*;
 
-public class User {
+public class User extends Observable {
     private static int latestUserId = 1000;
     private int userId;
     private String lastName;
@@ -34,10 +34,9 @@ public class User {
         this.Matches = new ArrayList<>();
     }
 
-    //Methods
-
-
-    //Getters & Setters
+    /*
+     * Getters & Setters
+     */
 
     public int getUserId() {
         return userId;
@@ -114,6 +113,10 @@ public class User {
     public List<Integer> getMatches(){
         return Matches;
     }
+
+    /*
+     * Methods
+     */
 
     public boolean hasMatch(User user) {
         return Matches.contains(user.getUserId());
