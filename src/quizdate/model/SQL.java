@@ -98,10 +98,10 @@ public class SQL {
 
         try {
             Statement statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO Account (userId, email, lastName, firstName, dateOfBirth," +
-                    " sex, phoneNumber, adres) VALUES ('" + SQL.getAvailableUserId() + "','" + user.getEmail() + "', '" + user.getLastName() + "', '" +
+            statement.executeUpdate("INSERT INTO Account (userId, email, password, lastName, firstName, dateOfBirth," +
+                    " sex, phoneNumber, adres) VALUES ('" + SQL.getAvailableUserId() + "','" + user.getEmail() + "', '" + user.getPassword() + "', '" + user.getLastName() + "', '" +
                     user.getFirstName() + "', '" + user.getDateOfBirth() + "', '" + user.getSex() + "', '" +
-                    user.getPhoneNumber() + "', '" + user.getAdres() + "', '" + user.getPassword() + "')");
+                    user.getPhoneNumber() + "', '" + user.getAdres() + " ' )");
             status = true;
         } catch (SQLException e) {
             e.printStackTrace();
