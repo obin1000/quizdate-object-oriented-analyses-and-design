@@ -6,24 +6,31 @@ public class SQL {
 
     private static Connection connection;
     private static Statement statement;
+    private static final int START_ID = 1000;
 
     public SQL() {
 
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            this.connection = DriverManager.getConnection("jdbc:mysql://oege.ie.hva.nl:3306/zhadiyem?useUnicode=true&useJDBCCompliantTimezoneShift" +
-                    "=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "hadiyem","F+OYAvrrsj26nQ");
-            this.statement = connection.createStatement();
+        if (connection == null && statement == null) {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                this.connection = DriverManager.getConnection("jdbc:mysql://oege.ie.hva.nl:3306/zhadiyem?useUnicode=true&useJDBCCompliantTimezoneShift" +
+                        "=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "hadiyem", "F+OYAvrrsj26nQ");
+                this.statement = connection.createStatement();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
+
 
     }
 
-    public static int getAvailableUserId(int startId) {
-        int id = startId;
+    private static int getAvailableUserId() {
+
+        int id = START_ID;
         boolean status = false;
+
         try {
             do {
                 ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM Account WHERE userId = " + id);
@@ -35,16 +42,19 @@ public class SQL {
                     status = true;
                 }
 
-            } while (status == false);
+            } while (!status);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return id;
+
     }
 
     // grabs a random userId from the database
     public int getRandomId(){
+
         int data =1;
         try {
             ResultSet back = statement.executeQuery("SELECT userId FROM Account ORDER BY RAND() LIMIT 1");
@@ -53,60 +63,47 @@ public class SQL {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return data;
+
     }
 
     public boolean saveUser(User user) {
+
         boolean status = false;
+
         try {
             statement.executeUpdate("INSERT INTO Account (userId, email, lastName, firstName, dateOfBirth," +
-                    " sex, phoneNumber, adres) VALUES ('" + SQL.getAvailableUserId(1000) + "','" + user.getEmail() + "', '" + user.getLastName() + "', '" +
+                    " sex, phoneNumber, adres) VALUES ('" + SQL.getAvailableUserId() + "','" + user.getEmail() + "', '" + user.getLastName() + "', '" +
                     user.getFirstName() + "', '" + user.getDateOfBirth() + "', '" + user.getSex() + "', '" +
                     user.getPhoneNumber() + "', '" + user.getAdres() + "')");
             status = true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return status;
+        
     }
 
     public void deleteUser(int userId) {
+
         try {
             statement.executeUpdate("DELETE FROM Account WHERE userId = '" + userId + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
- /*   public void execute(String text) {
-
-        try {
-            statement.executeQuery(text);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
     }
-
-    public boolean update(String text) {
-        boolean status = false;
-        try {
-            statement.executeUpdate(text);
-            status = true;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return status;
-    }*/
 
     public void close() {
+
         try {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
 
