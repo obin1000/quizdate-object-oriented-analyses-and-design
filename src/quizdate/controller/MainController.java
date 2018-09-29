@@ -40,6 +40,7 @@ public class MainController {
         }
     }
 
+
     public void switchSceneCreateAccount(ActionEvent event, Button pressedButton) throws IOException {
         System.out.println("Calls switchSceneCreateAccount ");
         switchSceneWithoutUserId(event,pressedButton, "../view/create_account.fxml");
@@ -58,12 +59,12 @@ public class MainController {
     }
 
     public void setUserId(int userId){
-        System.out.println("UserId = Set via MainController.");
+        System.out.println("UserId =" + userId +" Set via MainController.");
         this.userId = userId;
     }
 
     public int getUserId(){
-        System.out.println("UsedId = Get via MainController.");
+        System.out.println("UsedId =" + userId +  " Get via MainController.");
         return userId;
     }
 
@@ -71,8 +72,6 @@ public class MainController {
     private void initialize() {
 
         Platform.runLater(() -> {
-
-
 
         });
 

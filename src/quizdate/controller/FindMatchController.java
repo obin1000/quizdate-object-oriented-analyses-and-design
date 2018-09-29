@@ -29,6 +29,7 @@ public class FindMatchController implements Initializable {
     public void dislikeButtonPressed(ActionEvent event) throws IOException {
         System.out.println("Dislike button clicked...");
         System.out.println(getMainController().getUserId());
+        System.out.println("");
     }
 
     public void likeButtonPressed(ActionEvent event) throws IOException {

@@ -23,8 +23,8 @@ public class EditUserController implements Initializable{
     @FXML private TextField firstName;
     @FXML private Button btn_back;
 
-    private static LocalDate inputDa = LocalDate.of(2001,5,23);
-    private static User u3 = new User("Bootje", "Mootje", inputDa, "Male", "robin", "1337","Hoorn3","password");
+    private LocalDate inputDa = LocalDate.of(2001,5,23);
+    private User u3 = new User("Bootje", "Mootje", inputDa, "Male", "robin", "1337","Hoorn3","password");
 
     public void saveChangesButtonPressed(ActionEvent event) throws IOException {
         u3.setLastName(lastName.getText());

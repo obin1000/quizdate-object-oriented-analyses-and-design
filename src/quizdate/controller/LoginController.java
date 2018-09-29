@@ -67,6 +67,7 @@ public class LoginController {
         Parent root = (Parent)fxmlLoader.load();
         return fxmlLoader.<MainController>getController();
     }
+
 }
 
 
