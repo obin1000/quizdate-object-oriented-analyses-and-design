@@ -2,43 +2,42 @@ package quizdate.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import quizdate.model.User;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class EditUserController implements Initializable{
+public class EditUserController implements Initializable {
 
 
-    @FXML private Label name;
-    @FXML private TextField lastName;
-    @FXML private TextField firstName;
-    @FXML private Button btn_back;
+    @FXML
+    private Label name;
+    @FXML
+    private TextField lastName;
+    @FXML
+    private TextField firstName;
+    @FXML
+    private Button btn_back;
 
-    private LocalDate inputDa = LocalDate.of(2001,5,23);
-    private User u3 = new User("Bootje", "Mootje", inputDa, "Male", "robin", "1337","Hoorn3","password");
+    private LocalDate inputDa = LocalDate.of(2001, 5, 23);
+    private User u3 = new User("Bootje", "Mootje", inputDa, "Male", "robin", "1337", "Hoorn3", "password");
 
-    public void saveChangesButtonPressed(ActionEvent event) throws IOException {
+    public void saveChangesButtonPressed(ActionEvent event) {
         u3.setLastName(lastName.getText());
         System.out.println(u3.getLastName());
     }
 
-    public void backButtonPressed(ActionEvent event) throws IOException{
-        getMainController().switchSceneFindMatch(event, btn_back,getMainController().getUserId());
+    public void backButtonPressed(ActionEvent event) {
+        getMainController().switchSceneFindMatch(event, btn_back);
     }
 
-    private MainController getMainController() throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
-        Parent root = (Parent)fxmlLoader.load();
-        return fxmlLoader.<MainController>getController();
+    private MainController getMainController() {
+        return MainController.getSingleton();
     }
 
     @Override

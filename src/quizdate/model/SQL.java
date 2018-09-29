@@ -6,6 +6,7 @@ public class SQL {
 
     private static Connection connection;
     private static final int START_ID = 1000;
+    private static SQL singleton;
 
     public SQL() {
 
@@ -50,26 +51,20 @@ public class SQL {
 //
 //    }
 
-    public boolean checkLoginInformation(String email, String password) {
-        boolean status = false;
-
+    public int checkLoginInformation(String email, String password) {
+        int userId = 0;
         try {
 
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM Account WHERE email ='" + email + "' AND password ='" + password + "'");
-            rs.next();
-            int value = rs.getInt(1);
-            if (value == 1) {
-                status = true;
-            } else {
-                status = false;
+            ResultSet rs = statement.executeQuery("SELECT userId FROM Account WHERE email ='" + email + "' AND password ='" + password + "'");
+            if(rs.next()){
+                System.out.println(userId = Integer.parseInt(rs.getString("userId")));
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return status;
+        return userId;
 
     }
 
@@ -109,15 +104,21 @@ public class SQL {
 
     }
 
-    public void getUser(int userId) {
+    public User getUser(int userId) {
+        User user = null;
         try {
+
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM Account WHERE userId = " + userId);
-            System.out.println(rs);
+
+            if(rs.next()) {
+                user = new User(rs.getString("lastName"), rs.getString("firstName"),
+                        rs.getDate("dateOfBirth").toLocalDate(), rs.getString("sex"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("adres"), rs.getString("password"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //RETURN USER
+        return user;
     }
 
 
@@ -146,6 +147,14 @@ public class SQL {
         boolean status = false;
 
         return status;
+    }
+
+    public static SQL getSingleton() {
+
+        if (SQL.singleton == null) {
+            SQL.singleton = new SQL();
+        }
+        return SQL.singleton;
     }
 
 

@@ -2,8 +2,6 @@ package quizdate.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import quizdate.model.SQL;
@@ -19,8 +17,7 @@ public class LoginController {
     @FXML
     private Button btn_login;
     @FXML
-    private Button btn_register;
-    SQL sql = new SQL();
+    private Button btn_register;;
     private int userId = 1;
 
 //    public boolean loginInformationCorrect() {
@@ -36,16 +33,14 @@ public class LoginController {
         return true;
     }
 
-    public void loginButtonPressed(ActionEvent event) throws IOException {
+    public void loginButtonPressed(ActionEvent event) {
 
-        if (sql.checkLoginInformation(txt_username.getText(),txt_password.getText()) && textEntered()) {
+        if (SQL.getSingleton().checkLoginInformation(txt_username.getText(), txt_password.getText()) != 0 &&textEntered()) {
             //CHECK IF LOGIN DATA IS CORRECT, THEN DENY OR LOGIN.
             System.out.println("Checking loginButtonPressed details...");
             System.out.println("logindetails correct!");
-            System.out.println(txt_username.getText());
-            System.out.println(txt_password.getText());
-            getMainController().setUserId(5);
-            getMainController().switchSceneFindMatch(event,btn_login,userId);
+            getMainController().setUserId(SQL.getSingleton().checkLoginInformation(txt_username.getText(),txt_password.getText()));
+            getMainController().switchSceneFindMatch(event, btn_login);
 
         } else {
             System.err.print("please enter correct information");
@@ -58,14 +53,12 @@ public class LoginController {
      * @throws IOException
      */
 
-    public void registerButtonClicked(ActionEvent event) throws IOException{
-        getMainController().switchSceneCreateAccount(event,btn_register);
+    public void registerButtonClicked(ActionEvent event) {
+        getMainController().switchSceneCreateAccount(event, btn_register);
     }
 
-    private MainController getMainController() throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/main.fxml"));
-        Parent root = (Parent)fxmlLoader.load();
-        return fxmlLoader.<MainController>getController();
+    private MainController getMainController() {
+        return MainController.getSingleton();
     }
 
 }
