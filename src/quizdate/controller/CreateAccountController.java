@@ -28,11 +28,13 @@ public class CreateAccountController extends MainController {
     private Button btn_createAccount;
     @FXML
     private Button btn_back;
+    @FXML
+    private TextField txt_password;
 
     public void createAccountButtonPressed (ActionEvent event) throws IOException {
         
         User user = new User(txt_lastName.getText(), txt_firstName.getText(), dte_dateOfBirth.getValue(),
-            (String) cmb_sex.getValue(), txt_email.getText(), txt_phoneNumber.getText(), txt_adres.getText());
+            (String) cmb_sex.getValue(), txt_email.getText(), txt_phoneNumber.getText(), txt_adres.getText(),txt_password.getText() );
             
         SQL sqlConnection = new SQL();
 

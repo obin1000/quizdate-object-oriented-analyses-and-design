@@ -14,7 +14,6 @@ public class SQL {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 this.connection = DriverManager.getConnection("jdbc:mysql://oege.ie.hva.nl:3306/zhadiyem?useUnicode=true&useJDBCCompliantTimezoneShift" +
                         "=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "hadiyem", "F+OYAvrrsj26nQ");
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -50,6 +49,31 @@ public class SQL {
         return id;
 
     }
+
+//    private static int checkLoginInformation(String email, String password) {
+//        boolean status = false;
+//
+//        try {
+//            do {
+//                Statement statement = connection.createStatement();
+//                ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM Account WHERE email=);
+//                rs.next();
+//                int value = rs.getInt(1);
+//                if (value == 1) {
+//                    ++id;
+//                } else {
+//                    status = true;
+//                }
+//
+//            } while (!status);
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return id;
+//
+//    }
 
     // grabs a random userId from the database
     public int getRandomId(){
@@ -106,6 +130,12 @@ public class SQL {
             e.printStackTrace();
         }
 
+    }
+
+    public boolean getUser(){
+        boolean status = false;
+
+        return status;
     }
 
 

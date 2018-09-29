@@ -18,9 +18,10 @@ public class User extends Observable {
     private Date creationDate;
     private List<Integer> Likes;
     private List<Integer> Matches;
+    private String password;
 
     public User(String lastName, String firstName, LocalDate dateOfBirth, String sex, String email,
-                String phoneNumber, String adres) {
+                String phoneNumber, String adres, String password) {
         this.userId = latestUserId++;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -32,6 +33,7 @@ public class User extends Observable {
         this.creationDate = new Date();
         this.Likes = new ArrayList<>();
         this.Matches = new ArrayList<>();
+        this.password = password;
     }
 
     /*

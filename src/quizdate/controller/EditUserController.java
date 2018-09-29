@@ -24,14 +24,12 @@ public class EditUserController extends MainController implements Initializable{
     @FXML private TextField lastName;
     @FXML private TextField firstName;
     @FXML private Button btn_back;
-    private ObservableList <User> userList = FXCollections.observableArrayList();
 
     private static LocalDate inputDa = LocalDate.of(2001,5,23);
-    private static User u3 = new User("Bootje", "Mootje", inputDa, "Male", "robin", "1337","Hoorn3");
+    private static User u3 = new User("Bootje", "Mootje", inputDa, "Male", "robin", "1337","Hoorn3","password");
 
     public void saveChangesButtonPressed(ActionEvent event) throws IOException {
         u3.setLastName(lastName.getText());
-        userList.add(u3);
         System.out.println(u3.getLastName());
     }
 
@@ -42,13 +40,6 @@ public class EditUserController extends MainController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         lastName.setText(u3.getLastName());
-        userList.add(u3);
-        userList.addListener(new InvalidationListener() {
-            @Override
-            public void invalidated(javafx.beans.Observable observable) {
-
-            }
-        });
     }
 
 }
