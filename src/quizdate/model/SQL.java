@@ -101,7 +101,7 @@ public class SQL {
             statement.executeUpdate("INSERT INTO Account (userId, email, lastName, firstName, dateOfBirth," +
                     " sex, phoneNumber, adres) VALUES ('" + SQL.getAvailableUserId() + "','" + user.getEmail() + "', '" + user.getLastName() + "', '" +
                     user.getFirstName() + "', '" + user.getDateOfBirth() + "', '" + user.getSex() + "', '" +
-                    user.getPhoneNumber() + "', '" + user.getAdres() + "')");
+                    user.getPhoneNumber() + "', '" + user.getAdres() + "', '" + user.getPassword() + "')");
             status = true;
         } catch (SQLException e) {
             e.printStackTrace();

@@ -116,6 +116,10 @@ public class User extends Observable {
         return Matches;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     /*
      * Methods
      */
