@@ -40,7 +40,7 @@ public class CreateAccountController extends MainController {
                      super.switchSceneLogin(event,btn_createAccount);
         }
 
-        sqlConnection.close();
+        //sqlConnection.close();
     }
 
     public void backButtonPressed (ActionEvent event) throws IOException {

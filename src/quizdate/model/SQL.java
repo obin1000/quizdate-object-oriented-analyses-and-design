@@ -5,17 +5,15 @@ import java.sql.*;
 public class SQL {
 
     private static Connection connection;
-    private static Statement statement;
     private static final int START_ID = 1000;
 
     public SQL() {
 
-        if (connection == null && statement == null) {
+        if (connection == null) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 this.connection = DriverManager.getConnection("jdbc:mysql://oege.ie.hva.nl:3306/zhadiyem?useUnicode=true&useJDBCCompliantTimezoneShift" +
                         "=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "hadiyem", "F+OYAvrrsj26nQ");
-                this.statement = connection.createStatement();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -23,8 +21,8 @@ public class SQL {
 
         }
 
-
     }
+
 
     private static int getAvailableUserId() {
 
@@ -33,6 +31,7 @@ public class SQL {
 
         try {
             do {
+                Statement statement = connection.createStatement();
                 ResultSet rs = statement.executeQuery("SELECT COUNT(*) FROM Account WHERE userId = " + id);
                 rs.next();
                 int value = rs.getInt(1);
@@ -57,6 +56,7 @@ public class SQL {
 
         int data =1;
         try {
+            Statement statement = connection.createStatement();
             ResultSet back = statement.executeQuery("SELECT userId FROM Account ORDER BY RAND() LIMIT 1");
             back.next();
             data = back.getInt(1);
@@ -73,6 +73,7 @@ public class SQL {
         boolean status = false;
 
         try {
+            Statement statement = connection.createStatement();
             statement.executeUpdate("INSERT INTO Account (userId, email, lastName, firstName, dateOfBirth," +
                     " sex, phoneNumber, adres) VALUES ('" + SQL.getAvailableUserId() + "','" + user.getEmail() + "', '" + user.getLastName() + "', '" +
                     user.getFirstName() + "', '" + user.getDateOfBirth() + "', '" + user.getSex() + "', '" +
@@ -83,12 +84,13 @@ public class SQL {
         }
 
         return status;
-        
+
     }
 
     public void deleteUser(int userId) {
 
         try {
+            Statement statement = connection.createStatement();
             statement.executeUpdate("DELETE FROM Account WHERE userId = '" + userId + "'");
         } catch (SQLException e) {
             e.printStackTrace();
