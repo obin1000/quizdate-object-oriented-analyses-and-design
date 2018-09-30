@@ -1,5 +1,10 @@
 package quizdate.model;
 
+
+
+
+import javafx.beans.InvalidationListener;
+
 import java.awt.Image;
 import java.time.LocalDate;
 import java.util.*;
@@ -19,6 +24,7 @@ public class User extends Observable {
     private List<Integer> Likes;
     private List<Integer> Matches;
     private String password;
+    private List<Observer> observers = new ArrayList<>();
 
     public User(String lastName, String firstName, LocalDate dateOfBirth, String sex, String email,
                 String phoneNumber, String adres, String password) {
@@ -50,6 +56,7 @@ public class User extends Observable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+        notifyObservers();
     }
 
     public String getFirstName() {
@@ -58,6 +65,7 @@ public class User extends Observable {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+        notifyObservers();
     }
 
     public LocalDate getDateOfBirth() {
@@ -66,6 +74,7 @@ public class User extends Observable {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+        notifyObservers();
     }
 
     public String getSex() {
@@ -74,6 +83,7 @@ public class User extends Observable {
 
     public void setSex(String sex) {
         this.sex = sex;
+        notifyObservers();
     }
 
     public String getEmail() {
@@ -82,6 +92,7 @@ public class User extends Observable {
 
     public void setEmail(String email) {
         this.email = email;
+        notifyObservers();
     }
 
     public String getPhoneNumber() {
@@ -90,6 +101,7 @@ public class User extends Observable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+        notifyObservers();
     }
 
     public String getAdres() {
@@ -98,6 +110,7 @@ public class User extends Observable {
 
     public void setAdres() {
         this.adres = adres;
+        notifyObservers();
     }
 
     public Image getProfilePicture() {
@@ -106,6 +119,7 @@ public class User extends Observable {
 
     public void setProfilePicture(Image profilePicture) {
         this.profilePicture = profilePicture;
+        notifyObservers();
     }
 
     public List<Integer> getLikes(){
@@ -134,33 +148,56 @@ public class User extends Observable {
 
     public void addToLiked(int likedPerson){
         this.Likes.add(likedPerson);
+        notifyObservers();
     }
 
     public void addToMatches(int matchId){
         this.Matches.add(matchId);
+        notifyObservers();
     }
 
     public void addToMatches(User user){
         this.Matches.add(user.getUserId());
+        notifyObservers();
     }
 
     public void removeMatch(int uid){
         Matches.remove((Integer) uid);
+        notifyObservers();
     }
 
     public void removeMatch(User user){
         Matches.remove((Integer) user.getUserId());
+        notifyObservers();
     }
 
     public void removeLike(int uid){
         Likes.remove((Integer) uid);
+        notifyObservers();
     }
 
     public void removeLike(User user){
         Likes.remove((Integer) user.getUserId());
+        notifyObservers();
     }
 
     public String toString(){
         return userId + " " + firstName + " " + lastName;
+    }
+
+    @Override
+    public void addObserver(Observer o) {
+        observers.add(o);
+    }
+
+    @Override
+    public void deleteObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    public void notifyObservers(){
+        for(Observer observer : observers){
+            observer.update(this,null);
+        }
     }
 }

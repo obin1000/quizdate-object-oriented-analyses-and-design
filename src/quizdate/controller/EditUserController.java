@@ -24,12 +24,9 @@ public class EditUserController implements Initializable {
     @FXML
     private Button btn_back;
 
-    private LocalDate inputDa = LocalDate.of(2001, 5, 23);
-    private User u3 = new User("Bootje", "Mootje", inputDa, "Male", "robin", "1337", "Hoorn3", "password");
-
     public void saveChangesButtonPressed(ActionEvent event) {
-        u3.setLastName(lastName.getText());
-        System.out.println(u3.getLastName());
+        getMainController().getUser().setLastName(lastName.getText());
+        System.out.println(getMainController().getUser().getLastName());
     }
 
     public void backButtonPressed(ActionEvent event) {
@@ -42,7 +39,9 @@ public class EditUserController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        lastName.setText(u3.getLastName());
+        lastName.setText(getMainController().getUser().getLastName());
     }
+
+
 
 }

@@ -20,9 +20,7 @@ public class FindMatchController implements Initializable {
     private ImageView profilePicture;
     @FXML
     private Button btn_settings;
-
     private Image img = new Image("file:./src/quizdate/images/trump.jpg");
-    LoginController login = new LoginController();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -32,11 +30,10 @@ public class FindMatchController implements Initializable {
 
     public void dislikeButtonPressed(ActionEvent event) {
         System.out.println("Dislike button clicked...");
-        User u = SQL.getSingleton().getUser(getMainController().getUserId());
-        System.out.println(u.getPassword());
     }
 
     public void likeButtonPressed(ActionEvent event) {
+        System.out.println(getMainController().getUser().getPassword());
         System.out.println("Like button clicked...");
     }
 

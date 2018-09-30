@@ -9,8 +9,9 @@ public class SQL {
     private static SQL singleton;
 
     public SQL() {
-
+        SQL.singleton = this;
         if (connection == null) {
+
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 this.connection = DriverManager.getConnection("jdbc:mysql://oege.ie.hva.nl:3306/zhadiyem?useUnicode=true&useJDBCCompliantTimezoneShift" +
@@ -54,13 +55,11 @@ public class SQL {
     public int checkLoginInformation(String email, String password) {
         int userId = 0;
         try {
-
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT userId FROM Account WHERE email ='" + email + "' AND password ='" + password + "'");
             if(rs.next()){
                 System.out.println(userId = Integer.parseInt(rs.getString("userId")));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -44,7 +44,7 @@
       </Text>
       <Button fx:id="btn_login" layoutX="204.0" layoutY="225.0" mnemonicParsing="false" onAction="#loginButtonPressed" prefHeight="38.0" prefWidth="200.0" style="-fx-background-color: F94141;" text="Login" />
       <Separator layoutX="66.0" layoutY="263.0" prefHeight="14.0" prefWidth="479.0" />
-      <Button fx:id="btn_register" layoutX="175.0" layoutY="291.0" mnemonicParsing="false" onAction="#registerButtonClicked" prefHeight="66.0" prefWidth="258.0" style="-fx-background-color: FFFF00;" text="Register now!">
+      <Button fx:id="btn_register" layoutX="175.0" layoutY="291.0" mnemonicParsing="false" onAction="#registerButtonPressed" prefHeight="66.0" prefWidth="258.0" style="-fx-background-color: FFFF00;" text="Register now!">
          <font>
             <Font name="System Bold" size="23.0" />
          </font>

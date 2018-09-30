@@ -7,13 +7,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import quizdate.model.SQL;
+import quizdate.model.User;
 
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 
-public class MainController {
+public class MainController implements Observer {
 
-    private int userId;
+    private User user;
     private static MainController singleton;
+
 
     public MainController() {
         MainController.singleton = this;
@@ -53,18 +57,14 @@ public class MainController {
         switchScene(event, pressedButton, "../view/edit_user.fxml");
     }
 
-    public void setUserId(int userId) {
-        System.out.println("UserId =" + userId + " Set via MainController.");
-        this.userId = userId;
+    public User getUser() {
+        return user;
     }
 
-    public int getUserId() {
-        System.out.println("UsedId =" + userId + " Get via MainController.");
-        SQL.getSingleton().getUser();
-
-        return userId;
+    public void setUser(User user) {
+        this.user = user;
+        user.addObserver(this);
     }
-
 
     public static MainController getSingleton() {
 
@@ -74,4 +74,10 @@ public class MainController {
         return MainController.singleton;
     }
 
+    @Override
+    public void update(Observable observable, Object o) {
+        if(SQL.getSingleton().saveUser(user)) {
+            System.out.println("MainController has just updated the user in the databasee.... :D");
+        }
+    }
 }
