@@ -6,6 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import quizdate.model.SQL;
+import quizdate.model.User;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,21 +25,17 @@ public class EditUserController implements Initializable {
     private Button btn_back;
 
     public void saveChangesButtonPressed(ActionEvent event) {
-        getMainController().getCurrentUser().setLastName(lastName.getText());
-        System.out.println(getMainController().getCurrentUser().getLastName());
+        MainController.getMainController().getCurrentUser().setLastName(lastName.getText());
+        System.out.println(MainController.getMainController().getCurrentUser().getLastName());
     }
 
     public void backButtonPressed(ActionEvent event) {
-        getMainController().switchSceneFindMatch(event, btn_back);
-    }
-
-    private MainController getMainController() {
-        return MainController.getSingleton();
+        MainController.getMainController().switchSceneFindMatch(event, btn_back);
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        lastName.setText(getMainController().getCurrentUser().getLastName());
+        lastName.setText(MainController.getMainController().getCurrentUser().getLastName());
     }
 
 

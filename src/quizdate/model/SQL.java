@@ -2,14 +2,13 @@ package quizdate.model;
 
 import java.sql.*;
 
-public class SQL {
+public final class SQL {
 
     private static Connection connection;
     private static final int START_ID = 1000;
-    private static SQL singleton;
+    private final static SQL singleton = new SQL();
 
-    public SQL() {
-        SQL.singleton = this;
+    private SQL() {
         if (connection == null) {
 
             try {
@@ -91,9 +90,9 @@ public class SQL {
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate("INSERT INTO Account (email, password, lastName, firstName, dateOfBirth," +
-                    " sex, phoneNumber, adres) VALUES ('" + user.getEmail() + "', '" + user.getPassword() + "', '" + user.getLastName() + "', '" +
-                    user.getFirstName() + "', '" + user.getDateOfBirth() + "', '" + user.getSex() + "', '" +
-                    user.getPhoneNumber() + "', '" + user.getAdres() + " ' )");
+                    " sex, phoneNumber, adres) VALUES ('" + user.getEmail() + "', '" + user.getPassword() + "', '" +
+                    user.getLastName() + "', '" + user.getFirstName() + "', '" + user.getDateOfBirth() + "', '" +
+                    user.getSex() + "', '" + user.getPhoneNumber() + "', '" + user.getAdres() + " ' )");
             status = true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,6 +100,25 @@ public class SQL {
 
         return status;
 
+    }
+
+    public boolean editUser(int userId, User user) {
+        boolean status = false;
+
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("UPDATE Account SET lastName = '" + user.getLastName() + "', " +
+                    "firstName = '" + user.getFirstName() + "' , dateOfBirth = '" + user.getDateOfBirth() + "'" +
+                    ", sex = '" + user.getSex() + "', email = '" + user.getEmail() + "', phoneNumber = '" +
+                    user.getPhoneNumber() + "', adres = '" + user.getAdres() + "', password = '" + user.getPassword() +
+                    "' WHERE userId = " +  userId);
+
+            status = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return status;
     }
 
     public User getUser(int userId) {
@@ -112,7 +130,9 @@ public class SQL {
 
             if(rs.next()) {
                 user = new User(rs.getString("lastName"), rs.getString("firstName"),
-                        rs.getDate("dateOfBirth").toLocalDate(), rs.getString("sex"), rs.getString("email"), rs.getString("phoneNumber"), rs.getString("adres"), rs.getString("password"));
+                        rs.getDate("dateOfBirth").toLocalDate(), rs.getString("sex"),
+                        rs.getString("email"), rs.getString("phoneNumber"),
+                        rs.getString("adres"), rs.getString("password"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -121,15 +141,19 @@ public class SQL {
     }
 
 
-    public void deleteUser(int userId) {
+
+    public boolean removeUser(User userId) {
+
+        boolean status = false;
 
         try {
             Statement statement = connection.createStatement();
-            statement.executeUpdate("DELETE FROM Account WHERE userId = '" + userId + "'");
+            statement.executeUpdate("DELETE FROM Account WHERE userId = " + userId);
+            status = true;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        return status;
     }
 
     public void close() {
@@ -148,13 +172,10 @@ public class SQL {
         return status;
     }
 
-    public static SQL getSingleton() {
-
-        if (SQL.singleton == null) {
-            SQL.singleton = new SQL();
-        }
+    public static SQL getDatabase() {
         return SQL.singleton;
     }
+
 
 
 }

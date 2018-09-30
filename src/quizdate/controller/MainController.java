@@ -13,14 +13,13 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-public class MainController implements Observer {
+public final class MainController implements Observer {
 
     private User currentUser;
-    private static MainController singleton;
+    private final static MainController singleton = new MainController();
 
 
-    public MainController() {
-        MainController.singleton = this;
+    private MainController() {
     }
 
     private void switchScene(ActionEvent event, Button pressedButton, String sceneName) {
@@ -61,22 +60,20 @@ public class MainController implements Observer {
         return currentUser;
     }
 
-    public void setCurrentUser(User currentUser) {
+    public void setCurrentUser(User currentUser, int userId) {
         this.currentUser = currentUser;
+        currentUser.setUserId(userId);
         currentUser.addObserver(this);
     }
 
-    public static MainController getSingleton() {
-
-        if (MainController.singleton == null) {
-            MainController.singleton = new MainController();
-        }
+    public static MainController getMainController() {
         return MainController.singleton;
     }
 
     @Override
     public void update(Observable observable, Object o) {
-        if(SQL.getSingleton().saveUser(currentUser)) {
+        System.out.println(currentUser.getUserId());
+        if(SQL.getDatabase().editUser(currentUser.getUserId(), currentUser)) {
             System.out.println("MainController has just updated the currentUser in the databasee.... :D");
         }
     }

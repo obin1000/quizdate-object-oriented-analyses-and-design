@@ -35,21 +35,17 @@ public class CreateAccountController {
         User user = new User(txt_lastName.getText(), txt_firstName.getText(), dte_dateOfBirth.getValue(),
                 (String) cmb_sex.getValue(), txt_email.getText(), txt_phoneNumber.getText(), txt_adres.getText(), txt_password.getText());
         System.out.println(user.getPassword());
-        SQL sqlConnection = new SQL();
 
-        if (sqlConnection.saveUser(user)) {
-            getMainController().switchSceneLogin(event, btn_createAccount);
+        if (SQL.getDatabase().saveUser(user)) {
+            MainController.getMainController().switchSceneLogin(event, btn_createAccount);
         }
 
         //sqlConnection.close();
     }
 
     public void backButtonPressed(ActionEvent event) {
-        getMainController().switchSceneLogin(event, btn_back);
+        MainController.getMainController().switchSceneLogin(event, btn_back);
     }
 
-    private MainController getMainController() {
-        return MainController.getSingleton();
-    }
 
 }

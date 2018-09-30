@@ -12,8 +12,7 @@ public class Match {
 
     // A user can request a Match to accept or deny it, Sends a random int from the database
     public int requestMatch() {
-        SQL db = new SQL();
-        return db.getRandomId();
+        return SQL.getDatabase().getRandomId();
     }
 
     // Create a Match between two users

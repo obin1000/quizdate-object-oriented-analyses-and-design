@@ -28,21 +28,18 @@ public class FindMatchController implements Initializable {
     }
 
     public void likeButtonPressed(ActionEvent event) {
-        System.out.println(getMainController().getCurrentUser().getPassword());
+        System.out.println(MainController.getMainController().getCurrentUser().getPassword());
         System.out.println("Like button clicked...");
     }
 
     public void settingsButtonPressed(ActionEvent event) {
         System.out.println("settings button clicked...");
-        getMainController().switchSceneEditUser(event, btn_settings);
+        MainController.getMainController().switchSceneEditUser(event, btn_settings);
     }
 
     public void chatButtonPressed(ActionEvent event) {
         System.out.println("Chat button clicked...");
     }
 
-    private MainController getMainController() {
-        return MainController.getSingleton();
-    }
 }
 
