@@ -15,7 +15,7 @@ import java.util.Observer;
 
 public class MainController implements Observer {
 
-    private User user;
+    private User currentUser;
     private static MainController singleton;
 
 
@@ -57,13 +57,13 @@ public class MainController implements Observer {
         switchScene(event, pressedButton, "../view/edit_user.fxml");
     }
 
-    public User getUser() {
-        return user;
+    public User getCurrentUser() {
+        return currentUser;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-        user.addObserver(this);
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+        currentUser.addObserver(this);
     }
 
     public static MainController getSingleton() {
@@ -76,8 +76,8 @@ public class MainController implements Observer {
 
     @Override
     public void update(Observable observable, Object o) {
-        if(SQL.getSingleton().saveUser(user)) {
-            System.out.println("MainController has just updated the user in the databasee.... :D");
+        if(SQL.getSingleton().saveUser(currentUser)) {
+            System.out.println("MainController has just updated the currentUser in the databasee.... :D");
         }
     }
 }

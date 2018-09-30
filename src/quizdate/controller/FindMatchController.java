@@ -2,16 +2,11 @@ package quizdate.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import quizdate.model.SQL;
-import quizdate.model.User;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -33,7 +28,7 @@ public class FindMatchController implements Initializable {
     }
 
     public void likeButtonPressed(ActionEvent event) {
-        System.out.println(getMainController().getUser().getPassword());
+        System.out.println(getMainController().getCurrentUser().getPassword());
         System.out.println("Like button clicked...");
     }
 

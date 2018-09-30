@@ -6,10 +6,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import quizdate.model.User;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class EditUserController implements Initializable {
@@ -25,8 +23,8 @@ public class EditUserController implements Initializable {
     private Button btn_back;
 
     public void saveChangesButtonPressed(ActionEvent event) {
-        getMainController().getUser().setLastName(lastName.getText());
-        System.out.println(getMainController().getUser().getLastName());
+        getMainController().getCurrentUser().setLastName(lastName.getText());
+        System.out.println(getMainController().getCurrentUser().getLastName());
     }
 
     public void backButtonPressed(ActionEvent event) {
@@ -39,7 +37,7 @@ public class EditUserController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        lastName.setText(getMainController().getUser().getLastName());
+        lastName.setText(getMainController().getCurrentUser().getLastName());
     }
 
 

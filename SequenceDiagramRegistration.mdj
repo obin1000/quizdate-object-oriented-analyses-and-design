@@ -1027,7 +1027,7 @@
 												"$ref": "AAAAAAFl7F8jX5ogIJ4="
 											},
 											"edgePosition": 1,
-											"text": "6 : Create user and assign dateOfCreation"
+											"text": "6 : Create currentUser and assign dateOfCreation"
 										},
 										{
 											"_type": "EdgeLabelView",
@@ -1302,7 +1302,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFl7FS1fJkPlHk="
 							},
-							"name": "Create user and assign dateOfCreation",
+							"name": "Create currentUser and assign dateOfCreation",
 							"source": {
 								"$ref": "AAAAAAFl7FUVRplB30k="
 							},

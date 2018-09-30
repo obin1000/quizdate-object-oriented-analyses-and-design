@@ -1606,7 +1606,7 @@
 											"top": 521,
 											"width": 180.9970703125,
 											"height": 13,
-											"text": "+saveUser(User user): boolean",
+											"text": "+saveUser(User currentUser): boolean",
 											"horizontalAlignment": 0
 										},
 										{
@@ -4735,7 +4735,7 @@
 								"_parent": {
 									"$ref": "AAAAAAFl4+SNr5hNSYI="
 								},
-								"name": "Likes user",
+								"name": "Likes currentUser",
 								"reference": {
 									"$ref": "AAAAAAFl47ten3elH7A="
 								}
@@ -5609,7 +5609,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFl/BqsIcJVsJU="
 									},
-									"name": "User user",
+									"name": "User currentUser",
 									"type": ""
 								}
 							]

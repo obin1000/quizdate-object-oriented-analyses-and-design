@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import quizdate.model.SQL;
-import quizdate.model.User;
 
 import java.io.IOException;
 
@@ -19,7 +18,6 @@ public class LoginController {
     private Button btn_login;
     @FXML
     private Button btn_register;;
-    private int userId = 1;
 
     public void loginButtonPressed(ActionEvent event) {
         int userId;
@@ -27,7 +25,7 @@ public class LoginController {
         if ((userId = SQL.getSingleton().checkLoginInformation(txt_username.getText(), txt_password.getText())) != 0) {
             //CHECK IF LOGIN DATA IS CORRECT, THEN DENY OR LOGIN.
             System.out.println("logindetails correct!");
-            getMainController().setUser(SQL.getSingleton().getUser(userId)); //Sets the user to singleton static MainController if a userId is found.
+            getMainController().setCurrentUser(SQL.getSingleton().getUser(userId)); //Sets the user to singleton static MainController if a userId is found.
             getMainController().switchSceneFindMatch(event, btn_login);
 
         } else {
