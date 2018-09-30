@@ -142,7 +142,7 @@ public final class SQL {
 
 
 
-    public boolean removeUser(User userId) {
+    public boolean removeUser(int userId) {
 
         boolean status = false;
 
