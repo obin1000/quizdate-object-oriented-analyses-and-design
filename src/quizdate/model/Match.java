@@ -28,6 +28,10 @@ public class Match {
         u2.removeMatch(u1);
         return true;
     }
+    // removes u2 from u1s likes
+    public void removeLike(User u1, User u2){
+        u1.removeLike(u2);
+    }
 
     // Is called when the user presses the accept button
     public void acceptMatch(User u1, User u2){
@@ -36,6 +40,6 @@ public class Match {
     }
     // Is called when user presses the deny button
     public  void denyMatch(){
-
+        System.out.println("that is not very nice");
     }
 }

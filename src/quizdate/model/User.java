@@ -154,6 +154,10 @@ public class User extends Observable {
         this.Likes.add(likedPerson);
         notifyObservers();
     }
+    public void addToLiked(User user){
+        this.Likes.add(user.getUserId());
+        notifyObservers();
+    }
 
     public void addToMatches(int matchId){
         this.Matches.add(matchId);
