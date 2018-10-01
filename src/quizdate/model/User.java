@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class User extends Observable {
-//    private static int latestUserId = 1000;
+    private static int latestUserId = 1000;
     private int userId;
     private String lastName;
     private String firstName;
@@ -21,14 +21,14 @@ public class User extends Observable {
     private String adres;
     private Image profilePicture;
     private Date creationDate;
-    private List<Integer> Likes;
-    private List<Integer> Matches;
+    private List<User> Likes;
+    private List<User> Matches;
     private String password;
     private List<Observer> observers = new ArrayList<>();
 
     public User(String lastName, String firstName, LocalDate dateOfBirth, String sex, String email,
                 String phoneNumber, String adres, String password) {
-//        this.userId = latestUserId++;
+        this.userId = latestUserId++;
         this.lastName = lastName;
         this.firstName = firstName;
         this.dateOfBirth = dateOfBirth;
@@ -126,11 +126,11 @@ public class User extends Observable {
         notifyObservers();
     }
 
-    public List<Integer> getLikes(){
+    public List<User> getLikes(){
         return Likes;
     }
 
-    public List<Integer> getMatches(){
+    public List<User> getMatches(){
         return Matches;
     }
 
@@ -143,52 +143,65 @@ public class User extends Observable {
      */
 
     public boolean hasMatch(User user) {
-        return Matches.contains(user.getUserId());
+        return Matches.contains(user);
     }
 
     public boolean hasLike(User user) {
-        return Likes.contains(user.getUserId());
+        return Likes.contains(user);
     }
 
-    public void addToLiked(int likedPerson){
-        this.Likes.add(likedPerson);
-        notifyObservers();
-    }
     public void addToLiked(User user){
-        this.Likes.add(user.getUserId());
-        notifyObservers();
-    }
-
-    public void addToMatches(int matchId){
-        this.Matches.add(matchId);
+        this.Likes.add(user);
         notifyObservers();
     }
 
     public void addToMatches(User user){
-        this.Matches.add(user.getUserId());
+        this.Matches.add(user);
         notifyObservers();
     }
 
-    public void removeMatch(int uid){
-        Matches.remove((Integer) uid);
+
+    public void removeFromMatch(User user){
+        Matches.remove(user);
         notifyObservers();
     }
 
-    public void removeMatch(User user){
-        Matches.remove((Integer) user.getUserId());
+    public void removeFromLike(User user){
+        Likes.remove(user);
         notifyObservers();
     }
 
-    public void removeLike(int uid){
-        Likes.remove((Integer) uid);
-        notifyObservers();
+    public void checkForMatch(User u2){
+        if (this.hasLike(u2)){
+            if (u2.hasLike(this)){
+                createMatch(u2);
+            }
+        }
     }
 
-    public void removeLike(User user){
-        Likes.remove((Integer) user.getUserId());
-        notifyObservers();
+    public boolean createMatch(User u2){
+        this.addToMatches(u2); //add user2 to user1s matches
+        u2.addToMatches(this); // add user1 to user2s matches
+        return true;
     }
 
+    // Remove a Match between two users
+    public boolean removeMatch(User u2){
+        this.removeFromLike(u2);
+        this.removeFromMatch(u2);
+        u2.removeMatch(this);
+        return true;
+    }
+
+    // Is called when the user presses the accept button
+    public void acceptMatch(User u2){
+        this.addToLiked(u2);  // add user2 to user1s likes list
+        checkForMatch(u2);
+    }
+    // Is called when user presses the deny button
+    public  void denyMatch(){
+        System.out.println("that is not very nice");
+    }
     public String toString(){
         return userId + " " + firstName + " " + lastName;
     }
