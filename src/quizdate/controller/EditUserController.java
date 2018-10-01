@@ -23,6 +23,8 @@ public class EditUserController implements Initializable {
     private TextField firstName;
     @FXML
     private Button btn_back;
+    @FXML
+    private Button btn_deleteAccount;
 
     public void saveChangesButtonPressed(ActionEvent event) {
         MainController.getMainController().getCurrentUser().setLastName(lastName.getText());
@@ -31,6 +33,12 @@ public class EditUserController implements Initializable {
 
     public void backButtonPressed(ActionEvent event) {
         MainController.getMainController().switchSceneFindMatch(event, btn_back);
+    }
+
+    public void deleteAccountButtonPressed(ActionEvent event){
+        System.out.println("User has deleted account.. | QuizDate wishes you all the best in seeking further love.");
+        //Add logic code here
+
     }
 
     @Override
