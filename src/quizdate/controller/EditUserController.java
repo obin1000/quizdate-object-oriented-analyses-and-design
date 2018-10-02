@@ -36,8 +36,10 @@ public class EditUserController implements Initializable {
     }
 
     public void deleteAccountButtonPressed(ActionEvent event){
+        SQL.getDatabase().removeUser(MainController.getMainController().getCurrentUser().getUserId());
         System.out.println("User has deleted account.. | QuizDate wishes you all the best in seeking further love.");
-        //Add logic code here
+        MainController.getMainController().switchSceneLogin(event, btn_deleteAccount);
+
 
     }
 
