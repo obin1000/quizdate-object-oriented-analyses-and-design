@@ -1,11 +1,6 @@
 package quizdate.model;
 
-
-
-
-import javafx.beans.InvalidationListener;
-
-import java.awt.Image;
+import javafx.scene.image.Image;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -199,8 +194,8 @@ public class User extends Observable {
         checkForMatch(u2);
     }
     // Is called when user presses the deny button
-    public  void denyMatch(){
-        System.out.println("that is not very nice");
+    public  void denyMatch(User u2){
+        System.out.println("that is not very nice for " + u2.getFirstName());
     }
     public String toString(){
         return userId + " " + firstName + " " + lastName;
