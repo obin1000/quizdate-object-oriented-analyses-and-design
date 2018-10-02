@@ -22,7 +22,7 @@
                </children>
             </Pane>
             <fx:define>
-               <Image fx:id="btn_like" url="@../images/like.png" />
+               <Image url="@../images/like.png" />
             </fx:define>
          </children>
       </Pane>
@@ -47,17 +47,17 @@
             <Image url="@../images/dateapp_logo.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="dislike" fitHeight="63.0" fitWidth="57.0" layoutX="156.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="63.0" fitWidth="57.0" layoutX="156.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/dislike.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="like" fitHeight="57.0" fitWidth="57.0" layoutX="389.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="57.0" fitWidth="57.0" layoutX="389.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/like.png" />
          </image>
       </ImageView>
-      <Button layoutX="392.0" layoutY="333.0" mnemonicParsing="false" onAction="#likeButtonPressed" prefHeight="39.0" prefWidth="52.0" style="-fx-background-color: transparent;" />
-      <Button layoutX="159.0" layoutY="333.0" mnemonicParsing="false" onAction="#dislikeButtonPressed" prefHeight="39.0" prefWidth="52.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="btn_like" layoutX="395.0" layoutY="332.0" mnemonicParsing="false" onAction="#likeButtonPressed" prefHeight="39.0" prefWidth="52.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="btn_dislike" layoutX="159.0" layoutY="333.0" mnemonicParsing="false" onAction="#dislikeButtonPressed" prefHeight="39.0" prefWidth="52.0" style="-fx-background-color: transparent;" />
    </children>
 </AnchorPane>

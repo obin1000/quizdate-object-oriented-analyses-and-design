@@ -17,6 +17,11 @@ public class FindMatchController implements Initializable {
     private ImageView profilePicture;
     @FXML
     private Button btn_settings;
+    @FXML
+    private Button btn_like;
+    @FXML
+    private Button btn_dislike;
+
     private Image img = new Image("file:./src/quizdate/images/trump.jpg");
     private User match;
 
@@ -33,7 +38,7 @@ public class FindMatchController implements Initializable {
         MainController.getMainController().getCurrentUser().denyMatch(match); //call dislike function in currentuser
         System.out.println("USER " + MainController.getMainController().getCurrentUser().getFirstName() + " DISLIKED "
                 + match.getFirstName());
-        //MainController.getMainController().switchSceneEditUser(event, btn_dislike); // refresh the match
+        MainController.getMainController().switchSceneFindMatch(event, btn_dislike); // refresh the match
     }
 
     public void likeButtonPressed(ActionEvent event) {
@@ -41,7 +46,7 @@ public class FindMatchController implements Initializable {
         System.out.println(MainController.getMainController().getCurrentUser().getPassword());
         System.out.println("USER " + MainController.getMainController().getCurrentUser().getFirstName() + " LIKED "
             + match.getFirstName());
-        // refresh the match
+        MainController.getMainController().switchSceneFindMatch(event, btn_dislike); // refresh the match
     }
 
     public void settingsButtonPressed(ActionEvent event) {
