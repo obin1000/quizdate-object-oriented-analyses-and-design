@@ -30,15 +30,13 @@ public class FindMatchController implements Initializable {
         match = SQL.getDatabase().getUser(SQL.getDatabase().getRandomId());
         if (match.getProfilePicture() == null){ profilePicture.setImage(img);}
         else {profilePicture.setImage(match.getProfilePicture());}
-
-        System.out.println("test123");
     }
 
     public void dislikeButtonPressed(ActionEvent event) {
         MainController.getMainController().getCurrentUser().denyMatch(match); //call dislike function in currentuser
         System.out.println("USER " + MainController.getMainController().getCurrentUser().getFirstName() + " DISLIKED "
                 + match.getFirstName());
-        MainController.getMainController().switchSceneFindMatch(event, btn_dislike); // refresh the match
+        MainController.getMainController().switchSceneFindMatch(event, btn_like); // refresh the match
     }
 
     public void likeButtonPressed(ActionEvent event) {

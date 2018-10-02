@@ -25,7 +25,7 @@ public final class MainController implements Observer {
     private void switchScene(ActionEvent event, Button pressedButton, String sceneName) {
         Stage appStage;
         Parent newRoot;
-        if (event.getSource() == pressedButton) {
+     //   if (event.getSource() == pressedButton) { <- this won't let me refresh :(
             appStage = (Stage) pressedButton.getScene().getWindow();
             try {
                 newRoot = FXMLLoader.load(getClass().getResource(sceneName));
@@ -35,7 +35,7 @@ public final class MainController implements Observer {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+       // }
     }
 
 

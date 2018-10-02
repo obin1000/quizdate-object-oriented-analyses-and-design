@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import quizdate.model.SQL;
 import quizdate.model.User;
@@ -49,6 +50,7 @@ public class Main extends Application {
         System.out.println(SQL.getDatabase().getRandomId());
         System.out.println(SQL.getDatabase().getRandomId());
         System.out.println(SQL.getDatabase().getRandomId());
+
         launch(args);
     }
 

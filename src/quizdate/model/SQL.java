@@ -1,5 +1,7 @@
 package quizdate.model;
 
+import javafx.scene.image.Image;
+
 import java.sql.*;
 
 public final class SQL {
@@ -133,6 +135,10 @@ public final class SQL {
                         rs.getDate("dateOfBirth").toLocalDate(), rs.getString("sex"),
                         rs.getString("email"), rs.getString("phoneNumber"),
                         rs.getString("adres"), rs.getString("password"));
+                if(rs.getString("picturePath") != null) {
+                    Image profilePic = new Image(rs.getString("picturePath"));
+                    user.setProfilePicture(profilePic);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
