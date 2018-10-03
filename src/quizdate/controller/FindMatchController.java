@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import quizdate.model.SQL;
@@ -21,6 +22,8 @@ public class FindMatchController implements Initializable {
     private Button btn_like;
     @FXML
     private Button btn_dislike;
+    @FXML
+    private Label lbl_username;
 
     private Image img = new Image("file:./src/quizdate/images/trump.jpg");
     private User match;
@@ -30,6 +33,7 @@ public class FindMatchController implements Initializable {
         match = SQL.getDatabase().getUser(SQL.getDatabase().getRandomId());
         if (match.getProfilePicture() == null){ profilePicture.setImage(img);}
         else {profilePicture.setImage(match.getProfilePicture());}
+        lbl_username.setText(match.getFirstName() + " " + match.getLastName());
     }
 
     public void dislikeButtonPressed(ActionEvent event) {

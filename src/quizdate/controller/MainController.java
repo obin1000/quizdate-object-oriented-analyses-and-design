@@ -16,7 +16,11 @@ import java.util.Observer;
 public final class MainController implements Observer {
 
     private User currentUser;
-    private final static MainController singleton = new MainController();
+    private final static MainController singleton;
+
+    static{
+        singleton = new MainController();
+    }
 
 
     private MainController() {
