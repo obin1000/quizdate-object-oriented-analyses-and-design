@@ -1,7 +1,7 @@
 java:
   stage: test
   tags: 
-  - windows
+  - my-tag
   script:
   - gradle test
   artifacts:
