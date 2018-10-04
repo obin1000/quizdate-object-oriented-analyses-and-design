@@ -1,5 +1,7 @@
 java:
   stage: test
+  tags: 
+  - windows
   script:
   - gradle test
   artifacts:
