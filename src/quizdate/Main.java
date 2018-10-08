@@ -4,9 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import quizdate.model.SQL;
+import quizdate.model.UserDatabase;
 import quizdate.model.User;
 
 import java.time.LocalDate;
@@ -46,10 +45,10 @@ public class Main extends Application {
         System.out.println("u3matches: " + u3.getMatches());
         System.out.println("They got a match");
 
-        System.out.println(SQL.getDatabase().getRandomId());
-        System.out.println(SQL.getDatabase().getRandomId());
-        System.out.println(SQL.getDatabase().getRandomId());
-        System.out.println(SQL.getDatabase().getRandomId());
+//        System.out.println(UserDatabase.getDatabase().getRandomId());
+//        System.out.println(UserDatabase.getDatabase().getRandomId());
+//        System.out.println(UserDatabase.getDatabase().getRandomId());
+//        System.out.println(UserDatabase.getDatabase().getRandomId());
 
         launch(args);
     }

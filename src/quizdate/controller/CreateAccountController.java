@@ -3,7 +3,7 @@ package quizdate.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;;
 import javafx.scene.control.*;
-import quizdate.model.SQL;
+import quizdate.model.UserDatabase;
 import quizdate.model.User;
 
 public class CreateAccountController {
@@ -36,7 +36,7 @@ public class CreateAccountController {
                 (String) cmb_sex.getValue(), txt_email.getText(), txt_phoneNumber.getText(), txt_adres.getText(), txt_password.getText());
         System.out.println(user.getPassword());
 
-        if (SQL.getDatabase().saveUser(user)) {
+        if (UserDatabase.getInstance().save(user)) {
             MainController.getMainController().switchSceneLogin(event, btn_createAccount);
         }
 

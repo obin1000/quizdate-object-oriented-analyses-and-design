@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import quizdate.model.SQL;
+import quizdate.model.UserDatabase;
 import quizdate.model.User;
 
 import java.io.IOException;
@@ -77,7 +77,7 @@ public final class MainController implements Observer {
     @Override
     public void update(Observable observable, Object o) {
         System.out.println(currentUser.getUserId());
-        if(SQL.getDatabase().editUser(currentUser.getUserId(), currentUser)) {
+        if(UserDatabase.getInstance().update(currentUser.getUserId(), currentUser)) {
             System.out.println("MainController has just updated the currentUser in the databasee.... :D");
         }
     }
