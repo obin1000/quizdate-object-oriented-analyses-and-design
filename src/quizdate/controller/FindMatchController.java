@@ -19,6 +19,8 @@ public class FindMatchController implements Initializable {
     @FXML
     private Button btn_settings;
     @FXML
+    private Button btn_chat;
+    @FXML
     private Button btn_like;
     @FXML
     private Button btn_dislike;
@@ -58,6 +60,7 @@ public class FindMatchController implements Initializable {
 
     public void chatButtonPressed(ActionEvent event) {
         System.out.println("Chat button clicked...");
+        MainController.getMainController().switchSceneChat(event, btn_chat);
     }
 
 }

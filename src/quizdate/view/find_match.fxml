@@ -39,7 +39,7 @@
                </image>
             </ImageView>
             <Button fx:id="btn_settings" layoutX="9.0" layoutY="5.0" mnemonicParsing="false" onAction="#settingsButtonPressed" prefHeight="50.0" prefWidth="52.0" style="-fx-background-color: transparent;" />
-            <Button layoutX="516.0" layoutY="-6.0" mnemonicParsing="false" onAction="#chatButtonPressed" prefHeight="63.0" prefWidth="70.0" style="-fx-background-color: transparent;" />
+            <Button fx:id="btn_chat" layoutX="516.0" layoutY="-6.0" mnemonicParsing="false" onAction="#chatButtonPressed" prefHeight="63.0" prefWidth="70.0" style="-fx-background-color: transparent;" />
          </children></Pane>
       <ImageView fx:id="profilePicture" fitHeight="196.0" fitWidth="290.0" layoutX="156.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="171.0" fitWidth="290.0" layoutX="215.0" layoutY="-40.0" pickOnBounds="true" preserveRatio="true">
