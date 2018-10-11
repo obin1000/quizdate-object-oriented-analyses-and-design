@@ -5,16 +5,15 @@ import javafx.scene.image.Image;
 import java.sql.*;
 import java.util.List;
 
-public class UserDatabase implements DAO<User> {
+public class UserRepository implements DAO<User> {
 
-    private final static UserDatabase singleton;
+    private final static UserRepository singleton;
 
     static {
-        singleton = new UserDatabase();
+        singleton = new UserRepository();
     }
 
-    private UserDatabase() {
-        super();
+    private UserRepository() {
     }
 
     public int checkLoginInformation(String email, String password) {
@@ -28,6 +27,7 @@ public class UserDatabase implements DAO<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        dbConnection.getInstance().close();
         return userId;
 
     }
@@ -48,7 +48,7 @@ public class UserDatabase implements DAO<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        dbConnection.getInstance().close();
         return data;
     }
 
@@ -73,6 +73,7 @@ public class UserDatabase implements DAO<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        dbConnection.getInstance().close();
         return user;
     }
 
@@ -90,7 +91,7 @@ public class UserDatabase implements DAO<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        dbConnection.getInstance().close();
         return status;
     }
 
@@ -110,7 +111,7 @@ public class UserDatabase implements DAO<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        dbConnection.getInstance().close();
         return status;
     }
 
@@ -125,10 +126,11 @@ public class UserDatabase implements DAO<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        dbConnection.getInstance().close();
         return status;
     }
 
-    public static UserDatabase getInstance() {
-        return UserDatabase.singleton;
+    public static UserRepository getInstance() {
+        return UserRepository.singleton;
     }
 }

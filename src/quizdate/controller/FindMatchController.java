@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import quizdate.model.UserDatabase;
+import quizdate.model.UserRepository;
 import quizdate.model.User;
 
 import java.net.URL;
@@ -32,7 +32,7 @@ public class FindMatchController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        match = UserDatabase.getInstance().get(UserDatabase.getInstance().getRandomId());
+        match = UserRepository.getInstance().get(UserRepository.getInstance().getRandomId());
         if (match.getProfilePicture() == null){ profilePicture.setImage(img);}
         else {profilePicture.setImage(match.getProfilePicture());}
         lbl_username.setText(match.getFirstName() + " " + match.getLastName());

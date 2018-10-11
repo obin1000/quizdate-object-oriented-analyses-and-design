@@ -14,24 +14,25 @@ public class dbConnection {
     }
 
     private dbConnection() {
+    }
+
+    public Connection getConnection() {
         if (connection == null) {
 
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                this.connection = DriverManager.getConnection("jdbc:mysql://oege.ie.hva.nl:3306/zhadiyem?useUnicode=true&useJDBCCompliantTimezoneShift" +
+                connection = DriverManager.getConnection("jdbc:mysql://oege.ie.hva.nl:3306/zhadiyem?useUnicode=true&useJDBCCompliantTimezoneShift" +
                         "=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "hadiyem", "F+OYAvrrsj26nQ");
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
-    }
-
-    public Connection getConnection() {
         return connection;
     }
 
     public static dbConnection getInstance() {
+
         return singleton;
     }
 
@@ -39,6 +40,7 @@ public class dbConnection {
 
         try {
             connection.close();
+            connection = null;
         } catch (SQLException e) {
             e.printStackTrace();
         }

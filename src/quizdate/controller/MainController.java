@@ -7,8 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import quizdate.model.ChatRoom;
-import quizdate.model.ChatroomImpl;
-import quizdate.model.UserDatabase;
+import quizdate.model.UserRepository;
 import quizdate.model.User;
 
 import java.io.IOException;
@@ -91,7 +90,7 @@ public final class MainController implements Observer {
     @Override
     public void update(Observable observable, Object o) {
         System.out.println(currentUser.getUserId());
-        if(UserDatabase.getInstance().update(currentUser.getUserId(), currentUser)) {
+        if(UserRepository.getInstance().update(currentUser.getUserId(), currentUser)) {
             System.out.println("MainController has just updated the currentUser in the databasee.... :D");
         }
     }

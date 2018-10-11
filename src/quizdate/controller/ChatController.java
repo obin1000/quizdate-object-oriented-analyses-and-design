@@ -7,14 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import quizdate.model.ChatRoom;
 import quizdate.model.User;
-import quizdate.model.UserDatabase;
+import quizdate.model.UserRepository;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -33,11 +29,11 @@ public class ChatController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         if(debug==1) {
             System.out.println("debug");
-            User u1 = UserDatabase.getInstance().get(11);
-            User u2 = UserDatabase.getInstance().get(12);
-            User u3 = UserDatabase.getInstance().get(13);
-            User u4 = UserDatabase.getInstance().get(14);
-            User u5 = UserDatabase.getInstance().get(15);
+            User u1 = UserRepository.getInstance().get(11);
+            User u2 = UserRepository.getInstance().get(12);
+            User u3 = UserRepository.getInstance().get(13);
+            User u4 = UserRepository.getInstance().get(14);
+            User u5 = UserRepository.getInstance().get(15);
             MainController.getMainController().getCurrentUser().createMatch(u1);
             u1.getChat(0).sendMessage("hello",u1);
             u1.getChat(0).sendMessage("How are you",u1);

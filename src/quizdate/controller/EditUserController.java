@@ -6,7 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import quizdate.model.UserDatabase;
+import quizdate.model.UserRepository;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,7 +35,7 @@ public class EditUserController implements Initializable {
     }
 
     public void deleteAccountButtonPressed(ActionEvent event){
-        UserDatabase.getInstance().remove(MainController.getMainController().getCurrentUser().getUserId());
+        UserRepository.getInstance().remove(MainController.getMainController().getCurrentUser().getUserId());
         System.out.println("User has deleted account.. | QuizDate wishes you all the best in seeking further love.");
         MainController.getMainController().switchSceneLogin(event, btn_deleteAccount);
 
