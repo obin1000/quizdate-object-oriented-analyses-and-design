@@ -1,25 +1,41 @@
 package quizdate.model;
 
-import java.util.List;
-
 public class Question {
+
     private String question;
-    private List<Character> answers;
-    private char correctAnswer;
+    private String rightAnswer;
+    private String[] possibleAnswers;
 
-    public Question(){
+    public Question(String question, String rightAnswer, String[] possibleAnswers) {
+
+        this.question = question;
+        this.rightAnswer = rightAnswer;
+        this.possibleAnswers = possibleAnswers;
 
     }
-    public String getQuestion(){
+
+
+    public String getQuestion() {
         return question;
     }
-    public void setQuestion(String q){
-        this.question = q;
+
+    public void setQuestion(String question) {
+        this.question = question;
     }
-    public boolean isCorrect(){
-        return true;
+
+    public String getRightAnswer() {
+        return rightAnswer;
     }
-    public String toString(){
-        return question;
+
+    public void setRightAnswer(String rightAnswer) {
+        this.rightAnswer = rightAnswer;
+    }
+
+    public String[] getPossibleAnswers() {
+        return possibleAnswers;
+    }
+
+    public void setPossibleAnswers(String[] possibleAnswers) {
+        this.possibleAnswers = possibleAnswers;
     }
 }
