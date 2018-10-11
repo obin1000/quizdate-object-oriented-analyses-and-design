@@ -13,8 +13,8 @@ public class ChatroomImpl implements ChatRoom {
     }
     @Override
     public void sendMessage(String message, User user) {
-        messages.add(user.getFirstName()+": "+message);
         System.out.println(user + " send: " + message);
+        messages.add(user.getFirstName()+": "+message);
         for(User u : users){
             if(u != user){
                 u.receiveMessage(user,message);
