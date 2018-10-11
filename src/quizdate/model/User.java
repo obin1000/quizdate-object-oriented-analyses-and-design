@@ -4,7 +4,7 @@ import javafx.scene.image.Image;
 import java.time.LocalDate;
 import java.util.*;
 
-public class User extends Observable {
+public class User extends Observable implements Chatter {
     private static int latestUserId = 1000;
     private int userId;
     private String lastName;
@@ -20,6 +20,7 @@ public class User extends Observable {
     private List<User> Matches;
     private String password;
     private List<Observer> observers = new ArrayList<>();
+    private List<ChatRoom> chats;
 
     public User(String lastName, String firstName, LocalDate dateOfBirth, String sex, String email,
                 String phoneNumber, String adres, String password) {
@@ -35,6 +36,7 @@ public class User extends Observable {
         this.Likes = new ArrayList<>();
         this.Matches = new ArrayList<>();
         this.password = password;
+        this.chats = new ArrayList<>();
     }
 
     /*
@@ -177,14 +179,23 @@ public class User extends Observable {
     public boolean createMatch(User u2){
         this.addToMatches(u2); //add user2 to user1s matches
         u2.addToMatches(this); // add user1 to user2s matches
+        ChatRoom chat = new ChatroomImpl();
+        chat.addUser(this);
+        chat.addUser(u2);
+        this.chats.add(chat);
+        u2.chats.add(chat);
+        System.out.println("Chat between: " + this + " " + u2 );
         return true;
     }
 
     // Remove a Match between two users
-    public boolean removeMatch(User u2){
+    public boolean removeMatch(User u2,ChatRoom chat){
         this.removeFromLike(u2);
         this.removeFromMatch(u2);
-        u2.removeMatch(this);
+        u2.removeFromMatch(this);
+        this.chats.remove(chat);
+        u2.chats.remove(chat);
+        System.out.println("Chat removed: " + this + " " + u2 );
         return true;
     }
 
@@ -201,6 +212,7 @@ public class User extends Observable {
         return userId + " " + firstName + " " + lastName;
     }
 
+
     @Override
     public void addObserver(Observer o) {
         observers.add(o);
@@ -216,4 +228,22 @@ public class User extends Observable {
             observer.update(this,null);
         }
     }
+
+    @Override
+    public void receiveMessage(Chatter roomMate, String message) {
+        System.out.println(this + " received: " + message);
+    }
+    public List<ChatRoom> getChats(){
+        return chats;
+    }
+    public ChatRoom getChat(int index){
+        if(chats.get(index) != null){
+            return chats.get(index);
+        }
+        else{
+            return null;
+        }
+    }
+
+
 }

@@ -5,10 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import quizdate.model.ChatRoom;
+import quizdate.model.ChatroomImpl;
 import quizdate.model.UserDatabase;
 import quizdate.model.User;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main extends Application {
 
@@ -44,6 +47,7 @@ public class Main extends Application {
         System.out.println("u3likes: " + u3.getLikes());
         System.out.println("u3matches: " + u3.getMatches());
         System.out.println("They got a match");
+
 
 //        System.out.println(UserDatabase.getDatabase().getRandomId());
 //        System.out.println(UserDatabase.getDatabase().getRandomId());

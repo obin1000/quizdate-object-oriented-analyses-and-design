@@ -62,6 +62,9 @@ public final class MainController implements Observer {
     public void switchSceneChat(ActionEvent event, Button pressedButton) {
         switchScene(event, pressedButton, "../view/chat.fxml");
     }
+    public void switchSceneChatWindow(ActionEvent event, Button pressedButton) {
+        switchScene(event, pressedButton, "../view/chatwindow.fxml");
+    }
 
     public User getCurrentUser() {
         return currentUser;
