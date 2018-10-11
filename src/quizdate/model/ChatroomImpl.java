@@ -9,6 +9,7 @@ public class ChatroomImpl implements ChatRoom {
 
     public ChatroomImpl(){
         this.users = new ArrayList<User>();
+        this.messages = new ArrayList<>();
     }
     @Override
     public void sendMessage(String message, User user) {

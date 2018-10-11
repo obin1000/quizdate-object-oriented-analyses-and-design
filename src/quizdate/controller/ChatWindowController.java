@@ -6,7 +6,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import quizdate.model.ChatRoom;
 import quizdate.model.User;
 import quizdate.model.UserDatabase;
@@ -20,14 +22,35 @@ public class ChatWindowController implements Initializable {
     private Button btn_settings;
     @FXML
     private Button btn_home;
+    @FXML
+    private Button btn_send;
+    @FXML
+    private ListView view;
+    @FXML
+    private TextField message;
 
-    public void initialize(URL location, ResourceBundle resources,ChatRoom chat) {
-    }
+    private ChatRoom room;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("Loading chat");
+        view.getItems().removeAll();
+        view.setPlaceholder(new Label("No messages? Time to make the first move!"));
+        room = MainController.getRequestedRoom();
+        for(String s:room.getMessages()){
+            System.out.println(s);
+            view.getItems().add(s);
+        }
 
     }
+
+    public void sendButtonPressed(ActionEvent event) {
+        System.out.println("sending message... "+ message.getText());
+        room.sendMessage(message.getText(),MainController.getMainController().getCurrentUser());
+        MainController.getMainController().switchSceneChatWindow(event, btn_send,room);
+    }
+
     public void settingsButtonPressed(ActionEvent event) {
         System.out.println("settings button clicked...");
         MainController.getMainController().switchSceneEditUser(event, btn_settings);

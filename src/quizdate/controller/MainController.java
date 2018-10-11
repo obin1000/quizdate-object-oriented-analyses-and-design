@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import quizdate.model.ChatRoom;
+import quizdate.model.ChatroomImpl;
 import quizdate.model.UserDatabase;
 import quizdate.model.User;
 
@@ -17,6 +19,7 @@ public final class MainController implements Observer {
 
     private User currentUser;
     private final static MainController singleton;
+    private static ChatRoom requestedroom;
 
     static{
         singleton = new MainController();
@@ -62,7 +65,8 @@ public final class MainController implements Observer {
     public void switchSceneChat(ActionEvent event, Button pressedButton) {
         switchScene(event, pressedButton, "../view/chat.fxml");
     }
-    public void switchSceneChatWindow(ActionEvent event, Button pressedButton) {
+    public void switchSceneChatWindow(ActionEvent event, Button pressedButton, ChatRoom chat) {
+        requestedroom = chat;
         switchScene(event, pressedButton, "../view/chatwindow.fxml");
     }
 
@@ -78,6 +82,10 @@ public final class MainController implements Observer {
 
     public static MainController getMainController() {
         return MainController.singleton;
+    }
+
+    public static ChatRoom getRequestedRoom() {
+        return requestedroom;
     }
 
     @Override

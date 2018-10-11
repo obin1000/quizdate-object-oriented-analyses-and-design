@@ -33,12 +33,20 @@ public class ChatController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         if(debug==1) {
             System.out.println("debug");
-            MainController.getMainController().getCurrentUser().createMatch(UserDatabase.getInstance().get(11));
-            MainController.getMainController().getCurrentUser().createMatch(UserDatabase.getInstance().get(12));
-            MainController.getMainController().getCurrentUser().createMatch(UserDatabase.getInstance().get(13));
-            MainController.getMainController().getCurrentUser().createMatch(UserDatabase.getInstance().get(14));
-            MainController.getMainController().getCurrentUser().createMatch(UserDatabase.getInstance().get(15));
-            MainController.getMainController().getCurrentUser().createMatch(UserDatabase.getInstance().get(16));
+            User u1 = UserDatabase.getInstance().get(11);
+            User u2 = UserDatabase.getInstance().get(12);
+            User u3 = UserDatabase.getInstance().get(13);
+            User u4 = UserDatabase.getInstance().get(14);
+            User u5 = UserDatabase.getInstance().get(15);
+            MainController.getMainController().getCurrentUser().createMatch(u1);
+            u1.getChat(0).sendMessage("hello",u1);
+            u1.getChat(0).sendMessage("How are you",u1);
+            u1.getChat(0).sendMessage("Can i come over?",u1);
+            u1.getChat(0).sendMessage("Sexy girls in your region",u1);
+            MainController.getMainController().getCurrentUser().createMatch(u2);
+            MainController.getMainController().getCurrentUser().createMatch(u3);
+            MainController.getMainController().getCurrentUser().createMatch(u4);
+            MainController.getMainController().getCurrentUser().createMatch(u5);
             debug++;
         }
         System.out.println("getting matches");
@@ -56,7 +64,7 @@ public class ChatController implements Initializable {
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    MainController.getMainController().switchSceneChatWindow(event, button);
+                    MainController.getMainController().switchSceneChatWindow(event, button,c);
                 }
             });
             view.getItems().add(button);
