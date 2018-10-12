@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import quizdate.model.ChatRoom;
+import quizdate.model.MatchService;
 import quizdate.model.User;
 import quizdate.model.UserRepository;
 
@@ -23,35 +24,32 @@ public class ChatController implements Initializable {
     @FXML
     private ListView view;
 
+    private static final MainController MAIN_CONTROLLER = MainController.getMainController();
+    private static final MatchService MATCH_SERVICE = MatchService.getInstance();
+    private static final UserRepository USER_REPOSITORY = UserRepository.getInstance();
+    private User currentUser = MAIN_CONTROLLER.getCurrentUser();
     private static int debug = 1;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(debug==1) {
             System.out.println("debug");
-            User u1 = UserRepository.getInstance().get(11);
-            User u2 = UserRepository.getInstance().get(12);
-            User u3 = UserRepository.getInstance().get(13);
-            User u4 = UserRepository.getInstance().get(14);
-            User u5 = UserRepository.getInstance().get(15);
-            MainController.getMainController().getCurrentUser().createMatch(u1);
+            User u1 = USER_REPOSITORY.get(1);
+            MATCH_SERVICE.createMatch(currentUser,u1);
             u1.getChat(0).sendMessage("hello",u1);
             u1.getChat(0).sendMessage("How are you",u1);
             u1.getChat(0).sendMessage("Can i come over?",u1);
             u1.getChat(0).sendMessage("Sexy girls in your region",u1);
-            MainController.getMainController().getCurrentUser().createMatch(u2);
-            MainController.getMainController().getCurrentUser().createMatch(u3);
-            MainController.getMainController().getCurrentUser().createMatch(u4);
-            MainController.getMainController().getCurrentUser().createMatch(u5);
             debug++;
         }
         System.out.println("getting matches");
-        List<ChatRoom> chats = MainController.getMainController().getCurrentUser().getChats();
+        List<ChatRoom> chats = currentUser.getChats();
         view.getItems().removeAll();
+
         for(ChatRoom c: chats){
             StringBuilder name = new StringBuilder();
             for(User u : c.getUsers()){
-                if(u !=MainController.getMainController().getCurrentUser()) {
+                if(u != currentUser) {
                     name.append(u);
                 }
             }
@@ -60,7 +58,7 @@ public class ChatController implements Initializable {
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    MainController.getMainController().switchSceneChatWindow(event, button,c);
+                    MAIN_CONTROLLER.switchSceneChatWindow(event, button,c);
                 }
             });
             view.getItems().add(button);
@@ -69,12 +67,12 @@ public class ChatController implements Initializable {
     }
     public void settingsButtonPressed(ActionEvent event) {
         System.out.println("settings button clicked...");
-        MainController.getMainController().switchSceneEditUser(event, btn_settings);
+        MAIN_CONTROLLER.switchSceneEditUser(event, btn_settings);
     }
 
     public void homeButtonPressed(ActionEvent event) {
-        System.out.println("Chat button clicked...");
-        MainController.getMainController().switchSceneFindMatch(event, btn_home);
+        System.out.println("Home button clicked...");
+        MAIN_CONTROLLER.switchSceneFindMatch(event, btn_home);
     }
 
 

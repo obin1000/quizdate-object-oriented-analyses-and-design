@@ -18,7 +18,6 @@ public class dbConnection {
 
     public Connection getConnection() {
         if (connection == null) {
-
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 connection = DriverManager.getConnection("jdbc:mysql://oege.ie.hva.nl:3306/zhadiyem?useUnicode=true&useJDBCCompliantTimezoneShift" +
@@ -26,24 +25,20 @@ public class dbConnection {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
         return connection;
     }
 
     public static dbConnection getInstance() {
-
         return singleton;
     }
 
     public void close() {
-
         try {
             connection.close();
             connection = null;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 }

@@ -39,7 +39,7 @@ public class User extends Observable implements Chatter {
         this.chats = new ArrayList<>();
     }
 
-    /*
+    /**
      * Getters & Setters
      */
 
@@ -135,83 +135,13 @@ public class User extends Observable implements Chatter {
         return password;
     }
 
-    /*
-     * Methods
+    /**
+     * METHODS
      */
 
-    public boolean hasMatch(User user) {
-        return Matches.contains(user);
-    }
-
-    public boolean hasLike(User user) {
-        return Likes.contains(user);
-    }
-
-    public void addToLiked(User user){
-        this.Likes.add(user);
-        notifyObservers();
-    }
-
-    public void addToMatches(User user){
-        this.Matches.add(user);
-        notifyObservers();
-    }
-
-
-    public void removeFromMatch(User user){
-        Matches.remove(user);
-        notifyObservers();
-    }
-
-    public void removeFromLike(User user){
-        Likes.remove(user);
-        notifyObservers();
-    }
-
-    public void checkForMatch(User u2){
-        if (this.hasLike(u2)){
-            if (u2.hasLike(this)){
-                createMatch(u2);
-            }
-        }
-    }
-
-    public boolean createMatch(User u2){
-        this.addToMatches(u2); //add user2 to user1s matches
-        u2.addToMatches(this); // add user1 to user2s matches
-        ChatRoom chat = new ChatroomImpl();
-        chat.addUser(this);
-        chat.addUser(u2);
-        this.chats.add(chat);
-        u2.chats.add(chat);
-        System.out.println("Chat between: " + this + " " + u2 );
-        return true;
-    }
-
-    // Remove a Match between two users
-    public boolean removeMatch(User u2,ChatRoom chat){
-        this.removeFromLike(u2);
-        this.removeFromMatch(u2);
-        u2.removeFromMatch(this);
-        this.chats.remove(chat);
-        u2.chats.remove(chat);
-        System.out.println("Chat removed: " + this + " " + u2 );
-        return true;
-    }
-
-    // Is called when the user presses the accept button
-    public void acceptMatch(User u2){
-        this.addToLiked(u2);  // add user2 to user1s likes list
-        checkForMatch(u2);
-    }
-    // Is called when user presses the deny button
-    public  void denyMatch(User u2){
-        System.out.println("that is not very nice for " + u2.getFirstName());
-    }
     public String toString(){
         return userId + " " + firstName + " " + lastName;
     }
-
 
     @Override
     public void addObserver(Observer o) {

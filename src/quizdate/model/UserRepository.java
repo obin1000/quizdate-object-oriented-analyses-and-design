@@ -29,7 +29,6 @@ public class UserRepository implements DAO<User> {
         }
         dbConnection.getInstance().close();
         return userId;
-
     }
 
     @Override

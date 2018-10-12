@@ -7,10 +7,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import quizdate.model.MatchService;
 import quizdate.model.UserRepository;
 import quizdate.model.User;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class FindMatchController implements Initializable {
@@ -28,40 +30,49 @@ public class FindMatchController implements Initializable {
     private Label lbl_username;
 
     private Image img = new Image("file:./src/quizdate/images/trump.jpg");
-    private User match;
+    private User otherUser;
+    private final static MainController mainController = MainController.getMainController();
+    private User currentUser = mainController.getCurrentUser();
+    private final static MatchService MATCH_SERVICE = MatchService.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        match = UserRepository.getInstance().get(UserRepository.getInstance().getRandomId());
-        if (match.getProfilePicture() == null){ profilePicture.setImage(img);}
-        else {profilePicture.setImage(match.getProfilePicture());}
-        lbl_username.setText(match.getFirstName() + " " + match.getLastName());
+        otherUser = UserRepository.getInstance().get(UserRepository.getInstance().getRandomId());
+        if (otherUser.getProfilePicture() == null){ profilePicture.setImage(img);}
+        else {profilePicture.setImage(otherUser.getProfilePicture());}
+        lbl_username.setText(otherUser.getFirstName() + " " + otherUser.getLastName());
     }
 
     public void dislikeButtonPressed(ActionEvent event) {
-        MainController.getMainController().getCurrentUser().denyMatch(match); //call dislike function in currentuser
-        System.out.println("USER " + MainController.getMainController().getCurrentUser().getFirstName() + " DISLIKED "
-                + match.getFirstName());
-        MainController.getMainController().switchSceneFindMatch(event, btn_like); // refresh the match
+        MATCH_SERVICE.denyMatch(otherUser);
+        System.out.println("User " + currentUser.getFirstName() + " Disliked " + otherUser.getFirstName());
+
+//        MainController.getMainController().getCurrentUser().denyMatch(otherUser); //call dislike function in currentuser
+//        System.out.println("USER " + MainController.getMainController().getCurrentUser().getFirstName() + " DISLIKED "
+//                + otherUser.getFirstName());
+        mainController.switchSceneFindMatch(event, btn_like); // refresh screen to load new user
     }
 
     public void likeButtonPressed(ActionEvent event) {
-        MainController.getMainController().getCurrentUser().acceptMatch(match); // call the like function in user
-        System.out.println(MainController.getMainController().getCurrentUser().getPassword());
-        System.out.println("USER " + MainController.getMainController().getCurrentUser().getFirstName() + " LIKED "
-            + match.getFirstName());
-        MainController.getMainController().switchSceneFindMatch(event, btn_dislike); // refresh the match
+        MATCH_SERVICE.acceptMatch(currentUser,otherUser);
+        System.out.println(currentUser.getFirstName() + " LIKED " + otherUser.getFirstName());
+
+//        MainController.getMainController().getCurrentUser().acceptMatch(otherUser); // call the like function in user
+//        System.out.println("USER " + MainController.getMainController().getCurrentUser().getFirstName() + " LIKED "
+//            + otherUser.getFirstName());
+        mainController.switchSceneFindMatch(event, btn_dislike); // refresh the otherUser
     }
 
     public void settingsButtonPressed(ActionEvent event) {
         System.out.println("settings button clicked...");
-        MainController.getMainController().switchSceneEditUser(event, btn_settings);
+        mainController.switchSceneEditUser(event, btn_settings);
     }
 
     public void chatButtonPressed(ActionEvent event) {
         System.out.println("Chat button clicked...");
-        MainController.getMainController().switchSceneChat(event, btn_chat);
+        mainController.switchSceneChat(event, btn_chat);
     }
+
 
 }
 

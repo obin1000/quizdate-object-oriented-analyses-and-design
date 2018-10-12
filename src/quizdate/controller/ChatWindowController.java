@@ -25,6 +25,7 @@ public class ChatWindowController implements Initializable {
     @FXML
     private TextField message;
 
+
     private ChatRoom room;
 
 
