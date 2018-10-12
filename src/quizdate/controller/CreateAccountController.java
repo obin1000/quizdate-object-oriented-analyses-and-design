@@ -29,6 +29,9 @@ public class CreateAccountController {
     @FXML
     private TextField txt_password;
 
+    private static final MainController MAIN_CONTROLLER = MainController.getMainController();
+    private static final UserRepository USER_REPOSITORY = UserRepository.getInstance();
+
 
     public void createAccountButtonPressed(ActionEvent event) {
 
@@ -36,16 +39,13 @@ public class CreateAccountController {
                 (String) cmb_sex.getValue(), txt_email.getText(), txt_phoneNumber.getText(), txt_adres.getText(), txt_password.getText());
         System.out.println(user.getPassword());
 
-        if (UserRepository.getInstance().save(user)) {
-            MainController.getMainController().switchSceneLogin(event, btn_createAccount);
+        if (USER_REPOSITORY.save(user)) {
+            MAIN_CONTROLLER.switchSceneLogin(event, btn_createAccount);
         }
-
-        //sqlConnection.close();
     }
 
     public void backButtonPressed(ActionEvent event) {
-        MainController.getMainController().switchSceneLogin(event, btn_back);
+        MAIN_CONTROLLER.switchSceneLogin(event, btn_back);
     }
-
 
 }

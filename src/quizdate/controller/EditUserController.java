@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import quizdate.model.User;
 import quizdate.model.UserRepository;
 
 import java.net.URL;
@@ -25,28 +26,29 @@ public class EditUserController implements Initializable {
     @FXML
     private Button btn_deleteAccount;
 
+    private static final MainController MAIN_CONTROLLER = MainController.getMainController();
+    private static final UserRepository USER_REPOSITORY = UserRepository.getInstance();
+    private User currentUser = MAIN_CONTROLLER.getCurrentUser();
+
     public void saveChangesButtonPressed(ActionEvent event) {
-        MainController.getMainController().getCurrentUser().setLastName(lastName.getText());
-        System.out.println(MainController.getMainController().getCurrentUser().getLastName());
+        currentUser.setLastName(lastName.getText());
+        System.out.println(currentUser.getLastName());
     }
 
     public void backButtonPressed(ActionEvent event) {
-        MainController.getMainController().switchSceneFindMatch(event, btn_back);
+        MAIN_CONTROLLER.switchSceneFindMatch(event, btn_back);
     }
 
     public void deleteAccountButtonPressed(ActionEvent event){
-        UserRepository.getInstance().remove(MainController.getMainController().getCurrentUser().getUserId());
+        USER_REPOSITORY.remove(currentUser.getUserId());
         System.out.println("User has deleted account.. | QuizDate wishes you all the best in seeking further love.");
-        MainController.getMainController().switchSceneLogin(event, btn_deleteAccount);
+        MAIN_CONTROLLER.switchSceneLogin(event, btn_deleteAccount);
 
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        lastName.setText(MainController.getMainController().getCurrentUser().getLastName());
+        lastName.setText(currentUser.getLastName());
     }
-
-
-
 }

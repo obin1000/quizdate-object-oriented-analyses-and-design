@@ -12,7 +12,6 @@ import quizdate.model.UserRepository;
 import quizdate.model.User;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class FindMatchController implements Initializable {
@@ -30,47 +29,44 @@ public class FindMatchController implements Initializable {
     private Label lbl_username;
 
     private Image img = new Image("file:./src/quizdate/images/trump.jpg");
+    private static final MainController MAIN_CONTROLLER = MainController.getMainController();
+    private static final UserRepository USER_REPOSITORY = UserRepository.getInstance();
+    private static final MatchService MATCH_SERVICE = MatchService.getInstance();
+    private User currentUser = MAIN_CONTROLLER.getCurrentUser();
     private User otherUser;
-    private final static MainController mainController = MainController.getMainController();
-    private User currentUser = mainController.getCurrentUser();
-    private final static MatchService MATCH_SERVICE = MatchService.getInstance();
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        otherUser = UserRepository.getInstance().get(UserRepository.getInstance().getRandomId());
-        if (otherUser.getProfilePicture() == null){ profilePicture.setImage(img);}
-        else {profilePicture.setImage(otherUser.getProfilePicture());}
+        otherUser = USER_REPOSITORY.get(USER_REPOSITORY.getRandomId());
+        if (otherUser.getProfilePicture() == null){
+            profilePicture.setImage(img);
+        }else {
+            profilePicture.setImage(otherUser.getProfilePicture());
+        }
         lbl_username.setText(otherUser.getFirstName() + " " + otherUser.getLastName());
     }
 
     public void dislikeButtonPressed(ActionEvent event) {
         MATCH_SERVICE.denyMatch(otherUser);
         System.out.println("User " + currentUser.getFirstName() + " Disliked " + otherUser.getFirstName());
-
-//        MainController.getMainController().getCurrentUser().denyMatch(otherUser); //call dislike function in currentuser
-//        System.out.println("USER " + MainController.getMainController().getCurrentUser().getFirstName() + " DISLIKED "
-//                + otherUser.getFirstName());
-        mainController.switchSceneFindMatch(event, btn_like); // refresh screen to load new user
+        MAIN_CONTROLLER.switchSceneFindMatch(event, btn_like); // refresh screen to load new user
     }
 
     public void likeButtonPressed(ActionEvent event) {
         MATCH_SERVICE.acceptMatch(currentUser,otherUser);
         System.out.println(currentUser.getFirstName() + " LIKED " + otherUser.getFirstName());
-
-//        MainController.getMainController().getCurrentUser().acceptMatch(otherUser); // call the like function in user
-//        System.out.println("USER " + MainController.getMainController().getCurrentUser().getFirstName() + " LIKED "
-//            + otherUser.getFirstName());
-        mainController.switchSceneFindMatch(event, btn_dislike); // refresh the otherUser
+        MAIN_CONTROLLER.switchSceneFindMatch(event, btn_dislike); // refresh the otherUser
     }
 
     public void settingsButtonPressed(ActionEvent event) {
         System.out.println("settings button clicked...");
-        mainController.switchSceneEditUser(event, btn_settings);
+        MAIN_CONTROLLER.switchSceneEditUser(event, btn_settings);
     }
 
     public void chatButtonPressed(ActionEvent event) {
         System.out.println("Chat button clicked...");
-        mainController.switchSceneChat(event, btn_chat);
+        MAIN_CONTROLLER.switchSceneChat(event, btn_chat);
     }
 
 

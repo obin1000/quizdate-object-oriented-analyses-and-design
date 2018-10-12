@@ -25,7 +25,7 @@ public class ChatWindowController implements Initializable {
     @FXML
     private TextField message;
 
-
+    private static final MainController MAIN_CONTROLLER = MainController.getMainController();
     private ChatRoom room;
 
 
@@ -44,17 +44,17 @@ public class ChatWindowController implements Initializable {
     public void sendButtonPressed(ActionEvent event) {
         System.out.println("sending message... "+ message.getText());
         room.sendMessage(message.getText(),MainController.getMainController().getCurrentUser());
-        MainController.getMainController().switchSceneChatWindow(event, btn_send,room);
+        MAIN_CONTROLLER.switchSceneChatWindow(event, btn_send,room);
     }
 
     public void settingsButtonPressed(ActionEvent event) {
         System.out.println("settings button clicked...");
-        MainController.getMainController().switchSceneEditUser(event, btn_settings);
+        MAIN_CONTROLLER.switchSceneEditUser(event, btn_settings);
     }
 
     public void homeButtonPressed(ActionEvent event) {
         System.out.println("Chat button clicked...");
-        MainController.getMainController().switchSceneFindMatch(event, btn_home);
+        MAIN_CONTROLLER.switchSceneFindMatch(event, btn_home);
     }
 
 }
