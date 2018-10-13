@@ -1,5 +1,5 @@
 package quizdate.controller;
-
+//TODO: Generate random answer possibilities, show score in the end.
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,7 +34,7 @@ public class MakeQuizController implements Initializable {
     private User currentUser = MAIN_CONTROLLER.getCurrentUser();
     private User otherUser = MAIN_CONTROLLER.getMatchedUser();
 
-    private int counter = 0;
+    private int counter = 1;
     private int score = 0;
 
 
@@ -47,20 +47,47 @@ public class MakeQuizController implements Initializable {
         }
 
         lbl_username.setText(otherUser.getFirstName() + " " + otherUser.getLastName());
+
         setAnswers();
+
         // TODO : set answers and question to present the correct values.
 
     }
 
     public void nextButtonPressed(ActionEvent event){
-        if(counter < 5){
-            if(btn_answerA.isSelected()){
+
+        if(counter < 2){
+            if (btn_answerA.isSelected()){
                 if (btn_answerA.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
-                    
+                    score++;
                 }
+                counter++;
             }
-            counter++;
-    }
+            else if (btn_answerB.isSelected()){
+                if (btn_answerB.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
+                    score++;
+                }
+                counter++;
+            }
+            else if (btn_answerC.isSelected()){
+                if (btn_answerC.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
+                    score++;
+                }
+                counter++;
+            }
+            else if (btn_answerD.isSelected()){
+                if (btn_answerD.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
+                    score++;
+                }
+                counter++;
+            }
+            else {
+                System.out.println("NOTHING HAS BEEN SELECTED");
+            }
+    } else {
+            //TO TEST.
+            MAIN_CONTROLLER.switchSceneLogin(event, btn_next);
+        }
     }
 
     public void chatButtonPressed(ActionEvent event){
@@ -74,7 +101,7 @@ public class MakeQuizController implements Initializable {
     private void setAnswers() {
         btn_answerA.setText("New answer!");
         btn_answerB.setText(ANSWER_REPOSITORY.get(counter).getRightAnswer());
-        btn_answerC.setText("Answer C");
+        btn_answerC.setText("Answer D");
         btn_answerD.setText("Answer D");
         lbl_question.setText(ANSWER_REPOSITORY.getQuestion(counter));
     }
