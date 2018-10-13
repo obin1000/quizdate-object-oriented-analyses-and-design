@@ -17,8 +17,9 @@ import java.util.Observer;
 public final class MainController implements Observer {
 
     private User currentUser;
-    private final static MainController singleton;
+    private static final MainController singleton;
     private static ChatRoom requestedroom;
+    private static final UserRepository USER_REPOSITORY = UserRepository.getInstance();
 
     static{
         singleton = new MainController();
@@ -31,7 +32,6 @@ public final class MainController implements Observer {
     private void switchScene(ActionEvent event, Button pressedButton, String sceneName) {
         Stage appStage;
         Parent newRoot;
-     //   if (event.getSource() == pressedButton) { <- this won't let me refresh :(
             appStage = (Stage) pressedButton.getScene().getWindow();
             try {
                 newRoot = FXMLLoader.load(getClass().getResource(sceneName));
@@ -41,7 +41,6 @@ public final class MainController implements Observer {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-       // }
     }
 
 
@@ -80,7 +79,7 @@ public final class MainController implements Observer {
     }
 
     public static MainController getMainController() {
-        return MainController.singleton;
+        return singleton;
     }
 
     public static ChatRoom getRequestedRoom() {
@@ -90,8 +89,8 @@ public final class MainController implements Observer {
     @Override
     public void update(Observable observable, Object o) {
         System.out.println(currentUser.getUserId());
-        if(UserRepository.getInstance().update(currentUser.getUserId(), currentUser)) {
-            System.out.println("MainController has just updated the currentUser in the databasee.... :D");
+        if(USER_REPOSITORY.update(currentUser.getUserId(), currentUser)) {
+            System.out.println("MainController has just user updated " + currentUser + " :)");
         }
     }
 }

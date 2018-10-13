@@ -41,10 +41,8 @@ public class EditUserController implements Initializable {
 
     public void deleteAccountButtonPressed(ActionEvent event){
         USER_REPOSITORY.remove(currentUser.getUserId());
-        System.out.println("User has deleted account.. | QuizDate wishes you all the best in seeking further love.");
         MAIN_CONTROLLER.switchSceneLogin(event, btn_deleteAccount);
-
-
+        System.out.println("User has deleted account.. | QuizDate wishes you all the best in seeking further love.");
     }
 
     @Override

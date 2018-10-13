@@ -42,13 +42,12 @@ public class User extends Observable implements Chatter {
     /**
      * Getters & Setters
      */
+    public int getUserId() {
+        return userId;
+    }
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public int getUserId() {
-        return userId;
     }
 
     public String getLastName() {
@@ -57,7 +56,6 @@ public class User extends Observable implements Chatter {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-        notifyObservers();
     }
 
     public String getFirstName() {
@@ -66,7 +64,6 @@ public class User extends Observable implements Chatter {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-        notifyObservers();
     }
 
     public LocalDate getDateOfBirth() {
@@ -75,7 +72,6 @@ public class User extends Observable implements Chatter {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-        notifyObservers();
     }
 
     public String getSex() {
@@ -84,7 +80,6 @@ public class User extends Observable implements Chatter {
 
     public void setSex(String sex) {
         this.sex = sex;
-        notifyObservers();
     }
 
     public String getEmail() {
@@ -93,7 +88,6 @@ public class User extends Observable implements Chatter {
 
     public void setEmail(String email) {
         this.email = email;
-        notifyObservers();
     }
 
     public String getPhoneNumber() {
@@ -102,16 +96,14 @@ public class User extends Observable implements Chatter {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-        notifyObservers();
     }
 
     public String getAdres() {
         return adres;
     }
 
-    public void setAdres() {
+    public void setAdres(String adres) {
         this.adres = adres;
-        notifyObservers();
     }
 
     public Image getProfilePicture() {
@@ -120,20 +112,40 @@ public class User extends Observable implements Chatter {
 
     public void setProfilePicture(Image profilePicture) {
         this.profilePicture = profilePicture;
-        notifyObservers();
     }
 
-    public List<User> getLikes(){
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public List<User> getLikes() {
         return Likes;
     }
 
-    public List<User> getMatches(){
+    public void setLikes(List<User> likes) {
+        Likes = likes;
+    }
+
+    public List<User> getMatches() {
         return Matches;
+    }
+
+    public void setMatches(List<User> matches) {
+        Matches = matches;
     }
 
     public String getPassword() {
         return password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 
     /**
      * METHODS
@@ -163,9 +175,11 @@ public class User extends Observable implements Chatter {
     public void receiveMessage(Chatter roomMate, String message) {
         System.out.println(this + " received: " + message);
     }
+
     public List<ChatRoom> getChats(){
         return chats;
     }
+
     public ChatRoom getChat(int index){
         if(chats.get(index) != null){
             return chats.get(index);

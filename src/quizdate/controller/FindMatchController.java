@@ -44,6 +44,7 @@ public class FindMatchController implements Initializable {
         }else {
             profilePicture.setImage(otherUser.getProfilePicture());
         }
+        MATCH_SERVICE.addToLiked(otherUser,currentUser);
         lbl_username.setText(otherUser.getFirstName() + " " + otherUser.getLastName());
     }
 

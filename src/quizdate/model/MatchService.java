@@ -22,8 +22,6 @@ public class MatchService {
     public void addToLiked(User currentUser, User otherUser){
         currentUser.getLikes().add(otherUser);
         currentUser.notifyObservers();
-//        otherUser.notifyObservers();
-        //TODO | check if this works
     }
 
     public void addToMatches(User currentUser, User otherUser){
@@ -40,14 +38,6 @@ public class MatchService {
     public void removeFromLike(User currentUser, User otherUser){
         currentUser.getLikes().remove(otherUser);
         currentUser.notifyObservers();
-    }
-
-    public void checkForMatch(User currentUser, User otherUser){
-        if (hasLike(currentUser,otherUser)){
-            if (hasLike(otherUser,currentUser)){
-                createMatch(currentUser,otherUser);
-            }
-        }
     }
 
     public boolean createMatch(User currentUser, User otherUser){
@@ -82,8 +72,10 @@ public class MatchService {
     // Is called when the user presses the accept button
     public void acceptMatch(User currentUser, User otherUser){
         addToLiked(currentUser,otherUser);  // add user2 to user1s likes list
-        checkForMatch(currentUser, otherUser);
-        // TODO checkForMatch beter uitwerken, kan veel compacter.
+        if(hasLike(otherUser,currentUser)){
+            System.out.println("IT IS A MATCH!! :D");
+            createMatch(currentUser,otherUser);
+        }
     }
 
     // Is called when user presses the deny button
