@@ -47,6 +47,7 @@ public class ChatController implements Initializable {
             for(Chatter user : chat.getUsers()){
                 if(user != currentUser) {
                     name.append(user);
+                    System.out.println("\n" + name.toString());
                 }
             }
             Button button = new Button(name.toString());
@@ -54,7 +55,13 @@ public class ChatController implements Initializable {
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
+                    for(Chatter user : chat.getUsers()){
+                        if(user != currentUser) {
+                            MAIN_CONTROLLER.setMatchedUser((User)user);
+                        }
+                    }
                     MAIN_CONTROLLER.switchSceneChatWindow(event, button,chat);
+
                 }
             });
             view.getItems().add(button);

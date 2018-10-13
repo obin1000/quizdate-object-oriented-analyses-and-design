@@ -41,6 +41,7 @@ public class ChatWindowController implements Initializable {
     }
 
     public void sendButtonPressed(ActionEvent event) {
+        // TODO : madeQuiz baseren of degene de quiz al heeft gemaakt, en zodoende toegang geven tot de chat
         if(!madeQuiz){
             quizAlert(event,btn_send);
         }else{
@@ -60,16 +61,12 @@ public class ChatWindowController implements Initializable {
         alert.setHeaderText("You have not made the quiz which is required to chat yet.");
         alert.setContentText("Would you like to make the quiz now?");
         Optional<ButtonType> result = alert.showAndWait();
-        User u = null;
+        
         if(result.isPresent()) {
             if (result.get() == ButtonType.OK) {
-                if (MAIN_CONTROLLER.setMatchedUser(u)) {
-                    MAIN_CONTROLLER.switchSceneMakeQuiz(event, btn_send);
-                }else {
-                    System.err.println("Failed to set matchedUser in MainController");
-                }
+                MAIN_CONTROLLER.switchSceneMakeQuiz(event, buttonPressed);
             }else {
-                MAIN_CONTROLLER.switchSceneChat(event, btn_home);
+                MAIN_CONTROLLER.switchSceneChat(event, buttonPressed);
                 System.out.println("User decided to not make the quiz.");
             }
         }else{
