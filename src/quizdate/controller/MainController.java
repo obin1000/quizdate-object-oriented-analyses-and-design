@@ -1,10 +1,13 @@
 package quizdate.controller;
 
+import com.sun.javafx.fxml.builder.JavaFXSceneBuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import quizdate.model.ChatRoom;
 import quizdate.model.UserRepository;
@@ -43,6 +46,20 @@ public final class MainController implements Observer {
             }
     }
 
+//    private void switchScene2(ActionEvent event,  pressedButton, String sceneName) {
+//        Stage appStage;
+//        Parent newRoot;
+//        appStage = (Stage) pressedButton.getScene().getWindow();
+//        try {
+//            newRoot = FXMLLoader.load(getClass().getResource(sceneName));
+//            Scene scene = new Scene(newRoot);
+//            appStage.setScene(scene);
+//            appStage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
 
     public void switchSceneCreateAccount(ActionEvent event, Button pressedButton) {
         System.out.println("Calls switchSceneCreateAccount ");
@@ -67,6 +84,12 @@ public final class MainController implements Observer {
         requestedroom = chat;
         switchScene(event, pressedButton, "../view/chatwindow.fxml");
     }
+
+    public void switchSceneMakeQuiz(ActionEvent event, Button pressedButton) {
+        switchScene(event, pressedButton, "../view/makeQuiz.fxml");
+    }
+
+
 
     public User getCurrentUser() {
         return currentUser;

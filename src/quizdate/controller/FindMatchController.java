@@ -85,7 +85,7 @@ public class FindMatchController implements Initializable {
         alert.setContentText("Would you like to make the quiz and chat? :D");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
-            MAIN_CONTROLLER.switchSceneChatWindow(event,btn_like,MAIN_CONTROLLER.getRequestedRoom());
+            MAIN_CONTROLLER.switchSceneMakeQuiz(event,btn_like);
             System.out.println("User would love to chat with other user!!");
         }else{
             System.out.println("NOPEEEE :)");
