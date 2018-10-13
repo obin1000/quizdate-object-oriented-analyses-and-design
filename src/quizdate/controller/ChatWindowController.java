@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import quizdate.model.ChatRoom;
+import quizdate.model.User;
 
 import java.net.URL;
 import java.util.Optional;
@@ -13,11 +14,9 @@ import java.util.ResourceBundle;
 
 public class ChatWindowController implements Initializable {
     @FXML
-    private Button btn_settings;
+    private Button btn_settings, btn_home, btn_send, btn_chat;
     @FXML
-    private Button btn_home;
-    @FXML
-    private Button btn_send;
+    private Label lbl_chat;
     @FXML
     private ListView view;
     @FXML
@@ -38,26 +37,21 @@ public class ChatWindowController implements Initializable {
             view.getItems().add(s);
         }
         view.scrollTo(view.getItems().size());
+        lbl_chat.setText("Chatting with: " + MAIN_CONTROLLER.getMatchedUser().getFirstName());
     }
 
     public void sendButtonPressed(ActionEvent event) {
-        System.out.println("sending message... "+ message.getText());
-        room.sendMessage(message.getText(),MAIN_CONTROLLER.getCurrentUser());
         if(!madeQuiz){
             quizAlert(event,btn_send);
         }else{
+            System.out.println("sending message... "+ message.getText());
+            room.sendMessage(message.getText(),MAIN_CONTROLLER.getCurrentUser());
             MAIN_CONTROLLER.switchSceneChatWindow(event, btn_send,room);
         }
     }
 
-    public void settingsButtonPressed(ActionEvent event) {
-        System.out.println("settings button clicked...");
-        MAIN_CONTROLLER.switchSceneEditUser(event, btn_settings);
-    }
-
-    public void homeButtonPressed(ActionEvent event) {
-        System.out.println("Chat button clicked...");
-        MAIN_CONTROLLER.switchSceneFindMatch(event, btn_home);
+    public void chatButtonPressed(ActionEvent event){
+        MAIN_CONTROLLER.switchSceneChat(event, btn_chat);
     }
 
     private void quizAlert(ActionEvent event, Button buttonPressed){
@@ -66,12 +60,20 @@ public class ChatWindowController implements Initializable {
         alert.setHeaderText("You have not made the quiz which is required to chat yet.");
         alert.setContentText("Would you like to make the quiz now?");
         Optional<ButtonType> result = alert.showAndWait();
-
-        if(result.get() == ButtonType.OK){
-            MAIN_CONTROLLER.switchSceneMakeQuiz(event,btn_send);
+        User u = null;
+        if(result.isPresent()) {
+            if (result.get() == ButtonType.OK) {
+                if (MAIN_CONTROLLER.setMatchedUser(u)) {
+                    MAIN_CONTROLLER.switchSceneMakeQuiz(event, btn_send);
+                }else {
+                    System.err.println("Failed to set matchedUser in MainController");
+                }
+            }else {
+                MAIN_CONTROLLER.switchSceneChat(event, btn_home);
+                System.out.println("User decided to not make the quiz.");
+            }
         }else{
-//            MAIN_CONTROLLER.switchSceneChat(event,btn_home);
-            System.out.println("NOPEEEE :)");
+            System.err.println("No result was found");
         }
     }
 

@@ -15,9 +15,7 @@ import java.util.ResourceBundle;
 
 public class ChatController implements Initializable {
     @FXML
-    private Button btn_settings;
-    @FXML
-    private Button btn_home;
+    private Button btn_settings,btn_home;
     @FXML
     private ListView view;
 
@@ -62,10 +60,6 @@ public class ChatController implements Initializable {
             view.getItems().add(button);
         }
 
-    }
-    public void settingsButtonPressed(ActionEvent event) {
-        System.out.println("settings button clicked...");
-        MAIN_CONTROLLER.switchSceneEditUser(event, btn_settings);
     }
 
     public void homeButtonPressed(ActionEvent event) {

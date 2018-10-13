@@ -62,7 +62,7 @@ public class FindMatchController implements Initializable {
         // Adds otherUser to currentUser's like list, and checks if they are a match already.
         if(MATCH_SERVICE.acceptMatch(currentUser,otherUser)){
             System.out.println(currentUser.getFirstName() + " LIKED " + otherUser.getFirstName());
-            alertMatch(event);
+            matchAlert(event);
         }else{
             MAIN_CONTROLLER.switchSceneFindMatch(event, btn_dislike); // refresh the otherUser
         }
@@ -78,17 +78,19 @@ public class FindMatchController implements Initializable {
         MAIN_CONTROLLER.switchSceneChat(event, btn_chat);
     }
 
-    private void alertMatch(ActionEvent event){
+    private void matchAlert(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("You have a match!");
         alert.setHeaderText("You have a match with " + otherUser.getFirstName() + " " + otherUser.getLastName());
-        alert.setContentText("Would you like to make the quiz and chat? :D");
+        alert.setContentText("Would you like to make the quiz? :D");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
+            MAIN_CONTROLLER.setMatchedUser(otherUser);
             MAIN_CONTROLLER.switchSceneMakeQuiz(event,btn_like);
             System.out.println("User would love to chat with other user!!");
         }else{
-            System.out.println("NOPEEEE :)");
+            MAIN_CONTROLLER.switchSceneFindMatch(event,btn_like);
+            System.out.println("User has decided to keep on liking.");
         }
     }
 
