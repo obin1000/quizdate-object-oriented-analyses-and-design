@@ -38,6 +38,7 @@ public class ChatWindowController implements Initializable {
         for (String s : room.getMessages()) {
             view.getItems().add(s);
         }
+        view.scrollTo(view.getItems().size());
     }
 
     public void sendButtonPressed(ActionEvent event) {
