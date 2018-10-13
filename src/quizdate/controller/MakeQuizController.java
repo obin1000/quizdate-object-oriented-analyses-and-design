@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import quizdate.model.AnswerRepository;
 import quizdate.model.MatchService;
 import quizdate.model.UserRepository;
 import quizdate.model.User;
@@ -28,11 +29,13 @@ public class MakeQuizController implements Initializable {
     private Image img = new Image("file:./src/quizdate/images/trump.jpg");
     private static final MainController MAIN_CONTROLLER = MainController.getMainController();
     private static final UserRepository USER_REPOSITORY = UserRepository.getInstance();
+    private static final AnswerRepository ANSWER_REPOSITORY = AnswerRepository.getInstance();
     private static final MatchService MATCH_SERVICE = MatchService.getInstance();
     private User currentUser = MAIN_CONTROLLER.getCurrentUser();
     private User otherUser = MAIN_CONTROLLER.getMatchedUser();
 
     private int counter = 0;
+    private int score = 0;
 
 
     @Override
@@ -44,26 +47,20 @@ public class MakeQuizController implements Initializable {
         }
 
         lbl_username.setText(otherUser.getFirstName() + " " + otherUser.getLastName());
-
+        setAnswers();
         // TODO : set answers and question to present the correct values.
-        btn_answerA.setText("Answer A");
-        btn_answerB.setText("Answer B");
-        btn_answerC.setText("Answer C");
-        btn_answerD.setText("Answer D");
-        lbl_question.setText("What is the correct answer?");
+
     }
 
     public void nextButtonPressed(ActionEvent event){
         if(counter < 5){
             if(btn_answerA.isSelected()){
-
+                if (btn_answerA.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
+                    
+                }
             }
-            btn_answerA.setText("New answer!");
-            btn_answerB.setText("Answer B");
-            btn_answerC.setText("Answer C");
-            btn_answerD.setText("Answer D");
-            lbl_question.setText("What is the correct answer?");
-        }
+            counter++;
+    }
     }
 
     public void chatButtonPressed(ActionEvent event){
@@ -74,5 +71,12 @@ public class MakeQuizController implements Initializable {
 //        MAIN_CONTROLLER.setMatchedUser(reset);
     }
 
+    private void setAnswers() {
+        btn_answerA.setText("New answer!");
+        btn_answerB.setText(ANSWER_REPOSITORY.get(counter).getRightAnswer());
+        btn_answerC.setText("Answer C");
+        btn_answerD.setText("Answer D");
+        lbl_question.setText(ANSWER_REPOSITORY.getQuestion(counter));
+    }
 }
 

@@ -33,7 +33,7 @@ public class AnswerRepository implements DAO<Answer> {
 
             Statement statement = dbConnection.getInstance().getConnection().createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM Answer WHERE idQuestion = " + id + " AND userId = "
-            +  USER_REPOSITORY.);
+            +  MAIN_CONTROLLER.getMatchedUser().getUserId());
 
             if(rs.next()) {
                 questionandanswer = new Answer(id, rs.getString("rightAnswer"));

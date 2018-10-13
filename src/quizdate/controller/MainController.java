@@ -96,6 +96,7 @@ public final class MainController implements Observer {
         boolean status = false;
         try {
             this.matchedUser = matchedUser;
+            matchedUser.setUserId(USER_REPOSITORY.getUserId(matchedUser));
             status = true;
         }catch(Exception e){
             e.printStackTrace();
