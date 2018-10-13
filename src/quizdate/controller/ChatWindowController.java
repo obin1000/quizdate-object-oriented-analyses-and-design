@@ -37,7 +37,7 @@ public class ChatWindowController implements Initializable {
             view.getItems().add(s);
         }
         view.scrollTo(view.getItems().size());
-        lbl_chat.setText("Chatting with: " + MAIN_CONTROLLER.getMatchedUser().getFirstName());
+        lbl_chat.setText(MAIN_CONTROLLER.getMatchedUser().getFirstName());
     }
 
     public void sendButtonPressed(ActionEvent event) {
@@ -61,7 +61,7 @@ public class ChatWindowController implements Initializable {
         alert.setHeaderText("You have not made the quiz which is required to chat yet.");
         alert.setContentText("Would you like to make the quiz now?");
         Optional<ButtonType> result = alert.showAndWait();
-        
+
         if(result.isPresent()) {
             if (result.get() == ButtonType.OK) {
                 MAIN_CONTROLLER.switchSceneMakeQuiz(event, buttonPressed);
