@@ -3,9 +3,9 @@ package quizdate.model;
 import java.util.List;
 
 public interface ChatRoom {
-    public void sendMessage(String message, User user);
-    public void addUser(User user);
-    public void removeUser(User user);
-    public List<User> getUsers();
+    public void sendMessage(String message, Chatter user);
+    public void addUser(Chatter user);
+    public void removeUser(Chatter user);
+    public List<Chatter> getUsers();
     public List<String> getMessages();
 }

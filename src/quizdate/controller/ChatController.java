@@ -7,10 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import quizdate.model.ChatRoom;
-import quizdate.model.MatchService;
-import quizdate.model.User;
-import quizdate.model.UserRepository;
+import quizdate.model.*;
 
 import java.net.URL;
 import java.util.List;
@@ -49,7 +46,7 @@ public class ChatController implements Initializable {
 
         for(ChatRoom chat: chats){
             StringBuilder name = new StringBuilder();
-            for(User user : chat.getUsers()){
+            for(Chatter user : chat.getUsers()){
                 if(user != currentUser) {
                     name.append(user);
                 }
