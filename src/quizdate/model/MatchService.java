@@ -41,41 +41,54 @@ public class MatchService {
     }
 
     public boolean createMatch(User currentUser, User otherUser){
-        ChatRoom chat = new ChatroomImpl();
+        try {
+            ChatRoom chat = new ChatroomImpl();
 
-        addToMatches(currentUser,otherUser); //add user2 to user1s matches
-        chat.addUser(currentUser);
-        currentUser.getChats().add(chat);
+            addToMatches(currentUser, otherUser); //add user2 to user1s matches
+            chat.addUser(currentUser);
+            currentUser.getChats().add(chat);
 
-        addToMatches(otherUser,currentUser); // add user1 to user2s matches
-        chat.addUser(otherUser);
-        otherUser.getChats().add(chat);
+            addToMatches(otherUser, currentUser); // add user1 to user2s matches
+            chat.addUser(otherUser);
+            otherUser.getChats().add(chat);
 
-        System.out.println("Chat between: " + currentUser + " " + otherUser );
+            System.out.println("Chat between: " + currentUser + " " + otherUser);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
         return true;
     }
 
     // Remove a Match between two users
     public boolean removeMatch(User currentUser, User otherUser, ChatRoom chat){
-        removeFromLike(currentUser,otherUser);
-        removeFromMatch(currentUser,otherUser);
-        currentUser.getChats().remove(chat);
+        try {
+            removeFromLike(currentUser, otherUser);
+            removeFromMatch(currentUser, otherUser);
+            currentUser.getChats().remove(chat);
 
-        removeFromLike(otherUser,currentUser);
-        removeFromMatch(otherUser,currentUser);
-        otherUser.getChats().remove(chat);
+            removeFromLike(otherUser, currentUser);
+            removeFromMatch(otherUser, currentUser);
+            otherUser.getChats().remove(chat);
 
-        System.out.println("Chat removed: " + currentUser + " " + otherUser );
+            System.out.println("Chat removed: " + currentUser + " " + otherUser);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return true;
     }
 
     // Is called when the user presses the accept button
-    public void acceptMatch(User currentUser, User otherUser){
+    public boolean acceptMatch(User currentUser, User otherUser){
+        boolean isMatch = false;
+
         addToLiked(currentUser,otherUser);  // add user2 to user1s likes list
         if(hasLike(otherUser,currentUser)){
-            System.out.println("IT IS A MATCH!! :D");
-            createMatch(currentUser,otherUser);
+            if(createMatch(currentUser,otherUser)){
+                System.out.println("IT IS A MATCH!! :D");
+                isMatch = true;
+            }
         }
+        return isMatch;
     }
 
     // Is called when user presses the deny button

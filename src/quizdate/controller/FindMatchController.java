@@ -3,7 +3,9 @@ package quizdate.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,6 +14,7 @@ import quizdate.model.UserRepository;
 import quizdate.model.User;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class FindMatchController implements Initializable {
@@ -44,6 +47,7 @@ public class FindMatchController implements Initializable {
         }else {
             profilePicture.setImage(otherUser.getProfilePicture());
         }
+        //TODO - remove statement below before launch, this is to simulate a match.
         MATCH_SERVICE.addToLiked(otherUser,currentUser);
         lbl_username.setText(otherUser.getFirstName() + " " + otherUser.getLastName());
     }
@@ -55,8 +59,11 @@ public class FindMatchController implements Initializable {
     }
 
     public void likeButtonPressed(ActionEvent event) {
-        MATCH_SERVICE.acceptMatch(currentUser,otherUser);
-        System.out.println(currentUser.getFirstName() + " LIKED " + otherUser.getFirstName());
+        // Adds otherUser to currentUser's like list, and checks if they are a match already.
+        if(MATCH_SERVICE.acceptMatch(currentUser,otherUser)){
+            System.out.println(currentUser.getFirstName() + " LIKED " + otherUser.getFirstName());
+            alertMatch(event);
+        }
         MAIN_CONTROLLER.switchSceneFindMatch(event, btn_dislike); // refresh the otherUser
     }
 
@@ -68,6 +75,19 @@ public class FindMatchController implements Initializable {
     public void chatButtonPressed(ActionEvent event) {
         System.out.println("Chat button clicked...");
         MAIN_CONTROLLER.switchSceneChat(event, btn_chat);
+    }
+
+    private void alertMatch(ActionEvent event){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("You have a match!");
+        alert.setHeaderText("You have a match with " + otherUser.getFirstName() + " " + otherUser.getLastName());
+        alert.setContentText("Would you like to make the quiz and chat? :D");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get() == ButtonType.OK){
+            System.out.println("User would love to chat with other user!!");
+        }else{
+            System.out.println("NOPEEEE :)");
+        }
     }
 
 
