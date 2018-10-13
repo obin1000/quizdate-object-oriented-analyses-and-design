@@ -35,15 +35,15 @@ public class ChatWindowController implements Initializable {
         view.getItems().removeAll();
         view.setPlaceholder(new Label("No messages? Time to make the first move!"));
         room = MainController.getRequestedRoom();
-//        for(String s : room.getMessages()){
-//            view.getItems().add(s);
-//        }
+        for(String s : room.getMessages()){
+            view.getItems().add(s);
+        }
 
     }
 
     public void sendButtonPressed(ActionEvent event) {
         System.out.println("sending message... "+ message.getText());
-        room.sendMessage(message.getText(),MainController.getMainController().getCurrentUser());
+        room.sendMessage(message.getText(),MAIN_CONTROLLER.getCurrentUser());
         MAIN_CONTROLLER.switchSceneChatWindow(event, btn_send,room);
     }
 
