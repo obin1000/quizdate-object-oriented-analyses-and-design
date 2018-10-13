@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import quizdate.model.MatchService;
@@ -18,7 +19,9 @@ public class MakeQuizController implements Initializable {
     @FXML
     private ImageView profilePicture;
     @FXML
-    private Button btn_chat, btn_answerA, btn_answerB, btn_answerC, btn_answerD;
+    private Button btn_chat, btn_next;
+    @FXML
+    private RadioButton btn_answerA, btn_answerB, btn_answerC, btn_answerD;
     @FXML
     private Label lbl_username, lbl_question;
 
@@ -28,6 +31,8 @@ public class MakeQuizController implements Initializable {
     private static final MatchService MATCH_SERVICE = MatchService.getInstance();
     private User currentUser = MAIN_CONTROLLER.getCurrentUser();
     private User otherUser = MAIN_CONTROLLER.getMatchedUser();
+
+    private int counter = 0;
 
 
     @Override
@@ -46,6 +51,19 @@ public class MakeQuizController implements Initializable {
         btn_answerC.setText("Answer C");
         btn_answerD.setText("Answer D");
         lbl_question.setText("What is the correct answer?");
+    }
+
+    public void nextButtonPressed(ActionEvent event){
+        if(counter < 5){
+            if(btn_answerA.isSelected()){
+
+            }
+            btn_answerA.setText("New answer!");
+            btn_answerB.setText("Answer B");
+            btn_answerC.setText("Answer C");
+            btn_answerD.setText("Answer D");
+            lbl_question.setText("What is the correct answer?");
+        }
     }
 
     public void chatButtonPressed(ActionEvent event){

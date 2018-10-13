@@ -47,20 +47,6 @@ public final class MainController implements Observer {
             }
     }
 
-//    private void switchScene2(ActionEvent event,  pressedButton, String sceneName) {
-//        Stage appStage;
-//        Parent newRoot;
-//        appStage = (Stage) pressedButton.getScene().getWindow();
-//        try {
-//            newRoot = FXMLLoader.load(getClass().getResource(sceneName));
-//            Scene scene = new Scene(newRoot);
-//            appStage.setScene(scene);
-//            appStage.show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
 
     public void switchSceneCreateAccount(ActionEvent event, Button pressedButton) {
         System.out.println("Calls switchSceneCreateAccount ");

@@ -75,6 +75,15 @@ public class UserRepository implements DAO<User> {
         return user;
     }
 
+    public int getUserId(User u){
+        int userId = 0;
+
+        Statement statement = dbConnection.getInstance().getConnection().createStatement();
+        ResultSet rs = statement.executeQuery("SELECT userId FROM Account WHERE email = '" + u.getEmail() + "'");
+
+        return userId;
+    }
+
     @Override
     public boolean save(User user) {
         boolean status = false;
