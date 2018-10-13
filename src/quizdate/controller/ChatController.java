@@ -47,11 +47,11 @@ public class ChatController implements Initializable {
         List<ChatRoom> chats = currentUser.getChats();
         view.getItems().removeAll();
 
-        for(ChatRoom c: chats){
+        for(ChatRoom chat: chats){
             StringBuilder name = new StringBuilder();
-            for(User u : c.getUsers()){
-                if(u != currentUser) {
-                    name.append(u);
+            for(User user : chat.getUsers()){
+                if(user != currentUser) {
+                    name.append(user);
                 }
             }
             Button button = new Button(name.toString());
@@ -59,7 +59,7 @@ public class ChatController implements Initializable {
             button.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    MAIN_CONTROLLER.switchSceneChatWindow(event, button,c);
+                    MAIN_CONTROLLER.switchSceneChatWindow(event, button,chat);
                 }
             });
             view.getItems().add(button);
