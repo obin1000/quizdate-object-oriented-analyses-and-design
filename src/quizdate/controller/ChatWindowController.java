@@ -35,9 +35,9 @@ public class ChatWindowController implements Initializable {
         view.getItems().removeAll();
         view.setPlaceholder(new Label("No messages? Time to make the first move!"));
         room = MainController.getRequestedRoom();
-        for(String s:room.getMessages()){
-            view.getItems().add(s);
-        }
+//        for(String s : room.getMessages()){
+//            view.getItems().add(s);
+//        }
 
     }
 

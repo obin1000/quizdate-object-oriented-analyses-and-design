@@ -63,8 +63,9 @@ public class FindMatchController implements Initializable {
         if(MATCH_SERVICE.acceptMatch(currentUser,otherUser)){
             System.out.println(currentUser.getFirstName() + " LIKED " + otherUser.getFirstName());
             alertMatch(event);
+        }else{
+            MAIN_CONTROLLER.switchSceneFindMatch(event, btn_dislike); // refresh the otherUser
         }
-        MAIN_CONTROLLER.switchSceneFindMatch(event, btn_dislike); // refresh the otherUser
     }
 
     public void settingsButtonPressed(ActionEvent event) {
@@ -84,6 +85,7 @@ public class FindMatchController implements Initializable {
         alert.setContentText("Would you like to make the quiz and chat? :D");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
+            MAIN_CONTROLLER.switchSceneChat(event,btn_like);
             System.out.println("User would love to chat with other user!!");
         }else{
             System.out.println("NOPEEEE :)");
