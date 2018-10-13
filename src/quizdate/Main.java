@@ -5,9 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import quizdate.model.User;
-
-import java.time.LocalDate;
+import quizdate.model.AnswerRepository;
 
 public class Main extends Application {
 
@@ -49,7 +47,7 @@ public class Main extends Application {
 //        System.out.println(UserRepository.getDatabase().getRandomId());
 //        System.out.println(UserRepository.getDatabase().getRandomId());
 //        System.out.println(UserRepository.getDatabase().getRandomId());
-
+        System.out.println(AnswerRepository.getInstance().getQuestion(1));
         launch(args);
     }
 

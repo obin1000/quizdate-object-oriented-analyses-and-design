@@ -36,7 +36,6 @@ public class UserRepository implements DAO<User> {
         return null;
     }
 
-    @Override
     public int getRandomId() {
         int data = 1;
         try {

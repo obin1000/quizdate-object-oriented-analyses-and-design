@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class User extends Observable implements Chatter {
-    private static int latestUserId = 1000;
     private int userId;
     private String lastName;
     private String firstName;
@@ -24,7 +23,6 @@ public class User extends Observable implements Chatter {
 
     public User(String lastName, String firstName, LocalDate dateOfBirth, String sex, String email,
                 String phoneNumber, String adres, String password) {
-        this.userId = latestUserId++;
         this.lastName = lastName;
         this.firstName = firstName;
         this.dateOfBirth = dateOfBirth;
