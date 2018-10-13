@@ -34,7 +34,7 @@ public class ChatController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         if(debug==1) {
             System.out.println("debug");
-            User u1 = USER_REPOSITORY.get(1);
+            User u1 = USER_REPOSITORY.get(2);
             MATCH_SERVICE.createMatch(currentUser,u1);
             u1.getChat(0).sendMessage("hello",u1);
             u1.getChat(0).sendMessage("How are you",u1);
@@ -42,6 +42,7 @@ public class ChatController implements Initializable {
             u1.getChat(0).sendMessage("Sexy girls in your region",u1);
             debug++;
         }
+
         System.out.println("getting matches");
         List<ChatRoom> chats = currentUser.getChats();
         view.getItems().removeAll();

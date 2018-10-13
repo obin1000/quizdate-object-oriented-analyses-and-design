@@ -1,8 +1,11 @@
 package quizdate.model;
 
+import quizdate.controller.MainController;
+
 public class MatchService {
 
     private static MatchService singleton;
+    private static final MainController MAIN_CONTROLLER = MainController.getMainController();
 
     static{
         singleton = new MatchService();
@@ -51,7 +54,7 @@ public class MatchService {
             addToMatches(otherUser, currentUser); // add user1 to user2s matches
             chat.addUser(otherUser);
             otherUser.getChats().add(chat);
-
+            MAIN_CONTROLLER.setRequestedroom(chat);
             System.out.println("Chat between: " + currentUser + " " + otherUser);
         } catch(Exception e){
             e.printStackTrace();

@@ -34,11 +34,10 @@ public class ChatWindowController implements Initializable {
         System.out.println("Loading chat");
         view.getItems().removeAll();
         view.setPlaceholder(new Label("No messages? Time to make the first move!"));
-        room = MainController.getRequestedRoom();
-        for(String s : room.getMessages()){
+        room = MAIN_CONTROLLER.getRequestedRoom();
+        for (String s : room.getMessages()) {
             view.getItems().add(s);
         }
-
     }
 
     public void sendButtonPressed(ActionEvent event) {

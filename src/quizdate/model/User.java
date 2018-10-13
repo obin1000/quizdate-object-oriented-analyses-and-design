@@ -150,7 +150,7 @@ public class User extends Observable implements Chatter {
      */
 
     public String toString(){
-        return userId + " " + firstName + " " + lastName;
+        return firstName + " " + lastName;
     }
 
     @Override

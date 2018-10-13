@@ -16,10 +16,10 @@ import java.util.Observer;
 
 public final class MainController implements Observer {
 
-    private User currentUser;
     private static final MainController singleton;
-    private static ChatRoom requestedroom;
     private static final UserRepository USER_REPOSITORY = UserRepository.getInstance();
+    private ChatRoom requestedroom;
+    private User currentUser;
 
     static{
         singleton = new MainController();
@@ -82,8 +82,12 @@ public final class MainController implements Observer {
         return singleton;
     }
 
-    public static ChatRoom getRequestedRoom() {
+    public ChatRoom getRequestedRoom() {
         return requestedroom;
+    }
+
+    public void setRequestedroom(ChatRoom chat){
+        requestedroom = chat;
     }
 
     @Override
