@@ -1,26 +1,17 @@
 package quizdate.model;
 
-public class Question {
+public class Answer {
 
-    private String question;
+    private int questionId;
     private String rightAnswer;
     private String[] possibleAnswers;
 
-    public Question(String question, String rightAnswer, String[] possibleAnswers) {
+    public Answer(int questionId, String rightAnswer) {
 
-        this.question = question;
+        this.questionId = questionId;
         this.rightAnswer = rightAnswer;
-        this.possibleAnswers = possibleAnswers;
+        //this.possibleAnswers = possibleAnswers;
 
-    }
-
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String question) {
-        this.question = question;
     }
 
     public String getRightAnswer() {
@@ -38,4 +29,7 @@ public class Question {
     public void setPossibleAnswers(String[] possibleAnswers) {
         this.possibleAnswers = possibleAnswers;
     }
+
+    public int getQuestionId() { return questionId; }
+
 }

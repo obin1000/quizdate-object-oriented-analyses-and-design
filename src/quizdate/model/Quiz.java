@@ -1,23 +1,22 @@
 package quizdate.model;
 
-import quizdate.model.Question;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Quiz extends Question {
+public class Quiz {
 
-    private List<Question> children;
+    private List<String> questions;
 
-    public Quiz(String question, String rightAnswer, String[] possibleAnswers) {
+    public Quiz() {
 
-        super(question, rightAnswer, possibleAnswers);
-        children = new ArrayList<>();
+        questions = new ArrayList<>();
 
     }
 
-    public void addQuestion(Question question) {
-        this.children.add(question);
+    public void addQuestion(String question) {
+        this.questions.add(question);
     }
+
+
 
 }
