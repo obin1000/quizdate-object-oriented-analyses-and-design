@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatroomImpl implements ChatRoom {
-    private List<User> users;
+    private List<Chatter> users;
     private List<String> messages;
 
     public ChatroomImpl(){
-        this.users = new ArrayList<User>();
+        this.users = new ArrayList<Chatter>();
         this.messages = new ArrayList<>();
     }
     @Override
-    public void sendMessage(String message, User user) {
+    public void sendMessage(String message, Chatter user) {
         System.out.println(user + " send: " + message);
-        messages.add(user.getFirstName()+": "+message);
-        for(User u : users){
+        messages.add(user+": "+message);
+        for(Chatter u : users){
             if(u != user){
                 u.receiveMessage(user,message);
             }
@@ -23,15 +23,15 @@ public class ChatroomImpl implements ChatRoom {
     }
 
     @Override
-    public void addUser(User user) {
+    public void addUser(Chatter user) {
         this.users.add(user);
     }
-    public void removeUser(User user) {
+    public void removeUser(Chatter user) {
         this.users.remove(user);
     }
 
     @Override
-    public List<User> getUsers() {
+    public List<Chatter> getUsers() {
         return users;
     }
 
