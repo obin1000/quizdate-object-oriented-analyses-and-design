@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import quizdate.model.ChatRepoSQL;
 import quizdate.model.ChatRoom;
 import quizdate.model.User;
 
@@ -42,11 +43,12 @@ public class ChatWindowController implements Initializable {
 
     public void sendButtonPressed(ActionEvent event) {
         // TODO : madeQuiz baseren of degene de quiz al heeft gemaakt, en zodoende toegang geven tot de chat
-        if(!madeQuiz){
+        if(madeQuiz){
             quizAlert(event,btn_send);
         }else{
             System.out.println("sending message... "+ message.getText());
             room.sendMessage(message.getText(),MAIN_CONTROLLER.getCurrentUser());
+            ChatRepoSQL.getInstance().update(room);
             MAIN_CONTROLLER.switchSceneChatWindow(event, btn_send,room);
         }
     }

@@ -23,23 +23,12 @@ public class ChatController implements Initializable {
     private static final MatchService MATCH_SERVICE = MatchService.getInstance();
     private static final UserRepository USER_REPOSITORY = UserRepository.getInstance();
     private User currentUser = MAIN_CONTROLLER.getCurrentUser();
-    private static int debug = 1;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(debug==1) {
-            System.out.println("debug");
-            User u1 = USER_REPOSITORY.get(2);
-            MATCH_SERVICE.createMatch(currentUser,u1);
-            u1.getChat(0).sendMessage("hello",u1);
-            u1.getChat(0).sendMessage("How are you",u1);
-            u1.getChat(0).sendMessage("Can i come over?",u1);
-            u1.getChat(0).sendMessage("Sexy girls in your region",u1);
-            debug++;
-        }
 
         System.out.println("getting matches");
-        List<ChatRoom> chats = currentUser.getChats();
+        List<ChatRoom> chats = ChatRepoSQL.getInstance().getUserChatrooms(currentUser);
         view.getItems().removeAll();
 
         for(ChatRoom chat: chats){
