@@ -10,5 +10,4 @@ public interface ChatRepo {
     public List<ChatRoom> getAll();
     public void add(ChatRoom chat);
     public void remove(ChatRoom chat);
-    public void edit(ChatRoom chat);
 }

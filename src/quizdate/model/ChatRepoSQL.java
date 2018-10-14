@@ -167,8 +167,4 @@ public class ChatRepoSQL implements ChatRepo {
         dbConnection.getInstance().close();
     }
 
-    @Override
-    public void edit(ChatRoom chat) {
-        //TODO To be used
-    }
 }
