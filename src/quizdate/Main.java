@@ -5,7 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import quizdate.model.AnswerRepository;
+import quizdate.model.*;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Main extends Application {
 
@@ -47,7 +51,14 @@ public class Main extends Application {
 //        System.out.println(UserRepository.getDatabase().getRandomId());
 //        System.out.println(UserRepository.getDatabase().getRandomId());
 //        System.out.println(UserRepository.getDatabase().getRandomId());
-        System.out.println(AnswerRepository.getInstance().getQuestion(1));
+        //System.out.println(UserRepository.getInstance().get(2));
+        //System.out.println(ChatRepoSQL.getInstance().getById(2));
+//        System.out.println(ChatRepoSQL.getInstance().getUserChatrooms(2));
+        ChatroomImpl chat = new ChatroomImpl();
+        chat.setMessages("BOOHOO");
+        chat.addUser(UserRepository.getInstance().get(2));
+        ChatRepoSQL.getInstance().add(chat);
+            //System.out.println(ChatRepoSQL.getInstance().getRoomid());
         launch(args);
     }
 
