@@ -4,14 +4,19 @@ public class Answer {
 
     private int questionId;
     private String rightAnswer;
-    private String[] possibleAnswers;
+    private String givenAnswer;
 
-    public Answer(int questionId, String rightAnswer) {
+    public Answer(int questionId, String rightAnswer, String givenAnswer) {
 
         this.questionId = questionId;
         this.rightAnswer = rightAnswer;
-        //this.possibleAnswers = possibleAnswers;
+        this.givenAnswer = givenAnswer;
 
+    }
+
+    public Answer(int questionId, String rightAnswer) {
+        this.questionId = questionId;
+        this.rightAnswer = rightAnswer;
     }
 
     public String getRightAnswer() {
@@ -22,12 +27,12 @@ public class Answer {
         this.rightAnswer = rightAnswer;
     }
 
-    public String[] getPossibleAnswers() {
-        return possibleAnswers;
+    public String getGivenAnswer() {
+        return givenAnswer;
     }
 
-    public void setPossibleAnswers(String[] possibleAnswers) {
-        this.possibleAnswers = possibleAnswers;
+    public void setGivenAnswer(String givenAnswer) {
+        this.givenAnswer = givenAnswer;
     }
 
     public int getQuestionId() { return questionId; }

@@ -25,10 +25,27 @@ public class AnswerRepository implements DAO<Answer> {
         return null;
     }
 
+    public Answer getRandomAnswer(int id) {
+        Answer answer = null;
+        try {
+
+            Statement statement = dbConnection.getInstance().getConnection().createStatement();
+            ResultSet rs = statement.executeQuery("SELECT answer FROM PossibleAnswer WHERE idQuestion = " + id +
+                    " ORDER BY RAND() LIMIT 1");
+            if(rs.next()) {
+                answer = new Answer(id, rs.getString("answer"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        dbConnection.getInstance().close();
+        return answer;
+    }
+
 
     @Override
     public Answer get(int id) {
-        Answer questionandanswer = null;
+        Answer answer = null;
         try {
 
             Statement statement = dbConnection.getInstance().getConnection().createStatement();
@@ -36,13 +53,13 @@ public class AnswerRepository implements DAO<Answer> {
             +  MAIN_CONTROLLER.getMatchedUser().getUserId());
 
             if(rs.next()) {
-                questionandanswer = new Answer(id, rs.getString("rightAnswer"));
+                answer = new Answer(id, rs.getString("rightAnswer"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         dbConnection.getInstance().close();
-        return questionandanswer;
+        return answer;
     }
 
     public String getQuestion(int id) {
