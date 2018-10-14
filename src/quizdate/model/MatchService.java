@@ -4,11 +4,11 @@ import quizdate.controller.MainController;
 
 public class MatchService {
 
-    private static MatchService singleton;
+    private static final MatchService SINGLETON;
     private static final MainController MAIN_CONTROLLER = MainController.getMainController();
 
     static{
-        singleton = new MatchService();
+        SINGLETON = new MatchService();
     }
 
     private MatchService(){}
@@ -100,6 +100,6 @@ public class MatchService {
     }
 
     public static MatchService getInstance(){
-        return singleton;
+        return SINGLETON;
     }
 }
