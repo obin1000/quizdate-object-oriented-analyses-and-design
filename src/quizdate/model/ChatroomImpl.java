@@ -56,9 +56,6 @@ public class ChatroomImpl implements ChatRoom {
     public void setMessages(List<String> messages) {
         this.messages = messages;
     }
-    public void setMessages(String messages) {
-        this.messages.add(messages);
-    }
 
     @Override
     public String toString() {
