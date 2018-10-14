@@ -1,13 +1,10 @@
 package quizdate.controller;
 
-import com.sun.javafx.fxml.builder.JavaFXSceneBuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import quizdate.model.ChatRoom;
 import quizdate.model.UserRepository;
@@ -19,14 +16,14 @@ import java.util.Observer;
 
 public final class MainController implements Observer {
 
-    private static final MainController singleton;
+    private static final MainController SINGLETON;
     private static final UserRepository USER_REPOSITORY = UserRepository.getInstance();
     private ChatRoom requestedroom;
     private User matchedUser;
     private User currentUser;
 
     static{
-        singleton = new MainController();
+        SINGLETON = new MainController();
     }
 
 
@@ -105,7 +102,7 @@ public final class MainController implements Observer {
     }
 
     public static MainController getMainController() {
-        return singleton;
+        return SINGLETON;
     }
 
     public ChatRoom getRequestedRoom() {

@@ -109,10 +109,6 @@ public class MakeQuizController implements Initializable {
 
     public void chatButtonPressed(ActionEvent event){
         MAIN_CONTROLLER.switchSceneChat(event,btn_chat);
-        //TODO : Zorgen dat de usergegevens via ChatController achterhaald kunnen worden.
-        //TODO : Wanneer bovenstaand compleet is, kan onderstaan geuncomment worden
-//        User reset = null;
-//        MAIN_CONTROLLER.setMatchedUser(reset);
     }
 
     private void setAnswers() {
