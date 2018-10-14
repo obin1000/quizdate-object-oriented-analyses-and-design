@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="quizdate.controller.ShowResultController">
+  <children>
+    <ImageView fitHeight="419.0" fitWidth="615.0" layoutX="-7.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../images/bikeLove.jpg" />
+      </image>
+    </ImageView>
+    <Pane fx:id="pane" layoutX="27.0" layoutY="32.0" prefHeight="342.0" prefWidth="555.0" style="-fx-background-color: FFFF;">
+      <children>
+        <fx:define>
+          <Image url="@../images/like.png" />
+        </fx:define>
+        <Text layoutX="169.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quiz Results">
+          <font>
+            <Font size="45.0" />
+          </font>
+        </Text>
+        <Text layoutX="214.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="answer(s) are/is correct" />
+        <Button id="next" fx:id="btn_next" layoutX="131.0" layoutY="281.0" mnemonicParsing="false" onAction="#nextButtonPressed" prefHeight="47.0" prefWidth="294.0" text="Next" />
+        <Text layoutX="246.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question:">
+          <font>
+            <Font size="15.0" fx:id="x1" />
+          </font>
+        </Text>
+        <Text font="$x1" layoutX="231.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Given Answer:" />
+        <Text font="$x1" layoutX="233.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Right Answer:" />
+        <Label id="question" fx:id="text_question" layoutX="261.0" layoutY="124.0" text="Label" />
+        <Label id="givenAnswer" fx:id="text_givenAnswer" layoutX="260.0" layoutY="171.0" text="Label" />
+        <Label id="rightAnswer" fx:id="text_rightAnswer" layoutX="260.0" layoutY="220.0" text="Label" />
+        <Label id="correctCounter" fx:id="text_correctCounter" layoutX="194.0" layoutY="82.0" text="5" />
+      </children>
+    </Pane>
+  </children>
+</AnchorPane>
