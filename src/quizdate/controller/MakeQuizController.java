@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import quizdate.model.*;
 
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class MakeQuizController implements Initializable {
@@ -33,6 +34,7 @@ public class MakeQuizController implements Initializable {
 
     private int counter = 1;
     private int score = 0;
+    private String[] answerOptions = new String[4];
     private Quiz quiz;
 
 
@@ -115,11 +117,46 @@ public class MakeQuizController implements Initializable {
 //        MAIN_CONTROLLER.setMatchedUser(reset);
     }
 
+    private boolean checkAnswers(String answer) {
+        for (String answerOption : answerOptions) {
+            if (answer.equals(answerOption)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return true;
+    }
+
+    private void randomnizeAnswers() {
+        answerOptions[0] = ANSWER_REPOSITORY.get(counter).getRightAnswer();
+        String randomAnswer;
+        Random randomnizer = new Random();
+
+        for (int i = 1; i < answerOptions.length; i++) {
+            do {
+                randomAnswer = ANSWER_REPOSITORY.getRandomAnswer(counter).getRightAnswer();
+            } while (!checkAnswers(randomAnswer));
+            answerOptions[i] = randomAnswer;
+        }
+
+        for (int i = answerOptions.length - 1; i > 0; i--)
+        {
+            int index = randomnizer.nextInt(i + 1);
+            System.out.println(answerOptions[index]);
+            String a = answerOptions[index];
+            answerOptions[index] = answerOptions[i];
+            answerOptions[i] = a;
+        }
+    }
+
+
     private void setAnswers() {
-        btn_answerA.setText("New answer!");
-        btn_answerB.setText(ANSWER_REPOSITORY.get(counter).getRightAnswer());
-        btn_answerC.setText("Answer D");
-        btn_answerD.setText("Answer D");
+        randomnizeAnswers();
+        btn_answerA.setText(answerOptions[0]);
+        btn_answerB.setText(answerOptions[1]);
+        btn_answerC.setText(answerOptions[2]);
+        btn_answerD.setText(answerOptions[3]);
         lbl_question.setText(ANSWER_REPOSITORY.getQuestion(counter));
     }
 }

@@ -25,6 +25,23 @@ public class AnswerRepository implements DAO<Answer> {
         return null;
     }
 
+    public Answer getRandomAnswer(int id) {
+        Answer answer = null;
+        try {
+
+            Statement statement = dbConnection.getInstance().getConnection().createStatement();
+            ResultSet rs = statement.executeQuery("SELECT answer FROM PossibleAnswer WHERE idQuestion = " + id +
+                    " ORDER BY RAND() LIMIT 1");
+            if(rs.next()) {
+                answer = new Answer(id, rs.getString("answer"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        dbConnection.getInstance().close();
+        return answer;
+    }
+
 
     @Override
     public Answer get(int id) {
