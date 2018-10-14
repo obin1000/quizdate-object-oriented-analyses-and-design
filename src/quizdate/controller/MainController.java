@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import quizdate.model.ChatRoom;
+import quizdate.model.Quiz;
 import quizdate.model.UserRepository;
 import quizdate.model.User;
 
@@ -21,6 +22,7 @@ public final class MainController implements Observer {
     private ChatRoom requestedroom;
     private User matchedUser;
     private User currentUser;
+    private Quiz quizData;
 
     static{
         SINGLETON = new MainController();
@@ -73,6 +75,10 @@ public final class MainController implements Observer {
         switchScene(event, pressedButton, "../view/makeQuiz.fxml");
     }
 
+    public void switchSceneQuizResult(ActionEvent event, Button pressedButton) {
+        switchScene(event, pressedButton, "../view/ShowQuizResults.fxml");
+    }
+
 
 
     public User getCurrentUser() {
@@ -119,5 +125,13 @@ public final class MainController implements Observer {
         if(USER_REPOSITORY.update(currentUser.getUserId(), currentUser)) {
             System.out.println("MainController has just user updated " + currentUser + " :)");
         }
+    }
+
+    public Quiz getQuizData() {
+        return quizData;
+    }
+
+    public void setQuizData(Quiz quizData) {
+        this.quizData = quizData;
     }
 }

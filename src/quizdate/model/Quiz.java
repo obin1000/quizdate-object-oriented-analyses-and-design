@@ -7,11 +7,13 @@ public class Quiz {
 
     private List<String> questions;
     private List<Answer> answers;
+    private int score;
 
     public Quiz() {
 
         questions = new ArrayList<>();
         answers = new ArrayList<>();
+        score = 0;
     }
 
     public void addQuestion(String question) {
@@ -30,4 +32,15 @@ public class Quiz {
 
 
 
+    public int getScore() {
+        return score;
+    }
+
+    public void addScore() {
+        score++;
+    }
+
+    public void removeScore() {
+        score--;
+    }
 }

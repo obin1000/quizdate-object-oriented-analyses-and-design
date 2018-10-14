@@ -33,7 +33,6 @@ public class MakeQuizController implements Initializable {
     private User otherUser = MAIN_CONTROLLER.getMatchedUser();
 
     private int counter = 1;
-    private int score = 0;
     private String[] answerOptions = new String[4];
     private Quiz quiz;
 
@@ -61,7 +60,7 @@ public class MakeQuizController implements Initializable {
         if(counter <= 5){
             if (btn_answerA.isSelected()){
                 if (btn_answerA.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
-                    score++;
+                    quiz.addScore();
                 }
                 quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getRightAnswer(),
                         btn_answerA.getText()));
@@ -70,7 +69,7 @@ public class MakeQuizController implements Initializable {
             }
             else if (btn_answerB.isSelected()){
                 if (btn_answerB.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
-                    score++;
+                    quiz.addScore();
                 }
                 quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getRightAnswer(),
                         btn_answerB.getText()));
@@ -79,7 +78,7 @@ public class MakeQuizController implements Initializable {
             }
             else if (btn_answerC.isSelected()){
                 if (btn_answerC.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
-                    score++;
+                    quiz.addScore();
                 }
                 quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getRightAnswer(),
                         btn_answerC.getText()));
@@ -88,7 +87,7 @@ public class MakeQuizController implements Initializable {
             }
             else if (btn_answerD.isSelected()){
                 if (btn_answerD.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
-                    score++;
+                    quiz.addScore();
                 }
                 quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getRightAnswer(),
                         btn_answerD.getText()));
@@ -99,10 +98,9 @@ public class MakeQuizController implements Initializable {
                 System.out.println("NOTHING HAS BEEN SELECTED");
             }
             if (counter > 5) {
-                MAIN_CONTROLLER.switchSceneLogin(event, btn_next);
-                System.out.println(score);
-                System.out.println(quiz.getAnswers());
-                System.out.println(quiz.getQuestions());
+                MAIN_CONTROLLER.setQuizData(quiz);
+                MAIN_CONTROLLER.switchSceneQuizResult(event, btn_next);
+
             } else {
                 setAnswers();
             }
