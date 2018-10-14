@@ -2,6 +2,7 @@ package quizdate.model;
 
 import javafx.scene.image.Image;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,14 +11,13 @@ import java.util.List;
 
 public class ChatRepoSQL implements ChatRepo {
     private final static ChatRepoSQL singleton;
-    private List<ChatRoom> rooms;
 
     static {
         singleton = new ChatRepoSQL();
     }
 
     private ChatRepoSQL() {
-        rooms = new ArrayList<>();
+
     }
 
     public static ChatRepoSQL getInstance() {
@@ -69,7 +69,22 @@ public class ChatRepoSQL implements ChatRepo {
         }
         return chat;
     }
+    public int getRoomid(){
+        int roomnr=0;
+        try {
+            Statement statement = dbConnection.getInstance().getConnection().createStatement();
+            ResultSet back;
+            do {
+                roomnr++;
+                back = statement.executeQuery("SELECT Roomid FROM Chatroom WHERE Roomid =" + roomnr);
+            }while(back.next());
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        dbConnection.getInstance().close();
+        return roomnr;
+    }
     @Override
     public List<ChatRoom> getAll() {
         //TODO: too be implemented when needed
@@ -79,12 +94,27 @@ public class ChatRepoSQL implements ChatRepo {
 
     @Override
     public void add(ChatRoom chat) {
-        rooms.add(chat);
+        int roomid = getRoomid();
+        StringBuilder string = new StringBuilder();
+        for(String s: chat.getMessages()){
+            string.append(s+"\n");
+        }
+        String temp = string.toString();
+        try {
+            Statement statement = dbConnection.getInstance().getConnection().createStatement();
+            statement.executeUpdate("INSERT INTO Chatroom(Roomid, Messages) VALUES ('"+ roomid +"','"+ temp + "')");
+            for(Chatter c : chat.getUsers()) {
+                statement.executeUpdate("INSERT INTO UserChatroom(userId,Roomid) VALUES ('" + c.getUserId() +"','"+ roomid + "')");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        dbConnection.getInstance().close();
     }
 
     @Override
     public void remove(ChatRoom chat) {
-        rooms.remove(chat);
     }
 
     @Override
