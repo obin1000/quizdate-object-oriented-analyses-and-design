@@ -6,16 +6,23 @@ import java.util.List;
 public class ChatroomImpl implements ChatRoom {
     private List<Chatter> users;
     private List<String> messages;
+    private int roomid;
 
     public ChatroomImpl(){
         this.users = new ArrayList<Chatter>();
         this.messages = new ArrayList<>();
     }
-    public ChatroomImpl(List<Chatter> users, String messages){
-        this.users = users;
-        this.messages = new ArrayList<>();
-        this.messages.add(messages);
+
+    @Override
+    public int getRoomid() {
+        return roomid;
     }
+
+    @Override
+    public void setRoomid(int id) {
+        this.roomid = id;
+    }
+
     @Override
     public void sendMessage(String message, Chatter user) {
         System.out.println(user + " send: " + message);

@@ -19,7 +19,6 @@ public class User extends Observable implements Chatter {
     private List<User> Matches;
     private String password;
     private List<Observer> observers = new ArrayList<>();
-    private List<ChatRoom> chats;
 
     public User(String lastName, String firstName, LocalDate dateOfBirth, String sex, String email,
                 String phoneNumber, String adres, String password) {
@@ -34,7 +33,6 @@ public class User extends Observable implements Chatter {
         this.Likes = new ArrayList<>();
         this.Matches = new ArrayList<>();
         this.password = password;
-        this.chats = new ArrayList<>();
     }
 
     /**
@@ -172,19 +170,6 @@ public class User extends Observable implements Chatter {
     @Override
     public void receiveMessage(Chatter roomMate, String message) {
         System.out.println(this + " received: " + message);
-    }
-
-    public List<ChatRoom> getChats(){
-        return chats;
-    }
-
-    public ChatRoom getChat(int index){
-        if(chats.get(index) != null){
-            return chats.get(index);
-        }
-        else{
-            return null;
-        }
     }
 
 

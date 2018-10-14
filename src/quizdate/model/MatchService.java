@@ -49,12 +49,11 @@ public class MatchService {
 
             addToMatches(currentUser, otherUser); //add user2 to user1s matches
             chat.addUser(currentUser);
-            currentUser.getChats().add(chat);
 
             addToMatches(otherUser, currentUser); // add user1 to user2s matches
             chat.addUser(otherUser);
-            otherUser.getChats().add(chat);
             MAIN_CONTROLLER.setRequestedroom(chat);
+            ChatRepoSQL.getInstance().add(chat);
             System.out.println("Chat between: " + currentUser + " " + otherUser);
         } catch(Exception e){
             e.printStackTrace();
@@ -67,12 +66,11 @@ public class MatchService {
         try {
             removeFromLike(currentUser, otherUser);
             removeFromMatch(currentUser, otherUser);
-            currentUser.getChats().remove(chat);
 
             removeFromLike(otherUser, currentUser);
             removeFromMatch(otherUser, currentUser);
-            otherUser.getChats().remove(chat);
 
+            ChatRepoSQL.getInstance().remove(chat);
             System.out.println("Chat removed: " + currentUser + " " + otherUser);
         }catch(Exception e){
             e.printStackTrace();

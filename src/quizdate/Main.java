@@ -54,11 +54,13 @@ public class Main extends Application {
         //System.out.println(UserRepository.getInstance().get(2));
         //System.out.println(ChatRepoSQL.getInstance().getById(2));
 //        System.out.println(ChatRepoSQL.getInstance().getUserChatrooms(2));
-        ChatroomImpl chat = new ChatroomImpl();
-        chat.setMessages("BOOHOO");
-        chat.addUser(UserRepository.getInstance().get(2));
-        ChatRepoSQL.getInstance().add(chat);
-            //System.out.println(ChatRepoSQL.getInstance().getRoomid());
+//        ChatroomImpl chat = new ChatroomImpl();
+//        chat.setMessages("BOOHOOOOOOOOOOOOOOOOOOOOOO");
+//        chat.setRoomid(1);
+////        ChatRepoSQL.getInstance().add(chat);
+//            //System.out.println(ChatRepoSQL.getInstance().getRoomid());
+//        ChatRepoSQL.getInstance().update(chat);
+        System.out.println((ChatRepoSQL.getInstance().getById(1)));
         launch(args);
     }
 
