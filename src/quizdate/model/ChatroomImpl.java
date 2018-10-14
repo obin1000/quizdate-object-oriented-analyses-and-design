@@ -11,6 +11,11 @@ public class ChatroomImpl implements ChatRoom {
         this.users = new ArrayList<Chatter>();
         this.messages = new ArrayList<>();
     }
+    public ChatroomImpl(List<Chatter> users, String messages){
+        this.users = users;
+        this.messages = new ArrayList<>();
+        this.messages.add(messages);
+    }
     @Override
     public void sendMessage(String message, Chatter user) {
         System.out.println(user + " send: " + message);
@@ -35,7 +40,21 @@ public class ChatroomImpl implements ChatRoom {
         return users;
     }
 
+    @Override
     public List<String> getMessages() {
         return messages;
+    }
+
+    @Override
+    public void setMessages(List<String> messages) {
+        this.messages = messages;
+    }
+    public void setMessages(String messages) {
+        this.messages.add(messages);
+    }
+
+    @Override
+    public String toString() {
+        return users.toString() + messages.toString();
     }
 }

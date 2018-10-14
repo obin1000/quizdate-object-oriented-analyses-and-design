@@ -8,4 +8,5 @@ public interface ChatRoom {
     public void removeUser(Chatter user);
     public List<Chatter> getUsers();
     public List<String> getMessages();
+    public void setMessages(List<String> messages);
 }

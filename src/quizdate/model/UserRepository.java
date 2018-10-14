@@ -71,7 +71,6 @@ public class UserRepository implements DAO<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        dbConnection.getInstance().close();
         return user;
     }
 
