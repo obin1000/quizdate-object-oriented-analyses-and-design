@@ -63,6 +63,7 @@ public class UserRepository implements DAO<User> {
                         rs.getDate("dateOfBirth").toLocalDate(), rs.getString("sex"),
                         rs.getString("email"), rs.getString("phoneNumber"),
                         rs.getString("adres"), rs.getString("password"));
+                user.setUserId(rs.getInt("userId"));
                 if(rs.getString("picturePath") != null) {
                     Image profilePic = new Image(rs.getString("picturePath"));
                     user.setProfilePicture(profilePic);
