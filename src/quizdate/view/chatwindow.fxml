@@ -13,20 +13,14 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="quizdate.controller.ChatWindowController">
     <children>
         <Pane prefHeight="63.0" prefWidth="600.0" style="-fx-background-color: E0E0E0;">
-            <children>
-                <ImageView fitHeight="57.0" fitWidth="62.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../images/settings.png" />
-                    </image>
-                </ImageView>
-                <ImageView fitHeight="63.0" fitWidth="76.0" layoutX="520.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../images/home.png" />
-                    </image>
-                </ImageView>
-                <Button fx:id="btn_settings" layoutX="9.0" layoutY="5.0" mnemonicParsing="false" onAction="#settingsButtonPressed" prefHeight="50.0" prefWidth="52.0" style="-fx-background-color: transparent;" />
-                <Button fx:id="btn_home" layoutX="516.0" layoutY="-6.0" mnemonicParsing="false" onAction="#homeButtonPressed" prefHeight="63.0" prefWidth="70.0" style="-fx-background-color: transparent;" />
-            </children>
+         <children>
+            <ImageView fitHeight="63.0" fitWidth="76.0" layoutX="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/chat.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btn_chat" layoutX="-2.0" layoutY="-4.0" mnemonicParsing="false" onAction="#chatButtonPressed" prefHeight="63.0" prefWidth="70.0" style="-fx-background-color: transparent;" />
+         </children>
         </Pane>
         <ImageView fitHeight="171.0" fitWidth="290.0" layoutX="215.0" layoutY="-39.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -34,7 +28,7 @@
             </image>
         </ImageView>
         <ListView fx:id="view" layoutX="7.0" layoutY="114.0" prefHeight="226.0" prefWidth="589.0" />
-      <Label layoutX="257.0" layoutY="63.0" text="CHAT">
+      <Label fx:id="lbl_chat" layoutX="257.0" layoutY="63.0">
          <font>
             <Font size="36.0" />
          </font>

@@ -10,6 +10,8 @@ import java.util.List;
 public class AnswerRepository implements DAO<Answer> {
 
     private final static AnswerRepository singleton;
+    private final static MainController MAIN_CONTROLLER = MainController.getMainController();
+    private final static UserRepository USER_REPOSITORY = UserRepository.getInstance();
 
     static {
         singleton = new AnswerRepository();
@@ -31,7 +33,7 @@ public class AnswerRepository implements DAO<Answer> {
 
             Statement statement = dbConnection.getInstance().getConnection().createStatement();
             ResultSet rs = statement.executeQuery("SELECT * FROM Answer WHERE idQuestion = " + id + " AND userId = "
-            + MainController.getMainController().getCurrentUser().getUserId());
+            +  MAIN_CONTROLLER.getMatchedUser().getUserId());
 
             if(rs.next()) {
                 questionandanswer = new Answer(id, rs.getString("rightAnswer"));

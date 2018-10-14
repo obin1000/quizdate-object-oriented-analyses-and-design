@@ -1,10 +1,13 @@
 package quizdate.controller;
 
+import com.sun.javafx.fxml.builder.JavaFXSceneBuilder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import quizdate.model.ChatRoom;
 import quizdate.model.UserRepository;
@@ -19,6 +22,7 @@ public final class MainController implements Observer {
     private static final MainController singleton;
     private static final UserRepository USER_REPOSITORY = UserRepository.getInstance();
     private ChatRoom requestedroom;
+    private User matchedUser;
     private User currentUser;
 
     static{
@@ -68,6 +72,12 @@ public final class MainController implements Observer {
         switchScene(event, pressedButton, "../view/chatwindow.fxml");
     }
 
+    public void switchSceneMakeQuiz(ActionEvent event, Button pressedButton) {
+        switchScene(event, pressedButton, "../view/makeQuiz.fxml");
+    }
+
+
+
     public User getCurrentUser() {
         return currentUser;
     }
@@ -76,6 +86,22 @@ public final class MainController implements Observer {
         this.currentUser = currentUser;
         currentUser.setUserId(userId);
         currentUser.addObserver(this);
+    }
+
+    public User getMatchedUser() {
+        return matchedUser;
+    }
+
+    public boolean setMatchedUser(User matchedUser) {
+        boolean status = false;
+        try {
+            this.matchedUser = matchedUser;
+            matchedUser.setUserId(USER_REPOSITORY.getUserId(matchedUser));
+            status = true;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return status;
     }
 
     public static MainController getMainController() {

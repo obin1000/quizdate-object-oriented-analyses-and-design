@@ -26,7 +26,7 @@
             </fx:define>
          </children>
       </Pane>
-      <Pane prefHeight="63.0" prefWidth="600.0" style="-fx-background-color: E0E0E0;">
+      <Pane prefHeight="63.0" prefWidth="606.0" style="-fx-background-color: E0E0E0;">
          <children>
             <ImageView fitHeight="57.0" fitWidth="62.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true">
                <image>
