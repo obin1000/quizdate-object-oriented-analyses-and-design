@@ -34,7 +34,7 @@ public class ChatController implements Initializable {
         for(ChatRoom chat: chats){
             StringBuilder name = new StringBuilder();
             for(Chatter user : chat.getUsers()){
-                if(user != currentUser) {
+                if(user.getUserId() != currentUser.getUserId()) {
                     name.append(user);
                     System.out.println("\n" + name.toString());
                 }
