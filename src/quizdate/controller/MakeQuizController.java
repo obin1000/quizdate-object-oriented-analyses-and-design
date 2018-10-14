@@ -8,10 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import quizdate.model.AnswerRepository;
-import quizdate.model.MatchService;
-import quizdate.model.UserRepository;
-import quizdate.model.User;
+import quizdate.model.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,6 +33,7 @@ public class MakeQuizController implements Initializable {
 
     private int counter = 1;
     private int score = 0;
+    private Quiz quiz;
 
 
     @Override
@@ -45,6 +43,8 @@ public class MakeQuizController implements Initializable {
         }else {
             profilePicture.setImage(otherUser.getProfilePicture());
         }
+
+        quiz = new Quiz();
 
         lbl_username.setText(otherUser.getFirstName() + " " + otherUser.getLastName());
 
@@ -56,38 +56,55 @@ public class MakeQuizController implements Initializable {
 
     public void nextButtonPressed(ActionEvent event){
 
-        if(counter < 2){
+        if(counter <= 5){
             if (btn_answerA.isSelected()){
                 if (btn_answerA.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
                     score++;
                 }
+                quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getRightAnswer(),
+                        btn_answerA.getText()));
+                quiz.addQuestion(ANSWER_REPOSITORY.getQuestion(counter));
                 counter++;
             }
             else if (btn_answerB.isSelected()){
                 if (btn_answerB.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
                     score++;
                 }
+                quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getRightAnswer(),
+                        btn_answerB.getText()));
+                quiz.addQuestion(ANSWER_REPOSITORY.getQuestion(counter));
                 counter++;
             }
             else if (btn_answerC.isSelected()){
                 if (btn_answerC.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
                     score++;
                 }
+                quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getRightAnswer(),
+                        btn_answerC.getText()));
+                quiz.addQuestion(ANSWER_REPOSITORY.getQuestion(counter));
                 counter++;
             }
             else if (btn_answerD.isSelected()){
                 if (btn_answerD.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
                     score++;
                 }
+                quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getRightAnswer(),
+                        btn_answerD.getText()));
+                quiz.addQuestion(ANSWER_REPOSITORY.getQuestion(counter));
                 counter++;
             }
             else {
                 System.out.println("NOTHING HAS BEEN SELECTED");
             }
-    } else {
-            //TO TEST.
-            MAIN_CONTROLLER.switchSceneLogin(event, btn_next);
-        }
+            if (counter > 5) {
+                MAIN_CONTROLLER.switchSceneLogin(event, btn_next);
+                System.out.println(score);
+                System.out.println(quiz.getAnswers());
+                System.out.println(quiz.getQuestions());
+            } else {
+                setAnswers();
+            }
+    }
     }
 
     public void chatButtonPressed(ActionEvent event){

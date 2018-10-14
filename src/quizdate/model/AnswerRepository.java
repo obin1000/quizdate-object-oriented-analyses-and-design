@@ -28,7 +28,7 @@ public class AnswerRepository implements DAO<Answer> {
 
     @Override
     public Answer get(int id) {
-        Answer questionandanswer = null;
+        Answer answer = null;
         try {
 
             Statement statement = dbConnection.getInstance().getConnection().createStatement();
@@ -36,13 +36,13 @@ public class AnswerRepository implements DAO<Answer> {
             +  MAIN_CONTROLLER.getMatchedUser().getUserId());
 
             if(rs.next()) {
-                questionandanswer = new Answer(id, rs.getString("rightAnswer"));
+                answer = new Answer(id, rs.getString("rightAnswer"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         dbConnection.getInstance().close();
-        return questionandanswer;
+        return answer;
     }
 
     public String getQuestion(int id) {
