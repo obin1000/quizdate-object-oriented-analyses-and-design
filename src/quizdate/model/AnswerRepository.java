@@ -80,13 +80,13 @@ public class AnswerRepository implements DAO<Answer> {
     }
 
     @Override
-    public boolean save(Answer question) {
+    public boolean save(Answer answer) {
         boolean status = false;
 
         try {
             Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            statement.executeUpdate("INSERT INTO Answer() VALUES ('" + question.getRightAnswer()  + "', " +
-                    MainController.getMainController().getCurrentUser().getUserId() + "," +  1
+            statement.executeUpdate("INSERT INTO Answer() VALUES ('" + answer.getRightAnswer()  + "', " +
+                    MainController.getMainController().getCurrentUser().getUserId() + "," +  answer.getQuestionId()
                     +  "  )");
             status = true;
         } catch (SQLException e) {

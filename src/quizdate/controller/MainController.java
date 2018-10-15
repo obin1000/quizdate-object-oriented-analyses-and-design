@@ -23,6 +23,7 @@ public final class MainController implements Observer {
     private User matchedUser;
     private User currentUser;
     private Quiz quizData;
+    private User registeredUser;
 
     static{
         SINGLETON = new MainController();
@@ -50,6 +51,10 @@ public final class MainController implements Observer {
     public void switchSceneCreateAccount(ActionEvent event, Button pressedButton) {
         System.out.println("Calls switchSceneCreateAccount ");
         switchScene(event, pressedButton, "../view/create_account.fxml");
+    }
+
+    public void switchQuestionAnswers(ActionEvent event, Button pressedButton) {
+        switchScene(event, pressedButton, "../view/QuestionAnswers.fxml");
     }
 
     public void switchSceneLogin(ActionEvent event, Button pressedButton) {
@@ -85,6 +90,10 @@ public final class MainController implements Observer {
         return currentUser;
     }
 
+    public void removeCurrentUser() {
+        currentUser = null;
+    }
+
     public void setCurrentUser(User currentUser, int userId) {
         this.currentUser = currentUser;
         currentUser.setUserId(userId);
@@ -93,6 +102,16 @@ public final class MainController implements Observer {
 
     public User getMatchedUser() {
         return matchedUser;
+    }
+
+    public User getRegisteredUser() { return registeredUser; }
+
+    public void setRegisteredUser(User registeredUser) {
+        this.registeredUser = registeredUser;
+    }
+
+    public void removeRegisteredUser() {
+        registeredUser = null;
     }
 
     public boolean setMatchedUser(User matchedUser) {

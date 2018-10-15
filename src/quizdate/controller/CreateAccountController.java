@@ -23,7 +23,7 @@ public class CreateAccountController {
     @FXML
     private TextField txt_adres;
     @FXML
-    private Button btn_createAccount;
+    private Button btn_next;
     @FXML
     private Button btn_back;
     @FXML
@@ -38,10 +38,10 @@ public class CreateAccountController {
         User user = new User(txt_lastName.getText(), txt_firstName.getText(), dte_dateOfBirth.getValue(),
                 (String) cmb_sex.getValue(), txt_email.getText(), txt_phoneNumber.getText(), txt_adres.getText(), txt_password.getText());
         System.out.println(user.getPassword());
+        MAIN_CONTROLLER.setRegisteredUser(user);
+        MAIN_CONTROLLER.switchQuestionAnswers(event, btn_next);
 
-        if (USER_REPOSITORY.save(user)) {
-            MAIN_CONTROLLER.switchSceneLogin(event, btn_createAccount);
-        }
+
     }
 
     public void backButtonPressed(ActionEvent event) {

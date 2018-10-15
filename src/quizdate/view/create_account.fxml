@@ -70,7 +70,7 @@
             <TextField fx:id="txt_password" promptText="Password" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <Button fx:id="btn_createAccount" layoutX="385.0" layoutY="344.0" mnemonicParsing="false" onAction="#createAccountButtonPressed" prefHeight="32.0" prefWidth="111.0" style="-fx-background-color: F94141;" text="Create Account" />
+      <Button fx:id="btn_next" layoutX="385.0" layoutY="344.0" mnemonicParsing="false" onAction="#createAccountButtonPressed" prefHeight="32.0" prefWidth="111.0" style="-fx-background-color: F94141;" text="Next" />
       <Button fx:id="btn_back" layoutX="104.0" layoutY="344.0" mnemonicParsing="false" onAction="#backButtonPressed" prefHeight="32.0" prefWidth="73.0" style="-fx-background-color: F94141;" text="Back" />
    </children>
 </AnchorPane>
