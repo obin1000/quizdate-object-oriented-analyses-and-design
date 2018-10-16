@@ -5,9 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import quizdate.model.ChatRepoSQL;
-import quizdate.model.ChatRoom;
-import quizdate.model.User;
+import quizdate.model.*;
 
 import java.net.URL;
 import java.util.Optional;
@@ -34,11 +32,15 @@ public class ChatWindowController implements Initializable {
         view.getItems().removeAll();
         view.setPlaceholder(new Label("No messages? Time to make the first move!"));
         room = MAIN_CONTROLLER.getRequestedRoom();
+        for (Chatter c: room.getUsers()) {
+            if(c.getUserId() != MAIN_CONTROLLER.getCurrentUser().getUserId()) {
+                lbl_chat.setText(UserRepository.getInstance().get(c.getUserId()).getFirstName());
+            }
+        }
         for (String s : room.getMessages()) {
             view.getItems().add(s);
         }
         view.scrollTo(view.getItems().size());
-        lbl_chat.setText(MAIN_CONTROLLER.getMatchedUser().getFirstName());
     }
 
     public void sendButtonPressed(ActionEvent event) {
