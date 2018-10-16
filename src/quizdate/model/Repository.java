@@ -2,7 +2,7 @@ package quizdate.model;
 
 import java.util.List;
 
-public interface DAO<T> {
+public interface Repository<T> {
 
     List<T> getAll();
 

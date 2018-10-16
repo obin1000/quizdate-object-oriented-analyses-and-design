@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import java.sql.*;
 import java.util.List;
 
-public class UserRepository implements DAO<User> {
+public class UserRepository implements Repository<User> {
 
     private final static UserRepository singleton;
 

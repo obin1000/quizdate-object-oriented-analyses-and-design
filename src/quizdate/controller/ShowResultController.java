@@ -47,14 +47,14 @@ public class ShowResultController implements Initializable {
     private void setResults() {
 
         text_correctCounter.setText(Integer.toString(MAIN_CONTROLLER.getQuizData().getScore()));
-        text_rightAnswer.setText(MAIN_CONTROLLER.getQuizData().getAnswers().get(counter).getRightAnswer());
+        text_rightAnswer.setText(MAIN_CONTROLLER.getQuizData().getAnswers().get(counter).getAnswer());
         text_givenAnswer.setText(MAIN_CONTROLLER.getQuizData().getAnswers().get(counter).getGivenAnswer());
         text_question.setText(MAIN_CONTROLLER.getQuizData().getQuestions().get(counter));
 
 
         text_rightAnswer.setTextFill(Color.GREEN);
 
-        if (MAIN_CONTROLLER.getQuizData().getAnswers().get(counter).getRightAnswer().equals(MAIN_CONTROLLER.
+        if (MAIN_CONTROLLER.getQuizData().getAnswers().get(counter).getAnswer().equals(MAIN_CONTROLLER.
                 getQuizData().getAnswers().get(counter).getGivenAnswer())) {
             text_givenAnswer.setTextFill(Color.GREEN);
         } else {

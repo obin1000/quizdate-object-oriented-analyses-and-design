@@ -26,9 +26,7 @@ public class MakeQuizController implements Initializable {
 
     private Image img = new Image("file:./src/quizdate/images/trump.jpg");
     private static final MainController MAIN_CONTROLLER = MainController.getMainController();
-    private static final UserRepository USER_REPOSITORY = UserRepository.getInstance();
     private static final AnswerRepository ANSWER_REPOSITORY = AnswerRepository.getInstance();
-    private static final MatchService MATCH_SERVICE = MatchService.getInstance();
     private User currentUser = MAIN_CONTROLLER.getCurrentUser();
     private User otherUser = MAIN_CONTROLLER.getMatchedUser();
 
@@ -59,37 +57,37 @@ public class MakeQuizController implements Initializable {
 
         if(counter <= 5){
             if (btn_answerA.isSelected()){
-                if (btn_answerA.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
+                if (btn_answerA.getText().equals(ANSWER_REPOSITORY.get(counter).getAnswer())) {
                     quiz.addScore();
                 }
-                quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getRightAnswer(),
+                quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getAnswer(),
                         btn_answerA.getText()));
                 quiz.addQuestion(ANSWER_REPOSITORY.getQuestion(counter));
                 counter++;
             }
             else if (btn_answerB.isSelected()){
-                if (btn_answerB.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
+                if (btn_answerB.getText().equals(ANSWER_REPOSITORY.get(counter).getAnswer())) {
                     quiz.addScore();
                 }
-                quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getRightAnswer(),
+                quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getAnswer(),
                         btn_answerB.getText()));
                 quiz.addQuestion(ANSWER_REPOSITORY.getQuestion(counter));
                 counter++;
             }
             else if (btn_answerC.isSelected()){
-                if (btn_answerC.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
+                if (btn_answerC.getText().equals(ANSWER_REPOSITORY.get(counter).getAnswer())) {
                     quiz.addScore();
                 }
-                quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getRightAnswer(),
+                quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getAnswer(),
                         btn_answerC.getText()));
                 quiz.addQuestion(ANSWER_REPOSITORY.getQuestion(counter));
                 counter++;
             }
             else if (btn_answerD.isSelected()){
-                if (btn_answerD.getText().equals(ANSWER_REPOSITORY.get(counter).getRightAnswer())) {
+                if (btn_answerD.getText().equals(ANSWER_REPOSITORY.get(counter).getAnswer())) {
                     quiz.addScore();
                 }
-                quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getRightAnswer(),
+                quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getAnswer(),
                         btn_answerD.getText()));
                 quiz.addQuestion(ANSWER_REPOSITORY.getQuestion(counter));
                 counter++;
@@ -123,13 +121,13 @@ public class MakeQuizController implements Initializable {
     }
 
     private void randomnizeAnswers() {
-        answerOptions[0] = ANSWER_REPOSITORY.get(counter).getRightAnswer();
+        answerOptions[0] = ANSWER_REPOSITORY.get(counter).getAnswer();
         String randomAnswer;
         Random randomnizer = new Random();
 
         for (int i = 1; i < answerOptions.length; i++) {
             do {
-                randomAnswer = ANSWER_REPOSITORY.getRandomAnswer(counter).getRightAnswer();
+                randomAnswer = ANSWER_REPOSITORY.getRandomAnswer(counter).getAnswer();
             } while (!checkAnswers(randomAnswer));
             answerOptions[i] = randomAnswer;
         }

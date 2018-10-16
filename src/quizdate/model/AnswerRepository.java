@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class AnswerRepository implements DAO<Answer> {
+public class AnswerRepository implements Repository<Answer> {
 
     private final static AnswerRepository singleton;
     private final static MainController MAIN_CONTROLLER = MainController.getMainController();
@@ -85,7 +85,7 @@ public class AnswerRepository implements DAO<Answer> {
 
         try {
             Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            statement.executeUpdate("INSERT INTO Answer() VALUES ('" + answer.getRightAnswer()  + "', " +
+            statement.executeUpdate("INSERT INTO Answer() VALUES ('" + answer.getAnswer()  + "', " +
                     MainController.getMainController().getCurrentUser().getUserId() + "," +  answer.getQuestionId()
                     +  "  )");
             status = true;
@@ -102,7 +102,7 @@ public class AnswerRepository implements DAO<Answer> {
 
         try {
             Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            statement.executeUpdate("UPDATE Answer SET rightAnswer = '" + question.getRightAnswer() +
+            statement.executeUpdate("UPDATE Answer SET rightAnswer = '" + question.getAnswer() +
                     "' WHERE idQuestion = " + question.getQuestionId() + " AND userId = " +  id);
 
             status = true;

@@ -3,28 +3,28 @@ package quizdate.model;
 public class Answer {
 
     private int questionId;
-    private String rightAnswer;
+    private String answer;
     private String givenAnswer;
 
-    public Answer(int questionId, String rightAnswer, String givenAnswer) {
+    public Answer(int questionId, String answer, String givenAnswer) {
 
         this.questionId = questionId;
-        this.rightAnswer = rightAnswer;
+        this.answer = answer;
         this.givenAnswer = givenAnswer;
 
     }
 
-    public Answer(int questionId, String rightAnswer) {
+    public Answer(int questionId, String answer) {
         this.questionId = questionId;
-        this.rightAnswer = rightAnswer;
+        this.answer = answer;
     }
 
-    public String getRightAnswer() {
-        return rightAnswer;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setRightAnswer(String rightAnswer) {
-        this.rightAnswer = rightAnswer;
+    public void setAnswer(String rightAnswer) {
+        this.answer = rightAnswer;
     }
 
     public String getGivenAnswer() {
