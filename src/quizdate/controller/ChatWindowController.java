@@ -50,7 +50,6 @@ public class ChatWindowController implements Initializable {
         }else{
             System.out.println("sending message... "+ message.getText());
             room.sendMessage(message.getText(),MAIN_CONTROLLER.getCurrentUser());
-            ChatRepoSQL.getInstance().update(room);
             MAIN_CONTROLLER.switchSceneChatWindow(event, btn_send,room);
         }
     }

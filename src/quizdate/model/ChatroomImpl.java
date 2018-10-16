@@ -26,12 +26,13 @@ public class ChatroomImpl implements ChatRoom {
     @Override
     public void sendMessage(String message, Chatter user) {
         System.out.println(user + " send: " + message);
-        messages.add(user+": "+message);
         for(Chatter u : users){
             if(u != user){
                 u.receiveMessage(user,message);
             }
         }
+        messages.add(user+": "+message);
+        ChatRepoSQL.getInstance().update(this);
     }
 
     @Override
