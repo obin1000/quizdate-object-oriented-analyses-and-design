@@ -2,6 +2,7 @@ package quizdate.model;
 
 import quizdate.controller.MainController;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -27,11 +28,14 @@ public class AnswerRepository implements Repository<Answer> {
 
     public Answer getRandomAnswer(int id) {
         Answer answer = null;
+
         try {
 
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            ResultSet rs = statement.executeQuery("SELECT answer FROM PossibleAnswer WHERE idQuestion = " + id +
-                    " ORDER BY RAND() LIMIT 1");
+            PreparedStatement statement;
+            statement = dbConnection.getInstance().prepare("SELECT answer FROM PossibleAnswer " +
+                    "WHERE idQuestion = ? ORDER BY RAND() LIMIT 1");
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
             if(rs.next()) {
                 answer = new Answer(id, rs.getString("answer"));
             }
@@ -48,9 +52,13 @@ public class AnswerRepository implements Repository<Answer> {
         Answer answer = null;
         try {
 
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Answer WHERE idQuestion = " + id + " AND userId = "
-            +  MAIN_CONTROLLER.getMatchedUser().getUserId());
+            PreparedStatement statement;
+            statement = dbConnection.getInstance().prepare("SELECT * FROM Answer WHERE idQuestion = ? " +
+                            "AND userId = ?");
+            statement.setInt(1, id);
+            statement.setInt(2, MAIN_CONTROLLER.getMatchedUser().getUserId());
+
+            ResultSet rs = statement.executeQuery();
 
             if(rs.next()) {
                 answer = new Answer(id, rs.getString("rightAnswer"));
@@ -66,8 +74,11 @@ public class AnswerRepository implements Repository<Answer> {
         String question = null;
         try {
 
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Question WHERE idQuestion = " + id);
+            PreparedStatement statement;
+            statement = dbConnection.getInstance().prepare("SELECT * FROM Question WHERE idQuestion = ?");
+            statement.setInt(1, id);
+
+            ResultSet rs = statement.executeQuery();
 
             if(rs.next()) {
                 question = rs.getString("question");
@@ -84,10 +95,12 @@ public class AnswerRepository implements Repository<Answer> {
         boolean status = false;
 
         try {
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            statement.executeUpdate("INSERT INTO Answer() VALUES ('" + answer.getAnswer()  + "', " +
-                    MainController.getMainController().getCurrentUser().getUserId() + "," +  answer.getQuestionId()
-                    +  "  )");
+            PreparedStatement statement;
+            statement = dbConnection.getInstance().prepare("INSERT INTO Answer VALUES (?, ?, ? )");
+            statement.setString(1, answer.getAnswer());
+            statement.setInt(2, MAIN_CONTROLLER.getCurrentUser().getUserId());
+            statement.setInt(3, answer.getQuestionId());
+            statement.executeUpdate();
             status = true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,9 +114,13 @@ public class AnswerRepository implements Repository<Answer> {
         boolean status = false;
 
         try {
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            statement.executeUpdate("UPDATE Answer SET rightAnswer = '" + question.getAnswer() +
-                    "' WHERE idQuestion = " + question.getQuestionId() + " AND userId = " +  id);
+            PreparedStatement statement;
+            statement = dbConnection.getInstance().prepare("UPDATE Answer SET rightAnswer = ?" +
+                    " WHERE idQuestion = ? AND userId = ?");
+            statement.setString(1, question.getAnswer());
+            statement.setInt(2, question.getQuestionId());
+            statement.setInt(3, id);
+            statement.executeUpdate();
 
             status = true;
         } catch (SQLException e) {

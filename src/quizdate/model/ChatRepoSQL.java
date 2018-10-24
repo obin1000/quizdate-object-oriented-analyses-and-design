@@ -33,8 +33,11 @@ public class ChatRepoSQL implements ChatRepo {
         }
         String temp = string.toString();
         try {
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            statement.executeUpdate("UPDATE Chatroom SET Messages ='"+temp+"'  WHERE Roomid = " +  room.getRoomid());
+            PreparedStatement statement;
+            statement = dbConnection.getInstance().prepare("UPDATE Chatroom SET Messages = ? WHERE Roomid = ?");
+            statement.setString(1, temp);
+            statement.setInt(2, room.getRoomid());
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -45,9 +48,11 @@ public class ChatRepoSQL implements ChatRepo {
     public List<ChatRoom> getUserChatrooms(int Userid) {
         List<ChatRoom> rooms = new ArrayList<>();
         try {
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM UserChatroom uc\n" +
-                    "WHERE uc.userId = " + Userid);
+            PreparedStatement statement;
+            statement = dbConnection.getInstance().prepare("SELECT * FROM UserChatroom uc " +
+                    "WHERE uc.userId = ?");
+            statement.setInt(1, Userid);
+            ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
                 rooms.add(getById(rs.getInt("Roomid")));
@@ -70,11 +75,13 @@ public class ChatRepoSQL implements ChatRepo {
         String message;
         int i = 1;
         try {
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Chatroom u\n" +
-                    "INNER JOIN UserChatroom uc on uc.Roomid = u.Roomid\n" +
-                    "WHERE u.Roomid = "+id+"\n" +
+            PreparedStatement statement;
+            statement = dbConnection.getInstance().prepare("SELECT * FROM Chatroom u " +
+                    "INNER JOIN UserChatroom uc on uc.Roomid = u.Roomid " +
+                    "WHERE u.Roomid = ? " +
                     "ORDER BY u.Roomid asc;");
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
                 if(i ==1) {
@@ -94,11 +101,13 @@ public class ChatRepoSQL implements ChatRepo {
     public int getRoomNewId(){
         int roomnr=0;
         try {
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
+            PreparedStatement statement;
             ResultSet back;
             do {
                 roomnr++;
-                back = statement.executeQuery("SELECT Roomid FROM Chatroom WHERE Roomid =" + roomnr);
+                statement = dbConnection.getInstance().prepare("SELECT Roomid FROM Chatroom WHERE Roomid = ?");
+                statement.setInt(1, roomnr);
+                back = statement.executeQuery();
             }while(back.next());
 
         } catch (SQLException e) {
@@ -115,8 +124,10 @@ public class ChatRepoSQL implements ChatRepo {
     }
     public boolean roomInDatabase(ChatRoom chat){
         try {
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            ResultSet back = statement.executeQuery("SELECT Roomid FROM Chatroom WHERE Roomid =" + chat.getRoomid());
+            PreparedStatement statement;
+            statement = dbConnection.getInstance().prepare("SELECT Roomid FROM Chatroom WHERE Roomid = ?");
+            statement.setInt(1,chat.getRoomid());
+            ResultSet back = statement.executeQuery();
             if(back.next()){
                 return true;
             }else{
@@ -143,10 +154,20 @@ public class ChatRepoSQL implements ChatRepo {
             }
             String temp = string.toString();
             try {
-                Statement statement = dbConnection.getInstance().getConnection().createStatement();
-                statement.executeUpdate("INSERT INTO Chatroom(Roomid, Messages) VALUES ('" + roomid + "','" + temp + "')");
+                PreparedStatement statement;
+                statement = dbConnection.getInstance().prepare("INSERT INTO Chatroom(Roomid, Messages) " +
+                        "VALUES (?,?)");
+                statement.setInt(1, roomid);
+                statement.setString(2, temp);
+
+                statement.executeUpdate();
+
                 for (Chatter c : chat.getUsers()) {
-                    statement.executeUpdate("INSERT INTO UserChatroom(userId,Roomid) VALUES ('" + c.getUserId() + "','" + roomid + "')");
+                    statement = dbConnection.getInstance().prepare("INSERT INTO UserChatroom(userId,Roomid) " +
+                            "VALUES (?, ?)");
+                    statement.setInt(1, c.getUserId());
+                    statement.setInt(2, roomid);
+                    statement.executeUpdate();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -159,8 +180,10 @@ public class ChatRepoSQL implements ChatRepo {
     public void remove(ChatRoom chat) {
 
         try {
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            statement.executeUpdate("DELETE FROM Chatroom WHERE userId = " + chat.getRoomid());
+            PreparedStatement statement;
+            statement = dbConnection.getInstance().prepare("DELETE FROM Chatroom WHERE userId = ?");
+            statement.setInt(1, chat.getRoomid());
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

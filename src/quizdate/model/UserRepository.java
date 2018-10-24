@@ -19,8 +19,12 @@ public class UserRepository implements Repository<User> {
     public int checkLoginInformation(String email, String password) {
         int userId = 0;
         try {
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            ResultSet rs = statement.executeQuery("SELECT userId FROM Account WHERE email ='" + email + "' AND password ='" + password + "'");
+            PreparedStatement statement;
+            statement = dbConnection.getInstance().prepare("SELECT userId FROM Account WHERE email =? AND password =?");
+            statement.setString(1, email);
+            statement.setString(2, password);
+            ResultSet rs = statement.executeQuery();
+
             if(rs.next()){
                 System.out.println(userId = Integer.parseInt(rs.getString("userId")));
             }
@@ -39,8 +43,9 @@ public class UserRepository implements Repository<User> {
     public int getRandomId() {
         int data = 1;
         try {
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            ResultSet back = statement.executeQuery("SELECT userId FROM Account ORDER BY RAND() LIMIT 1");
+            PreparedStatement statement;
+            statement = dbConnection.getInstance().prepare("SELECT userId FROM Account ORDER BY RAND() LIMIT 1");
+            ResultSet back = statement.executeQuery();
             back.next();
             data = back.getInt(1);
         } catch (SQLException e) {
@@ -54,10 +59,11 @@ public class UserRepository implements Repository<User> {
     public User get(int id) {
         User user = null;
         try {
-
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM Account WHERE userId = " + id);
-
+            PreparedStatement statement;
+            statement = dbConnection.getInstance().prepare("SELECT * FROM Account WHERE userId =?");
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            System.out.println(rs);
             if(rs.next()) {
                 user = new User(rs.getString("lastName"), rs.getString("firstName"),
                         rs.getDate("dateOfBirth").toLocalDate(), rs.getString("sex"),
@@ -80,9 +86,10 @@ public class UserRepository implements Repository<User> {
 
 
         try {
-
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            ResultSet rs = statement.executeQuery("SELECT userId FROM Account WHERE email = '" + u.getEmail() + "'");
+            PreparedStatement statement;
+            statement = dbConnection.getInstance().prepare("SELECT userId FROM Account WHERE email = ?");
+            statement.setString(1, u.getEmail());
+            ResultSet rs = statement.executeQuery();
 
             if(rs.next()) {
                 userId = rs.getInt("userId");
@@ -102,13 +109,20 @@ public class UserRepository implements Repository<User> {
     @Override
     public boolean save(User user) {
         boolean status = false;
-
+        PreparedStatement statement;
         try {
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            statement.executeUpdate("INSERT INTO Account (email, password, lastName, firstName, dateOfBirth," +
-                    " sex, phoneNumber, adres) VALUES ('" + user.getEmail() + "', '" + user.getPassword() + "', '" +
-                    user.getLastName() + "', '" + user.getFirstName() + "', '" + user.getDateOfBirth() + "', '" +
-                    user.getSex() + "', '" + user.getPhoneNumber() + "', '" + user.getAdres() + " ' )");
+            statement = dbConnection.getInstance().prepare("INSERT INTO Account (email, password, lastName, " +
+                    "firstName, dateOfBirth," +
+                    " sex, phoneNumber, adres) VALUES (?, ?, ?, ?, ?, ?, ?, ? )");
+            statement.setString(1, user.getEmail());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getLastName());
+            statement.setString(4, user.getFirstName());
+            statement.setDate(5, Date.valueOf(user.getDateOfBirth()));
+            statement.setString(6, user.getSex());
+            statement.setString(7, user.getPhoneNumber());
+            statement.setString(8, user.getAdres());
+            statement.executeUpdate();
             status = true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -120,15 +134,25 @@ public class UserRepository implements Repository<User> {
     @Override
     public boolean update(int id, User user) {
         boolean status = false;
-
+        PreparedStatement statement;
         try {
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            statement.executeUpdate("UPDATE Account SET lastName = '" + user.getLastName() + "', " +
-                    "firstName = '" + user.getFirstName() + "' , dateOfBirth = '" + user.getDateOfBirth() + "'" +
-                    ", sex = '" + user.getSex() + "', email = '" + user.getEmail() + "', phoneNumber = '" +
-                    user.getPhoneNumber() + "', adres = '" + user.getAdres() + "', password = '" + user.getPassword() +
-                    "' WHERE userId = " +  id);
 
+            statement = dbConnection.getInstance().prepare("UPDATE Account SET lastName = ?, " +
+                    "firstName = ?, dateOfBirth = ?" +
+                    ", sex = ?, email = ?, phoneNumber = ?" +
+                    ", adres = ?, password = ? WHERE userId = ?");
+
+            statement.setString(1, user.getLastName());
+            statement.setString(2, user.getFirstName());
+            statement.setDate(3, Date.valueOf(user.getDateOfBirth()));
+            statement.setString(4, user.getSex());
+            statement.setString(5, user.getEmail());
+            statement.setString(6, user.getPhoneNumber());
+            statement.setString(7, user.getAdres());
+            statement.setString(8, user.getPassword());
+            statement.setInt(9, id);
+
+            statement.executeUpdate();
             status = true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -140,10 +164,11 @@ public class UserRepository implements Repository<User> {
     @Override
     public boolean remove(int id) {
         boolean status = false;
-
+        PreparedStatement statement;
         try {
-            Statement statement = dbConnection.getInstance().getConnection().createStatement();
-            statement.executeUpdate("DELETE FROM Account WHERE userId = " + id);
+            statement = dbConnection.getInstance().prepare("DELETE FROM Account WHERE userId = ?");
+            statement.setInt(1, id);
+            statement.executeUpdate();
             status = true;
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,8 +1,6 @@
 package quizdate.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class dbConnection {
 
@@ -16,7 +14,18 @@ public class dbConnection {
     private dbConnection() {
     }
 
-    public Connection getConnection() {
+    public PreparedStatement prepare(String statement) {
+        PreparedStatement prepStatement = null;
+        try {
+            prepStatement = connection.prepareStatement(statement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return prepStatement;
+    }
+
+    public static dbConnection getInstance() {
+
         if (connection == null) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -26,10 +35,7 @@ public class dbConnection {
                 e.printStackTrace();
             }
         }
-        return connection;
-    }
 
-    public static dbConnection getInstance() {
         return singleton;
     }
 
