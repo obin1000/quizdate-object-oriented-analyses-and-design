@@ -36,7 +36,7 @@ public class ShowResultController implements Initializable {
     }
 
     public void nextButtonPressed(ActionEvent event){
-        if (counter > 4) {
+        if (counter >= MAIN_CONTROLLER.getQuizData().getQuestions().size()) {
             MAIN_CONTROLLER.switchSceneChat(event, btn_next);
         } else {
             setResults();
@@ -47,15 +47,15 @@ public class ShowResultController implements Initializable {
     private void setResults() {
 
         text_correctCounter.setText(Integer.toString(MAIN_CONTROLLER.getQuizData().getScore()));
-        text_rightAnswer.setText(MAIN_CONTROLLER.getQuizData().getAnswers().get(counter).getAnswer());
-        text_givenAnswer.setText(MAIN_CONTROLLER.getQuizData().getAnswers().get(counter).getGivenAnswer());
-        text_question.setText(MAIN_CONTROLLER.getQuizData().getQuestions().get(counter));
+        text_rightAnswer.setText(MAIN_CONTROLLER.getQuizData().getQuestion(counter).getAnswer());
+        text_givenAnswer.setText(MAIN_CONTROLLER.getQuizData().getQuestion(counter).getGivenAnswer());
+        text_question.setText(MAIN_CONTROLLER.getQuizData().getQuestion(counter).getQuestion());
 
 
         text_rightAnswer.setTextFill(Color.GREEN);
 
-        if (MAIN_CONTROLLER.getQuizData().getAnswers().get(counter).getAnswer().equals(MAIN_CONTROLLER.
-                getQuizData().getAnswers().get(counter).getGivenAnswer())) {
+        if (MAIN_CONTROLLER.getQuizData().getQuestion(counter).getAnswer().equals(MAIN_CONTROLLER.
+                getQuizData().getQuestion(counter).getGivenAnswer())) {
             text_givenAnswer.setTextFill(Color.GREEN);
         } else {
             text_givenAnswer.setTextFill(Color.RED);

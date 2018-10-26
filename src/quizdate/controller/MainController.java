@@ -6,10 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import quizdate.model.ChatRoom;
-import quizdate.model.Quiz;
-import quizdate.model.UserRepository;
-import quizdate.model.User;
+import quizdate.model.*;
 
 import java.io.IOException;
 import java.util.Observable;
@@ -19,11 +16,12 @@ public final class MainController implements Observer {
 
     private static final MainController SINGLETON;
     private static final UserRepository USER_REPOSITORY = UserRepository.getInstance();
+    private static final QuizRepository QUIZ_REPOSITORY = QuizRepository.getInstance();
     private ChatRoom requestedroom;
     private User matchedUser;
     private User currentUser;
     private Quiz quizData;
-    private User registeredUser;
+    private User registeringUser;
 
     static{
         SINGLETON = new MainController();
@@ -97,6 +95,7 @@ public final class MainController implements Observer {
     public void setCurrentUser(User currentUser, int userId) {
         this.currentUser = currentUser;
         currentUser.setUserId(userId);
+        currentUser.setQuiz(QUIZ_REPOSITORY.get(userId));
         currentUser.addObserver(this);
     }
 
@@ -104,14 +103,14 @@ public final class MainController implements Observer {
         return matchedUser;
     }
 
-    public User getRegisteredUser() { return registeredUser; }
+    public User getRegisteringUser() { return registeringUser; }
 
-    public void setRegisteredUser(User registeredUser) {
-        this.registeredUser = registeredUser;
+    public void setRegisteringUser(User registeringUser) {
+        this.registeringUser = registeringUser;
     }
 
-    public void removeRegisteredUser() {
-        registeredUser = null;
+    public void removeRegisteringUser() {
+        registeringUser = null;
     }
 
     public boolean setMatchedUser(User matchedUser) {
@@ -119,6 +118,10 @@ public final class MainController implements Observer {
         try {
             this.matchedUser = matchedUser;
             matchedUser.setUserId(USER_REPOSITORY.getUserId(matchedUser));
+            matchedUser.setQuiz(QUIZ_REPOSITORY.get(matchedUser.getUserId()));
+            for (int i = 0; i < matchedUser.getQuiz().getQuestions().size(); i++) {
+                System.out.println(matchedUser.getQuiz().getQuestion(i).getQuestion());
+            }
             status = true;
         }catch(Exception e){
             e.printStackTrace();

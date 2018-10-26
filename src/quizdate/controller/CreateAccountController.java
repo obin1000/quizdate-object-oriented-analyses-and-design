@@ -37,8 +37,7 @@ public class CreateAccountController {
 
         User user = new User(txt_lastName.getText(), txt_firstName.getText(), dte_dateOfBirth.getValue(),
                 (String) cmb_sex.getValue(), txt_email.getText(), txt_phoneNumber.getText(), txt_adres.getText(), txt_password.getText());
-        System.out.println(user.getPassword());
-        MAIN_CONTROLLER.setRegisteredUser(user);
+        MAIN_CONTROLLER.setRegisteringUser(user);
         MAIN_CONTROLLER.switchQuestionAnswers(event, btn_next);
 
 

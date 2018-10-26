@@ -26,26 +26,26 @@ public class MakeQuizController implements Initializable {
 
     private Image img = new Image("file:./src/quizdate/images/trump.jpg");
     private static final MainController MAIN_CONTROLLER = MainController.getMainController();
-    private static final AnswerRepository ANSWER_REPOSITORY = AnswerRepository.getInstance();
+    private static final QuizRepository QUIZ_REPOSITORY = QuizRepository.getInstance();
     private User currentUser = MAIN_CONTROLLER.getCurrentUser();
     private User otherUser = MAIN_CONTROLLER.getMatchedUser();
 
-    private int counter = 1;
+    private int counter = 0;
     private String[] answerOptions = new String[4];
-    private Quiz quiz;
+    private Quiz quiz = otherUser.getQuiz();
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         if (otherUser.getProfilePicture() == null){
             profilePicture.setImage(img);
         }else {
             profilePicture.setImage(otherUser.getProfilePicture());
         }
 
-        quiz = new Quiz();
-
         lbl_username.setText(otherUser.getFirstName() + " " + otherUser.getLastName());
+
 
         setAnswers();
 
@@ -55,49 +55,41 @@ public class MakeQuizController implements Initializable {
 
     public void nextButtonPressed(ActionEvent event){
 
-        if(counter <= 5){
+        if(counter < quiz.getQuestions().size()){
             if (btn_answerA.isSelected()){
-                if (btn_answerA.getText().equals(ANSWER_REPOSITORY.get(counter).getAnswer())) {
+                if (btn_answerA.getText().equals(otherUser.getQuiz().getQuestion(counter).getAnswer())) {
                     quiz.addScore();
                 }
-                quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getAnswer(),
-                        btn_answerA.getText()));
-                quiz.addQuestion(ANSWER_REPOSITORY.getQuestion(counter));
+                quiz.getQuestion(counter).setGivenAnswer(btn_answerA.getText());
                 counter++;
             }
             else if (btn_answerB.isSelected()){
-                if (btn_answerB.getText().equals(ANSWER_REPOSITORY.get(counter).getAnswer())) {
+                if (btn_answerB.getText().equals(otherUser.getQuiz().getQuestion(counter).getAnswer())) {
                     quiz.addScore();
                 }
-                quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getAnswer(),
-                        btn_answerB.getText()));
-                quiz.addQuestion(ANSWER_REPOSITORY.getQuestion(counter));
+                quiz.getQuestion(counter).setGivenAnswer(btn_answerB.getText());
                 counter++;
             }
             else if (btn_answerC.isSelected()){
-                if (btn_answerC.getText().equals(ANSWER_REPOSITORY.get(counter).getAnswer())) {
+                if (btn_answerC.getText().equals(otherUser.getQuiz().getQuestion(counter).getAnswer())) {
                     quiz.addScore();
                 }
-                quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getAnswer(),
-                        btn_answerC.getText()));
-                quiz.addQuestion(ANSWER_REPOSITORY.getQuestion(counter));
+                quiz.getQuestion(counter).setGivenAnswer(otherUser.getQuiz().getQuestion(counter).getAnswer());
                 counter++;
             }
             else if (btn_answerD.isSelected()){
-                if (btn_answerD.getText().equals(ANSWER_REPOSITORY.get(counter).getAnswer())) {
+                if (btn_answerD.getText().equals(otherUser.getQuiz().getQuestion(counter).getAnswer())) {
                     quiz.addScore();
                 }
-                quiz.addAnswer(new Answer(counter, ANSWER_REPOSITORY.get(counter).getAnswer(),
-                        btn_answerD.getText()));
-                quiz.addQuestion(ANSWER_REPOSITORY.getQuestion(counter));
+                quiz.getQuestion(counter).setGivenAnswer(btn_answerD.getText());
                 counter++;
             }
             else {
                 System.out.println("NOTHING HAS BEEN SELECTED");
             }
-            if (counter > 5) {
-                MAIN_CONTROLLER.setQuizData(quiz);
-                MAIN_CONTROLLER.switchSceneQuizResult(event, btn_next);
+        if (counter >= quiz.getQuestions().size()) {
+            MAIN_CONTROLLER.setQuizData(quiz);
+            MAIN_CONTROLLER.switchSceneQuizResult(event, btn_next);
 
             } else {
                 setAnswers();
@@ -121,13 +113,13 @@ public class MakeQuizController implements Initializable {
     }
 
     private void randomnizeAnswers() {
-        answerOptions[0] = ANSWER_REPOSITORY.get(counter).getAnswer();
+        answerOptions[0] = quiz.getQuestion(counter).getAnswer();
         String randomAnswer;
         Random randomnizer = new Random();
 
         for (int i = 1; i < answerOptions.length; i++) {
             do {
-                randomAnswer = ANSWER_REPOSITORY.getRandomAnswer(counter).getAnswer();
+                randomAnswer = QUIZ_REPOSITORY.getRandomAnswer(counter+1).getAnswer();
             } while (!checkAnswers(randomAnswer));
             answerOptions[i] = randomAnswer;
         }
@@ -149,7 +141,9 @@ public class MakeQuizController implements Initializable {
         btn_answerB.setText(answerOptions[1]);
         btn_answerC.setText(answerOptions[2]);
         btn_answerD.setText(answerOptions[3]);
-        lbl_question.setText(ANSWER_REPOSITORY.getQuestion(counter));
+        lbl_question.setText(otherUser.getQuiz().getQuestion(counter).getQuestion());
+
+
     }
 }
 

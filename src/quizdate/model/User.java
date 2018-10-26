@@ -6,6 +6,7 @@ import java.util.*;
 
 public class User extends Observable implements Chatter {
     private int userId;
+    private Quiz quiz;
     private String lastName;
     private String firstName;
     private LocalDate dateOfBirth;
@@ -38,6 +39,10 @@ public class User extends Observable implements Chatter {
     /**
      * Getters & Setters
      */
+
+    public Quiz getQuiz() { return quiz;}
+    public void setQuiz(Quiz quiz) {this.quiz=quiz;}
+
     public int getUserId() {
         return userId;
     }

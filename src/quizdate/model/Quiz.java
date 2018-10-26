@@ -5,31 +5,27 @@ import java.util.List;
 
 public class Quiz {
 
-    private List<String> questions;
-    private List<Answer> answers;
+    private List<Question> questions;
     private int score;
 
     public Quiz() {
 
         questions = new ArrayList<>();
-        answers = new ArrayList<>();
         score = 0;
     }
 
-    public void addQuestion(String question) {
+    public void addQuestion(Question question) {
         this.questions.add(question);
+        System.out.println("added question = " + question.getQuestion());
     }
 
-    public void addAnswer(Answer answer) { this.answers.add(answer); }
 
-    public List<String> getQuestions() {
+    public Question getQuestion(int id) {
+        return questions.get(id);
+    }
+    public List<Question> getQuestions() {
         return questions;
     }
-
-    public List<Answer> getAnswers() {
-        return answers;
-    }
-
 
 
     public int getScore() {

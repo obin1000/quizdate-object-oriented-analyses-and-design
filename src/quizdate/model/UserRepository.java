@@ -8,6 +8,7 @@ import java.util.List;
 public class UserRepository implements Repository<User> {
 
     private final static UserRepository singleton;
+    private final static QuizRepository QUIZ_REPOSITORY = QuizRepository.getInstance();
 
     static {
         singleton = new UserRepository();
