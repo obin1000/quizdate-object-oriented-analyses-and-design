@@ -36,7 +36,4 @@ public class Quiz {
         score++;
     }
 
-    public void removeScore() {
-        score--;
-    }
 }

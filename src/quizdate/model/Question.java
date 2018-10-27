@@ -19,10 +19,6 @@ public class Question {
 
     }
 
-    public Question(int questionId, String answer) {
-        this.questionId = questionId;
-        this.answer = answer;
-    }
 
     public Question(String question, String answer) {
         this.question = question;

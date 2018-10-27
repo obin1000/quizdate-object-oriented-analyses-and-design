@@ -37,7 +37,9 @@ public class QuizRepository implements Repository<Quiz> {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             if(rs.next()) {
-                question = new Question(id, rs.getString("answer"));
+                question = new Question();
+                question.setQuestionId(id);
+                question.setAnswer(rs.getString("answer"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
