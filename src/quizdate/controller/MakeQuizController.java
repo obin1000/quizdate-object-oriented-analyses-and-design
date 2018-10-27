@@ -113,7 +113,7 @@ public class MakeQuizController implements Initializable {
     }
 
     private void randomnizeAnswers() {
-        answerOptions[0] = quiz.getQuestion(counter).getAnswer();
+        answerOptions[0] = otherUser.getQuiz().getQuestion(counter).getAnswer();
         String randomAnswer;
         Random randomnizer = new Random();
 
